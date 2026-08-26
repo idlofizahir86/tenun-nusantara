@@ -10,7 +10,7 @@ interface Props {
   onWrong?: (detail?: string) => void;
 }
 
-export function MinigameSequence({ game, onProgress, onComplete, onWrong }: Props) {
+export function MinigameSequence({ game, onProgress, onComplete, onWrong: _ }: Props) {
   const [built, setBuilt] = useState<string[]>([]);
   const [progressed, setProgressed] = useState(false);
 

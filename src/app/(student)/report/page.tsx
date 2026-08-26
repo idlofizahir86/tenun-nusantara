@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Sparkles, RefreshCw, Download, Share2 } from "lucide-react";
-import { computeTalentProfile, type ReportEvent, traitEmoji } from "@/lib/scoring/engine";
+import { Sparkles, RefreshCw, Download, Share2 } from "lucide-react";
+import { computeTalentProfile, type ReportEvent } from "@/lib/scoring/engine";
 import { getSession, type SessionEvent } from "@/lib/session/session";
 import { AppNavbar } from "@/components/layout/app-navbar";
 
@@ -116,7 +116,6 @@ export default function ReportPage() {
     );
   }
 
-  const top = profile.traits.find((t) => t.key === profile.topTrait);
   const top3 = [...profile.traits].sort((a, b) => b.score - a.score).slice(0, 3);
   const completedIslands = getSession().completedIslands;
 

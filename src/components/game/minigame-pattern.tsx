@@ -10,7 +10,7 @@ interface Props {
   onWrong?: (detail?: string) => void;
 }
 
-export function MinigamePattern({ game, onProgress, onComplete, onWrong }: Props) {
+export function MinigamePattern({ game, onProgress, onComplete, onWrong: _ }: Props) {
   const [selected, setSelected] = useState<number | null>(null);
   const [placed, setPlaced] = useState<(number | null)[]>(
     Array(game.slots).fill(null)

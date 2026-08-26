@@ -13,7 +13,7 @@ interface Props {
   onWrong?: (detail?: string) => void;
 }
 
-export function MinigamePuzzle({ game, onProgress, onComplete, onWrong }: Props) {
+export function MinigamePuzzle({ game, onProgress, onComplete, onWrong: _ }: Props) {
   const [index, setIndex] = useState(0);
   const [progressed, setProgressed] = useState(false);
   const [wrongId, setWrongId] = useState<string | null>(null);

@@ -16,7 +16,7 @@ interface Props {
 const TOLERANCE = 4;
 const STEP = 4;
 
-export function MinigameTune({ game, onProgress, onComplete, onWrong }: Props) {
+export function MinigameTune({ game, onProgress, onComplete, onWrong: _ }: Props) {
   const [positions, setPositions] = useState<Record<string, number>>(() => {
     const init: Record<string, number> = {};
     game.notes.forEach((n) => {

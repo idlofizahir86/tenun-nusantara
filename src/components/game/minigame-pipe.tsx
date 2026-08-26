@@ -51,7 +51,7 @@ function PipeSlot({
   );
 }
 
-export function MinigamePipe({ game, onProgress, onComplete, onWrong }: Props) {
+export function MinigamePipe({ game, onProgress, onComplete, onWrong: _ }: Props) {
   const [selected, setSelected] = useState<string | null>(null);
   const [placed, setPlaced] = usePersistentState<(string | null)[]>("placed", () =>
     Array(game.slots.length).fill(null)

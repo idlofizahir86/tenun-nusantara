@@ -78,7 +78,7 @@ export default function MapPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [completedCount, setCompletedCount] = useState(0);
-  const [session, setSession] = useState(getSession());
+  const [session] = useState(getSession());
 
   useEffect(() => {
     try {

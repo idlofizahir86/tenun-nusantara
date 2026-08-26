@@ -26,7 +26,7 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-export function MinigamePuzzle16({ game, onProgress, onComplete, onWrong }: Props) {
+export function MinigamePuzzle16({ game, onProgress, onComplete, onWrong: _ }: Props) {
   const [pool] = useState(() => shuffle(game.pieces));
   const [placed, setPlaced] = usePersistentState<(string | null)[]>("placed", () =>
     Array(TOTAL).fill(null)

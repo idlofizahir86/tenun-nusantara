@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { RefreshCw, Printer } from "lucide-react";
 import { computeTalentProfile, type ReportEvent } from "@/lib/scoring/engine";
@@ -100,7 +99,6 @@ const NEXT_STEPS: Record<string, string[]> = {
 };
 
 export default function ParentReportPage() {
-  const router = useRouter();
   const [player, setPlayer] = useState<{ name: string; characterId: string }>({
     name: "Penjelajah",
     characterId: "siti",

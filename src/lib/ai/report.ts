@@ -28,7 +28,6 @@ Aturan:
 function fallbackReport(req: ReportRequest): ReportResult {
   const top = traitLabel(req.profile.topTrait);
   const name = req.playerName || "Penjelajah";
-  const n = req.profile.assessmentCount;
   const islands = req.islandsCompleted;
   return {
     topTrait: req.profile.topTrait,
