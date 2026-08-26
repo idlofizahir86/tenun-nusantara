@@ -1,0 +1,439 @@
+================================================================================
+DAFTAR ASET NALA (TENUN NUSANTARA) - COMPLETE ASSET LIST WITH NAMING
+================================================================================
+Dokumen ini adalah daftar lengkap aset dengan struktur direktori dan nama file
+yang jelas untuk produksi. Gunakan naming convention ini untuk konsistensi.
+
+NAMING CONVENTION:
+- Format: {island}-{act}-{category}-{name}-{variant}.{ext}
+- Contoh: candi-act1-bg-pelataran-kabut-tebal.jpg
+- Gunakan kebab-case (huruf kecil, pisah dengan dash)
+- Ekstensi: .png (transparan), .jpg (background), .svg (vector), .mp3/.wav (audio)
+
+================================================================================
+STRUKTUR DIREKTORI LENGKAP
+================================================================================
+
+public/
+├── assets/
+│   ├── images/
+│   │   ├── logo/
+│   │   ├── landing/
+│   │   ├── islands/
+│   │   │   ├── candi/
+│   │   │   │   ├── backgrounds/
+│   │   │   │   ├── characters/
+│   │   │   │   ├── objects/
+│   │   │   │   ├── ui/
+│   │   │   │   └── animations/
+│   │   │   ├── pasar-terapung/
+│   │   │   │   ├── backgrounds/
+│   │   │   │   ├── characters/
+│   │   │   │   ├── objects/
+│   │   │   │   ├── ui/
+│   │   │   │   └── animations/
+│   │   │   ├── rimba/
+│   │   │   │   ├── backgrounds/
+│   │   │   │   ├── characters/
+│   │   │   │   ├── objects/
+│   │   │   │   ├── ui/
+│   │   │   │   └── animations/
+│   │   │   ├── harmoni/
+│   │   │   │   ├── backgrounds/
+│   │   │   │   ├── characters/
+│   │   │   │   ├── objects/
+│   │   │   │   ├── ui/
+│   │   │   │   └── animations/
+│   │   │   └── aksara/
+│   │   │       ├── backgrounds/
+│   │   │       ├── characters/
+│   │   │       ├── objects/
+│   │   │       ├── ui/
+│   │   │       └── animations/
+│   │   ├── characters/
+│   │   │   ├── nala/
+│   │   │   └── npcs/
+│   │   ├── ui/
+│   │   │   ├── patterns/
+│   │   │   └── icons/
+│   │   └── motifs/
+│   ├── audio/
+│   │   ├── bgm/
+│   │   ├── sfx/
+│   │   └── voice/
+│   │       ├── nala/
+│   │       └── npcs/
+│   └── fonts/
+│       ├── Fredoka/
+│       ├── Nunito/
+│       └── Caveat/
+└── stories/
+    ├── candi.json
+    ├── pasar-terapung.json
+    ├── rimba.json
+    ├── harmoni.json
+    └── aksara.json
+
+================================================================================
+ASSET GLOBAL (SEMUA PULAU)
+================================================================================
+
+A. UI/UX Components
+================================================================================
+
+Folder: public/assets/images/ui/
+
+Logo:
+- [ ] logo-tenun-nusantara.svg (Logo utama, vector)
+- [ ] logo-tenun-nusantara-white.svg (Versi putih untuk dark bg)
+- [ ] logo-nala.svg (Logo NALA saja)
+- [ ] favicon.ico (Favicon browser)
+
+Avatar NALA:
+Folder: public/assets/images/characters/nala/
+- [ ] nala-avatar-idle-32.png
+- [ ] nala-avatar-idle-64.png
+- [ ] nala-avatar-idle-128.png
+- [ ] nala-avatar-talking-32.png
+- [ ] nala-avatar-talking-64.png
+- [ ] nala-avatar-talking-128.png
+- [ ] nala-avatar-listening-32.png
+- [ ] nala-avatar-listening-64.png
+- [ ] nala-avatar-listening-128.png
+- [ ] nala-avatar-thinking-32.png
+- [ ] nala-avatar-thinking-64.png
+- [ ] nala-avatar-thinking-128.png
+- [ ] nala-avatar-celebrating-32.png
+- [ ] nala-avatar-celebrating-64.png
+- [ ] nala-avatar-celebrating-128.png
+
+Icons:
+Folder: public/assets/images/ui/icons/
+- [ ] icon-pengaturan.svg (24px, 32px)
+- [ ] icon-profil.svg
+- [ ] icon-notifikasi.svg
+- [ ] icon-pause.svg
+- [ ] icon-hint.svg (bola lampu)
+- [ ] icon-mic.svg (microphone)
+- [ ] icon-play.svg
+- [ ] icon-reset.svg
+- [ ] icon-check.svg
+- [ ] icon-close.svg
+- [ ] icon-lock.svg
+- [ ] icon-unlock.svg
+- [ ] icon-arrow-left.svg
+- [ ] icon-arrow-right.svg
+- [ ] icon-compass.svg
+- [ ] icon-map.svg
+- [ ] icon-star.svg
+- [ ] icon-heart.svg
+- [ ] icon-timer.svg
+- [ ] icon-volume.svg
+- [ ] icon-volume-mute.svg
+
+Patterns & Decorations:
+Folder: public/assets/images/ui/patterns/
+- [ ] pattern-batik-subtle.svg (Background pattern)
+- [ ] pattern-tenun-border.svg (Border ornamen)
+- [ ] pattern-ornament-corner.svg (Sudut dekoratif)
+
+Loading Animation:
+Folder: public/assets/images/ui/
+- [ ] loading-benang-tenun.gif (Animasi benang merajut)
+- [ ] loading-spinner.svg (Spinner sederhana)
+
+Confetti & Effects:
+- [ ] effect-confetti-gold.png (Sprite sheet)
+- [ ] effect-sparkles.png (Sprite sheet)
+- [ ] effect-glow-green.png (Untuk puzzle pas)
+
+================================================================================
+
+B. Audio Global
+================================================================================
+
+Folder: public/assets/audio/
+
+Background Music:
+Folder: public/assets/audio/bgm/
+- [ ] bgm-global-nusantara-loop.mp3 (10 menit, instrumental lembut)
+- [ ] bgm-global-adventure-upbeat.mp3 (5 menit, semangat)
+
+Sound Effects:
+Folder: public/assets/audio/sfx/
+- [ ] sfx-ui-click-button.mp3 (Klik tombol)
+- [ ] sfx-ui-choice-selected.mp3 (Pilihan terpilih)
+- [ ] sfx-ui-puzzle-complete.mp3 (Puzzle selesai)
+- [ ] sfx-ui-reward-unlock.mp3 (Reward unlock)
+- [ ] sfx-ui-api-unggun-ambient.mp3 (Api unggun ambient, loop)
+- [ ] sfx-ui-transition-whoosh.mp3 (Transisi scene)
+- [ ] sfx-ui-error-soft.mp3 (Error halus)
+- [ ] sfx-ui-success-chime.mp3 (Success)
+
+Voice Over NALA (Optional):
+Folder: public/assets/audio/voice/nala/
+- [ ] voice-nala-sapaan-halo.mp3 ("Halo! Aku NALA")
+- [ ] voice-nala-sapaan-selamat-datang.mp3 ("Selamat datang di Tenun Nusantara")
+- [ ] voice-nala-sapaan-siap-berpetualang.mp3 ("Siap berpetualang?")
+- [ ] voice-nala-refleksi-mari-bercerita.mp3 ("Mari kita bercerita")
+- [ ] voice-nala-refleksi-ceritakan-padamu.mp3 ("Ceritakan padaku")
+
+================================================================================
+
+C. Typography
+================================================================================
+
+Folder: public/assets/fonts/
+
+Fredoka:
+- [ ] Fredoka-Bold.woff2
+- [ ] Fredoka-SemiBold.woff2
+- [ ] Fredoka-Regular.woff2
+- [ ] Fredoka-Medium.woff2
+
+Nunito:
+- [ ] Nunito-Bold.woff2
+- [ ] Nunito-SemiBold.woff2
+- [ ] Nunito-Regular.woff2
+- [ ] Nunito-Light.woff2
+
+Caveat:
+- [ ] Caveat-Bold.woff2
+- [ ] Caveat-Regular.woff2
+
+================================================================================
+PULAU CANDI
+================================================================================
+
+Tema: Candi kuno, batu andesit, relief, arsitektur Jawa
+Palette: Stone Brown #8B6F47, Warm Gray #9E9E9E, Gold #D4A574
+
+================================================================================
+
+BABAK 1: Observasi Lapangan
+================================================================================
+
+Folder: public/assets/images/islands/candi/
+
+Backgrounds:
+Folder: backgrounds/
+- [ ] candi-act1-bg-pelataran-kabut-tebal.jpg (1920x1080, awal)
+- [ ] candi-act1-bg-pelataran-kabut-menipis.jpg (1920x1080, setelah pilihan)
+
+Characters:
+Folder: characters/
+- [ ] candi-act1-char-pemain-idle.png (PNG transparan)
+- [ ] candi-act1-char-pemain-walking.png
+- [ ] candi-act1-char-pemain-pointing.png
+- [ ] candi-act1-char-juru-kunci-idle.png
+- [ ] candi-act1-char-juru-kunci-talking.png
+- [ ] candi-act1-char-juru-kunci-gesturing.png
+- [ ] candi-act1-char-npc-pedagang-idle.png (opsional)
+- [ ] candi-act1-char-npc-pedagang-walking.png
+
+Objects (Interactive):
+Folder: objects/
+- [ ] candi-act1-obj-pilar-rusak-1.png
+- [ ] candi-act1-obj-pilar-rusak-2.png
+- [ ] candi-act1-obj-pilar-rusak-3.png
+- [ ] candi-act1-obj-pilar-rusak-4.png
+- [ ] candi-act1-obj-pilar-rusak-5.png
+- [ ] candi-act1-obj-pilar-rusak-6.png
+- [ ] candi-act1-obj-pilar-rusak-7.png
+- [ ] candi-act1-obj-pilar-rusak-8.png
+- [ ] candi-act1-obj-batu-relief-pecah-1.png
+- [ ] candi-act1-obj-batu-relief-pecah-2.png
+- [ ] candi-act1-obj-batu-relief-pecah-3.png
+- [ ] candi-act1-obj-batu-relief-pecah-4.png
+- [ ] candi-act1-obj-batu-relief-pecah-5.png
+- [ ] candi-act1-obj-batu-relief-pecah-6.png
+- [ ] candi-act1-obj-batu-relief-pecah-7.png
+- [ ] candi-act1-obj-batu-relief-pecah-8.png
+- [ ] candi-act1-obj-batu-relief-pecah-9.png
+- [ ] candi-act1-obj-batu-relief-pecah-10.png
+- [ ] candi-act1-obj-peta-denah-kosong.png
+- [ ] candi-act1-obj-kompas-kuno.png
+
+UI Elements:
+Folder: ui/
+- [ ] candi-act1-ui-counter-pilar.png (Background counter)
+- [ ] candi-act1-ui-inventory-slot.png
+
+Audio:
+Folder: public/assets/audio/
+- [ ] bgm/candi-act1-bgm-gamelan-slow-mistis.mp3 (3 menit loop)
+- [ ] sfx/candi-act1-sfx-langkah- kaki-batu.mp3
+- [ ] sfx/candi-act1-sfx-kabut-bergerak.mp3
+- [ ] sfx/candi-act1-sfx-kakek-berbicara.mp3
+
+Folder: public/assets/audio/voice/npcs/
+- [ ] voice-candi-juru-kunci-line-1.mp3 ("Selamat datang, nak...")
+- [ ] voice-candi-juru-kunci-line-2.mp3 ("Candi ini sudah tua...")
+- [ ] voice-candi-juru-kunci-line-3.mp3 ("Bantu kami menyusun...")
+- [ ] voice-candi-juru-kunci-line-4.mp3 ("Pilih jalanmu...")
+- [ ] voice-candi-juru-kunci-line-5.mp3 ("Semoga berhasil...")
+
+Animations:
+Folder: public/assets/images/islands/candi/animations/
+- [ ] candi-act1-anim-kabut-loop.gif (Kabut bergerak)
+- [ ] candi-act1-anim-karakter-walk-cycle.gif (8 frames)
+- [ ] candi-act1-anim-juru-kunci-mouth-sync.gif
+- [ ] candi-act1-anim-highlight-hover.png (Sprite sheet)
+
+================================================================================
+
+BABAK 2: Puzzle Pola Relief
+================================================================================
+
+Backgrounds:
+Folder: backgrounds/
+- [ ] candi-act2-bg-interior-cahaya-matahari.jpg (1920x1080)
+
+Puzzle Grid:
+Folder: objects/
+- [ ] candi-act2-obj-grid-slot-kosong.png (Background grid)
+- [ ] candi-act2-obj-puzzle-relief-simetri-1.png
+- [ ] candi-act2-obj-puzzle-relief-simetri-2.png
+- [ ] candi-act2-obj-puzzle-relief-simetri-3.png
+- [ ] candi-act2-obj-puzzle-relief-simetri-4.png
+- [ ] candi-act2-obj-puzzle-relief-fraktal-1.png
+- [ ] candi-act2-obj-puzzle-relief-fraktal-2.png
+- [ ] candi-act2-obj-puzzle-relief-fraktal-3.png
+- [ ] candi-act2-obj-puzzle-relief-fraktal-4.png
+- [ ] candi-act2-obj-puzzle-relief-flora-1.png
+- [ ] candi-act2-obj-puzzle-relief-flora-2.png
+- [ ] candi-act2-obj-puzzle-relief-flora-3.png
+- [ ] candi-act2-obj-puzzle-relief-flora-4.png
+- [ ] candi-act2-obj-puzzle-relief-aksara-1.png
+- [ ] candi-act2-obj-puzzle-relief-aksara-2.png
+- [ ] candi-act2-obj-puzzle-relief-aksara-3.png
+- [ ] candi-act2-obj-puzzle-relief-aksara-4.png
+
+Reference Images:
+Folder: objects/
+- [ ] candi-act2-obj-relief-utuh-referensi-1.png (Thumbnail)
+- [ ] candi-act2-obj-relief-utuh-referensi-2.png
+- [ ] candi-act2-obj-relief-utuh-referensi-3.png
+- [ ] candi-act2-obj-relief-utuh-referensi-4.png
+
+UI Elements:
+Folder: ui/
+- [ ] candi-act2-ui-progress-bar-bg.png
+- [ ] candi-act2-ui-timer-bg.png
+- [ ] candi-act2-ui-counter-percobaan-bg.png
+
+Feedback Visual:
+Folder: objects/
+- [ ] candi-act2-fx-glow-hijau.png
+- [ ] candi-act2-fx-shake-animation.gif
+
+Audio:
+Folder: public/assets/audio/
+- [ ] bgm/candi-act2-bgm-gamelan-upbeat.mp3 (2 menit loop)
+- [ ] sfx/candi-act2-sfx-batu-digeser.mp3
+- [ ] sfx/candi-act2-sfx-batu-terkunci-pas.mp3
+- [ ] sfx/candi-act2-sfx-batu-salah-posisi.mp3
+- [ ] sfx/candi-act2-sfx-puzzle-selesai.mp3
+
+Folder: public/assets/audio/voice/nala/
+- [ ] voice-candi-nala-hint-1.mp3 ("Coba perhatikan polanya...")
+- [ ] voice-candi-nala-hint-2.mp3 ("Simetri rotasi mungkin membantu...")
+- [ ] voice-candi-nala-hint-3.mp3 ("Kamu hampir berhasil...")
+
+Animations:
+Folder: animations/
+- [ ] candi-act2-anim-drag-drop.gif
+- [ ] candi-act2-anim-snap-to-grid.gif
+- [ ] candi-act2-anim-glow-pulse.gif
+- [ ] candi-act2-anim-confetti-kecil.gif
+- [ ] candi-act2-anim-transition-babak3.gif
+
+================================================================================
+
+BABAK 3: Rekayasa Aliran Air Kompas
+================================================================================
+
+Backgrounds:
+Folder: backgrounds/
+- [ ] candi-act3-bg-ruang-utama-hidrolik.jpg (1920x1080)
+
+Interactive Components:
+Folder: objects/
+- [ ] candi-act3-obj-pipa-batu-L-0deg.png
+- [ ] candi-act3-obj-pipa-batu-L-90deg.png
+- [ ] candi-act3-obj-pipa-batu-L-180deg.png
+- [ ] candi-act3-obj-pipa-batu-L-270deg.png
+- [ ] candi-act3-obj-pipa-batu-I-0deg.png
+- [ ] candi-act3-obj-pipa-batu-I-90deg.png
+- [ ] candi-act3-obj-pipa-batu-T-0deg.png
+- [ ] candi-act3-obj-pipa-batu-T-90deg.png
+- [ ] candi-act3-obj-pipa-batu-T-180deg.png
+- [ ] candi-act3-obj-roda-gigi-kecil-0deg.png
+- [ ] candi-act3-obj-roda-gigi-kecil-90deg.png
+- [ ] candi-act3-obj-roda-gigi-sedang-0deg.png
+- [ ] candi-act3-obj-roda-gigi-sedang-90deg.png
+- [ ] candi-act3-obj-katup-air-off.png
+- [ ] candi-act3-obj-katup-air-on.png
+- [ ] candi-act3-obj-sumber-air.png
+- [ ] candi-act3-obj-target-air-poros-timbangan.png
+
+Water Flow Visualization:
+Folder: objects/
+- [ ] candi-act3-obj-air-biru-transparan.png
+- [ ] candi-act3-obj-air-splash.png
+- [ ] candi-act3-obj-saluran-dry.png
+- [ ] candi-act3-obj-saluran-wet.png
+
+UI Elements:
+Folder: ui/
+- [ ] candi-act3-ui-counter-kapasitas-bg.png
+- [ ] candi-act3-ui-tombol-test-flow.png
+- [ ] candi-act3-ui-tombol-reset-mekanisme.png
+
+Feedback Visual:
+Folder: objects/
+- [ ] candi-act3-fx-timbangan-naik.gif
+- [ ] candi-act3-fx-timbangan-turun.gif
+- [ ] candi-act3-fx-kunci-terbuka.gif
+- [ ] candi-act3-fx-cahaya-emas.png
+
+Audio:
+Folder: public/assets/audio/
+- [ ] bgm/candi-act3-bgm-gamelan-intens.mp3 (2 menit loop)
+- [ ] sfx/candi-act3-sfx-air-mengalir.mp3
+- [ ] sfx/candi-act3-sfx-roda-gigi-berputar.mp3
+- [ ] sfx/candi-act3-sfx-katup-dibuka.mp3
+- [ ] sfx/candi-act3-sfx-air-tumpah.mp3
+- [ ] sfx/candi-act3-sfx-kunci-terbuka.mp3
+
+Folder: public/assets/audio/voice/nala/
+- [ ] voice-candi-nala-narasi-klimaks.mp3
+
+Animations:
+Folder: animations/
+- [ ] candi-act3-anim-air-mengalir.gif (12-24 frames)
+- [ ] candi-act3-anim-roda-gigi-putar.gif
+- [ ] candi-act3-anim-timbangan-pivot.gif
+- [ ] candi-act3-anim-pintu-terbuka.gif
+- [ ] candi-act3-anim-transisi-api-unggun.gif
+
+================================================================================
+
+API UNGGUN (Pulau Candi)
+================================================================================
+
+Backgrounds:
+Folder: backgrounds/
+- [ ] candi-api-unggun-bg-malam-pelataran.jpg (1920x1080)
+
+Characters:
+Folder: characters/
+- [ ] candi-api-unggun-char-pemain-duduk-relax.png
+- [ ] candi-api-unggun-char-nala-duduk-listening.png
+- [ ] candi-api-unggun-char-api-unggun-particle.gif
+
+UI Elements:
+Folder: ui/
+- [ ] candi-api-unggun-ui-label-waktu-bercerita.png
+- [ ] candi-api-unggun-ui-tombol-mic-128px.png
+- [ ] candi-

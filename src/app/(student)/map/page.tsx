@@ -1,0 +1,349 @@
+"use client";
+
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Gem, Settings, Ship, Anchor, Maximize, BarChart3 } from "lucide-react";
+import { getSession } from "@/lib/session/session";
+import { AppNavbar } from "@/components/layout/app-navbar";
+
+const AVATARS: Record<string, string> = {
+  bayu: "/assets/images/characters/npcs/char_bayu.png",
+  siti: "/assets/images/characters/npcs/char_siti.png",
+  nyoman: "/assets/images/characters/npcs/char_nyoman.png",
+  ulan: "/assets/images/characters/npcs/char_ulan.png",
+};
+
+const LEVELS = [
+  { level: 1, title: "Pelaut Pemula" },
+  { level: 2, title: "Kadet Penjelajah" },
+  { level: 3, title: "Navigator Muda" },
+  { level: 4, title: "Sang Pemimpin Armada" },
+  { level: 5, title: "Laksamana Nusantara" },
+  { level: 6, title: "Legenda Nusantara" },
+];
+
+const ISLANDS = [
+  {
+    id: "harmoni",
+    name: "Pulau Harmoni",
+    img: "/assets/images/map/island_harmoni.png",
+    left: 10,
+    top: 19.3,
+    href: "/island/harmoni",
+  },
+  {
+    id: "rimba",
+    name: "Pulau Rimba",
+    img: "/assets/images/map/island_rimba.png",
+    left: 77.7,
+    top: 38.7,
+    href: "/island/rimba",
+  },
+  {
+    id: "terapung",
+    name: "Pulau Terapung",
+    img: "/assets/images/map/island_terapung.png",
+    left: 41.6,
+    top: 38.6,
+    href: "/island/terapung",
+  },
+  {
+    id: "aksara",
+    name: "Pulau Aksara",
+    img: "/assets/images/map/island_aksara.png",
+    left: 57,
+    top: 55.6,
+    href: "/island/aksara",
+  },
+  {
+    id: "candi",
+    name: "Pulau Candi",
+    img: "/assets/images/map/island_candi.png",
+    left: 27,
+    top: 65.4,
+    href: "/island/candi",
+  },
+];
+
+const SHIP_START = { left: 36, top: 68.7 };
+
+export default function MapPage() {
+  const router = useRouter();
+  const [player, setPlayer] = useState<{
+    name: string;
+    characterId: string;
+  }>({ name: "", characterId: "siti" });
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [completedCount, setCompletedCount] = useState(0);
+  const [session, setSession] = useState(getSession());
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("tenun-player");
+      if (raw) {
+        const data = JSON.parse(raw);
+        setPlayer({
+          name: data.name || "",
+          characterId: data.characterId || "siti",
+        });
+      }
+    } catch {
+      // abaikan
+    }
+  }, []);
+
+  // Baca jumlah pulau yang sudah diselesaikan
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("tenun-progress");
+      if (raw) {
+        const data = JSON.parse(raw);
+        const list = Array.isArray(data?.completedIslands)
+          ? data.completedIslands
+          : [];
+        setCompletedCount(list.length);
+      }
+    } catch {
+      // abaikan
+    }
+  }, []);
+
+  // Minta fullscreen saat masuk halaman map (best-effort, butuh user gesture)
+  useEffect(() => {
+    try {
+      const el = document.documentElement;
+      if (!document.fullscreenElement && el.requestFullscreen) {
+        el.requestFullscreen().catch(() => {});
+      }
+    } catch {
+      // abaikan
+    }
+  }, []);
+
+  // Pantau status fullscreen
+  useEffect(() => {
+    function onFsChange() {
+      setIsFullscreen(!!document.fullscreenElement);
+    }
+    document.addEventListener("fullscreenchange", onFsChange);
+    return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, []);
+
+  const selected = ISLANDS.find((i) => i.id === selectedId) ?? null;
+  const shipTarget = selected
+    ? { left: selected.left - 4, top: selected.top - 6 }
+    : SHIP_START;
+  const displayName = player.name || "Penjelajah";
+  const levelInfo = LEVELS[Math.min(completedCount, LEVELS.length - 1)];
+
+  function enterFullscreen() {
+    try {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+    } catch {
+      // abaikan
+    }
+  }
+
+  function toggleFullscreen() {
+    try {
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      } else if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+    } catch {
+      // abaikan
+    }
+  }
+
+  return (
+    <div className="flex h-screen w-full flex-col overflow-hidden">
+      <AppNavbar active="peta" />
+      <div className="flex min-h-0 w-full flex-1 flex-col overflow-hidden">
+      {/* Map Canvas */}
+      <main className="relative min-h-0 w-full flex-1 overflow-hidden">
+        <Image
+          src="/assets/images/map/map-indonesia.png"
+          alt="Peta Nusantara"
+          fill
+          priority
+          className="object-cover"
+        />
+
+        {/* Fullscreen Prompt */}
+        {!isFullscreen && (
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute left-1/2 top-4 z-20 flex -translate-x-1/2 items-center gap-3 rounded-2xl border border-[#FFB319] bg-[#0F3943] px-5 py-3 shadow-lg"
+          >
+            <span className="font-nunito text-sm font-semibold text-white">
+              Mode layar penuh untuk pengalaman terbaik!
+            </span>
+            <button
+              type="button"
+              onClick={enterFullscreen}
+              className="inline-flex items-center gap-2 rounded-[32px] bg-[#FFB319] px-5 py-2 font-outfit text-[13px] font-extrabold uppercase leading-[17px] text-[#0B1D23] transition-transform hover:scale-105"
+            >
+              <Maximize size={16} />
+              Layar Penuh
+            </button>
+          </motion.div>
+        )}
+
+        {/* Island Pins */}
+        {ISLANDS.map((island) => {
+          const isSelected = selectedId === island.id;
+          return (
+            <button
+              key={island.id}
+              type="button"
+              onClick={() => setSelectedId(island.id)}
+              className={`absolute flex flex-col items-center gap-2 transition-all duration-200 hover:scale-105 ${
+                isSelected ? "scale-105" : "opacity-90"
+              }`}
+              style={{ left: `${island.left}%`, top: `${island.top}%`, zIndex: 2 }}
+            >
+              <div
+                className={`flex items-start rounded-2xl bg-[#0F3943] ${
+                  isSelected ? "border-2 border-[#FFB319] p-2" : "border border-[#8DA2A6] p-2"
+                }`}
+              >
+                <Image
+                  src={island.img}
+                  alt={island.name}
+                  width={isSelected ? 140 : 120}
+                  height={isSelected ? 100 : 80}
+                  className={`rounded-lg object-cover ${isSelected ? "h-[100px] w-[140px]" : "h-20 w-[120px]"}`}
+                />
+              </div>
+              <span
+                className={`inline-block rounded-lg px-2 py-0.5 text-center font-outfit ${
+                  isSelected
+                    ? "bg-[#FFB319] text-[16px] font-extrabold leading-5 text-[#0B1D23]"
+                    : "bg-[#09242B]/85 text-[14px] font-bold leading-[18px] text-white"
+                }`}
+              >
+                {island.name}
+              </span>
+              {isSelected && (
+                <div className="flex items-start rounded-lg bg-[#19D29F] px-2.5 py-1">
+                  <span className="font-manrope text-[11px] font-bold leading-[15px] text-[#0B1D23]">
+                    DIPILIH
+                  </span>
+                </div>
+              )}
+            </button>
+          );
+        })}
+
+        {/* Player Ship */}
+        <motion.div
+          className="absolute z-[5] flex flex-col items-center gap-1"
+          animate={{ left: `${shipTarget.left}%`, top: `${shipTarget.top}%` }}
+          transition={{ type: "spring", stiffness: 50, damping: 14 }}
+          style={{ zIndex: 5 }}
+        >
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#FFB319] text-[#0B1D23]">
+            <Ship size={32} />
+          </div>
+          <span className="font-manrope text-[15px] font-extrabold uppercase leading-5 text-[#FFAB00] [text-shadow:-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,1px_1px_0_#000]">
+            Kapalmu
+          </span>
+        </motion.div>
+
+        {/* Sail CTA */}
+        {selected && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-4 rounded-2xl border border-[#FFB319] bg-[#0F3943] px-5 py-3 shadow-lg"
+          >
+            <span className="font-outfit text-[16px] font-bold text-white">
+              Berlayar ke <span className="text-[#FFB319]">{selected.name}</span>?
+            </span>
+            <button
+              type="button"
+              onClick={() => router.push(selected.href)}
+              className="inline-flex items-center gap-2 rounded-[32px] bg-[#FFB319] px-6 py-2.5 font-outfit text-[15px] font-extrabold uppercase leading-[19px] text-[#0B1D23] transition-transform hover:scale-105"
+            >
+              Berlayar!
+              <Anchor className="h-5 w-5" />
+            </button>
+          </motion.div>
+        )}
+      </main>
+
+      {/* Bottom Bar: Player Info + Badges + Settings */}
+      <footer className="flex w-full flex-none flex-wrap items-center justify-between gap-4 border-t border-[#FFB319] bg-[#0F3943] px-5 py-4 md:px-10">
+        {/* Player Info */}
+        <div className="flex items-center gap-3">
+          <Image
+            src={AVATARS[player.characterId] ?? AVATARS.siti}
+            alt={displayName}
+            width={48}
+            height={48}
+            className="h-12 w-12 rounded-full bg-[#0F3943] object-cover"
+          />
+          <div className="flex flex-col items-start gap-1">
+            <span className="whitespace-nowrap font-outfit text-[16px] font-bold leading-5 text-white">
+              {displayName}
+            </span>
+            <span className="whitespace-nowrap font-manrope text-[12px] leading-4 text-[#19D29F]">
+              Level {session.level} • {levelInfo.title} • {session.xp} XP
+            </span>
+          </div>
+        </div>
+
+        {/* Badges */}
+        <div className="flex items-center gap-3">
+          <span className="font-outfit text-[12px] font-bold uppercase leading-[15px] text-[#FFB319]">
+            Lencana Bakat
+          </span>
+          <div className="flex items-start gap-2">
+            {Array.from({ length: 5 }, (_, i) => {
+              const unlocked = i < completedCount;
+              return (
+                <div
+                  key={i}
+                  className={`flex h-9 w-9 items-center justify-center rounded-full border ${
+                    unlocked
+                      ? "border-[#FFB319] bg-[#FFB319] text-[#0B1D23]"
+                      : "border-[#FFB319] bg-[#09242B] text-[#FFB319]"
+                  }`}
+                >
+                  <Gem size={16} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Report / Settings */}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => router.push("/report")}
+            className="inline-flex items-center gap-2 rounded-full border border-[#19D29F] bg-[#09242B] px-4 py-2 font-outfit text-[13px] font-bold text-[#19D29F] transition-colors hover:bg-[#0F3943]"
+          >
+            <BarChart3 size={16} />
+            Peta Bakat
+          </button>
+          <button
+            aria-label="Pengaturan"
+            onClick={toggleFullscreen}
+            className="flex h-10 w-10 items-center justify-center rounded-full border-none bg-[#09242B] text-[#FFB319] transition-colors hover:bg-[#0F3943]"
+          >
+            <Settings size={20} />
+          </button>
+        </div>
+      </footer>
+      </div>
+    </div>
+  );
+}

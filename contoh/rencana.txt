@@ -1,0 +1,1114 @@
+================================================================================
+DAFTAR ASET NALA (TENUN NUSANTARA) - COMPLETE ASSET LIST
+================================================================================
+
+Dokumen ini adalah daftar lengkap aset yang perlu disiapkan per pulau dan 
+per babak untuk platform NALA. Tim Anda dapat langsung mulai memproduksi aset.
+
+
+================================================================================
+ASSET GLOBAL (SEMUA PULAU)
+================================================================================
+
+A. UI/UX Components
+- Logo NALA (SVG, PNG transparan)
+- Avatar NALA (5 states: Idle, Talking, Listening, Thinking, Celebrating)
+    Size: 32px, 64px, 128px ✅
+- Speech bubble NALA (cream background, rounded 24px) {LANGSUNG DI CODING}
+- Progress dots (3 states: active, inactive, completed) {LANGSUNG DI CODING}
+- Tombol pilihan naratif (3 varian: gold, indigo, red) {LANGSUNG DI CODING}
+- Top bar navigation (64px height) {LANGSUNG DI CODING}
+- Sidebar navigation (280px width) {LANGSUNG DI CODING}
+- Icon set (24px, 32px): pengaturan, profil, notifikasi, pause, hint, mic
+- Loading animation (benang tenun merajut)
+- Confetti & sparkles effect
+- Background gradient (Warm Cream #F5EBDD ke Batik Gold #D4A574)
+
+B. Audio Global
+- Background music loop (10 menit, instrumental Nusantara)
+- SFX: klik tombol
+- SFX: pilihan terpilih
+- SFX: puzzle selesai
+- SFX: reward/unlock
+- SFX: api unggun (ambient)
+- Voice over NALA (opsional, atau gunakan Web Speech API)
+
+C. Typography
+- Font Fredoka (Bold, SemiBold, Regular)
+- Font Nunito (Bold, SemiBold, Regular)
+- Font Caveat (Regular, Bold)
+
+
+================================================================================
+PULAU CANDI
+================================================================================
+
+Tema: Candi kuno, batu andesit, relief, arsitektur Jawa
+Palette: Stone Brown #8B6F47, Warm Gray #9E9E9E, Gold #D4A574
+
+
+BABAK 1: Observasi Lapangan
+----------------------------
+
+Visual Assets:
+- Background Scene: Pelataran candi tertutup kabut pagi (1920x1080, full-screen)
+    Versi 1: Kabut tebal (awal)
+    Versi 2: Kabut menipis (setelah pilihan)
+- Character Sprites (PNG transparan, multiple poses):
+    Pemain (anak usia 7-14, 3 pose: idle, walking, pointing)
+    Juru kunci (kakek tua, 3 pose: idle, talking, gesturing)
+    NPC pedagang (opsional, 2 pose)
+- Interactive Objects (clickable):
+    Pilar candi (5-8 variasi, berbeda tingkat kerusakan)
+    Batu relief pecah (10 variasi)
+    Peta denah kosong (blank canvas)
+    Kompas kuno
+- UI Elements Babak 1:
+    3 tombol pilihan besar (horizontal/vertical)
+    Counter "Pilar terhitung: 0/8"
+    Inventory slot (untuk peta yang digambar)
+
+Audio Assets:
+- BGM: Gamelan slow, mistis (loop 3 menit)
+- SFX: langkah kaki di batu
+- SFX: kabut bergerak (wind soft)
+- SFX: kakek berbicara
+- Voice lines juru kunci (5-7 kalimat pendek)
+
+Animation Assets:
+- Kabut bergerak (loop animation)
+- Karakter berjalan (walk cycle 8 frames)
+- Juru kunci mengangguk/berbicara (mouth sync sederhana)
+- Highlight effect saat hover objek interaktif
+
+
+BABAK 2: Puzzle Pola Relief
+----------------------------
+
+Visual Assets:
+- Background Scene: Interior ruang candi dengan cahaya matahari masuk dari celah (1920x1080)
+- Puzzle Grid:
+    Grid 3x3 atau 4x4 (background slot kosong)
+    9-16 keping puzzle relief batu (PNG dengan shadow)
+        Pola simetri rotasi (4 variasi)
+        Pola fraktal geometris (4 variasi)
+        Pola flora/fauna (4 variasi)
+        Pola aksara kuno (4 variasi)
+- Relief Reference Image (small thumbnail di pojok):
+    4 variasi relief utuh yang harus disusun
+- UI Elements Babak 2:
+    Progress bar "Pola tersusun: 0/4"
+    Timer (halus, opacity 50%)
+    Tombol Hint (ikon bola lampu)
+    Tombol Reset puzzle
+    Counter "Percobaan: X"
+- Feedback Visual:
+    Glow hijau saat keping pas
+    Shake animation saat keping salah
+    Particle effect saat puzzle selesai
+
+Audio Assets:
+- BGM: Gamelan lebih upbeat (loop 2 menit)
+- SFX: batu digeser
+- SFX: batu terkunci pas (click satisfying)
+- SFX: batu salah posisi (error soft)
+- SFX: puzzle selesai (chime success)
+- Voice NALA: hint (3-5 kalimat)
+
+Animation Assets:
+- Drag & drop animation (keping mengikuti cursor)
+- Snap-to-grid animation
+- Glow pulse effect pada slot yang benar
+- Confetti kecil saat selesai
+- Transition ke babak 3
+
+
+BABAK 3: Rekayasa Aliran Air Kompas
+-------------------------------------
+
+Visual Assets:
+- Background Scene: Ruang utama candi dengan mekanisme hidrolik kuno (1920x1080)
+    Poros timbangan kuno di center
+    Saluran air batu (empty slots)
+    Roda gigi besar (3-5 variasi ukuran)
+- Interactive Components:
+    Pipa batu L-shape (4 rotasi: 0, 90, 180, 270 derajat)
+    Pipa batu I-shape (lurus, 2 rotasi)
+    Pipa batu T-shape (3 rotasi)
+    Roda gigi kecil (clickable, 2 rotasi)
+    Roda gigi sedang (clickable)
+    Katup air (toggle on/off)
+    Sumber air (mata air di pojok kiri)
+    Target air (poros timbangan di kanan)
+- Water Flow Visualization:
+    Air biru transparan (animation frames atau shader)
+    Splash effect saat air sampai target
+    Dry/wet state pada saluran
+- UI Elements Babak 3:
+    Counter "Kapasitas air: X/Y liter"
+    Tombol "Test Flow"
+    Tombol "Reset Mekanisme"
+    4 tombol pilihan naratif akhir (horizontal)
+- Feedback Visual:
+    Timbangan bergerak (naik/turun)
+    Kunci ruang utama terbuka (animation)
+    Cahaya emas dari dalam ruang
+
+Audio Assets:
+- BGM: Gamelan intens, building tension (loop 2 menit)
+- SFX: air mengalir
+- SFX: roda gigi berputar
+- SFX: katup dibuka
+- SFX: air tumpah (jika salah)
+- SFX: kunci terbuka (success dramatic)
+- Voice NALA: narasi klimaks
+
+Animation Assets:
+- Air mengalir (flow animation 12-24 frames)
+- Roda gigi berputar (rotation smooth)
+- Timbangan naik/turun (pivot animation)
+- Pintu terbuka (slide/rotate)
+- Transisi ke Api Unggun
+
+
+API UNGGUN (Pulau Candi)
+-------------------------
+
+Visual Assets:
+- Background: Malam hari di pelataran candi, api unggun menyala, bintang (1920x1080)
+- Characters:
+    Pemain duduk di dekat api (pose relax)
+    NALA duduk berhadapan (pose listening)
+    Api unggun (particle animation)
+- UI Elements:
+    Label "Waktu bercerita" (handwriting font)
+    Tombol mic besar (128px, record state)
+    Visualizer gelombang suara (5-7 bars)
+    Text area alternatif (jika mode teks)
+    Tombol "Lanjut" (disabled sampai jawaban)
+- Reward Screen:
+    Motif tenun "Parang" atau "Kawung" (SVG/PNG high-res)
+    Badge "Penjelajah Candi"
+    Stats cards (3 cards horizontal)
+
+Audio Assets:
+- BGM: Akustik guitar/suling lembut (loop 3 menit)
+- SFX: api unggun crackling (ambient loop)
+- SFX: malam hari (jangkrik, angin)
+- Voice NALA: pertanyaan refleksi (3-5 variasi)
+- SFX: rekaman suara (beep start/stop)
+
+Animation Assets:
+- Api unggun (flicker loop)
+- NALA mengangguk mendengarkan
+- Gelombang suara bergerak (real-time)
+- Motif tenun reveal animation
+- Badge unlock sparkle
+
+
+================================================================================
+PULAU PASAR TERAPUNG
+================================================================================
+
+Tema: Sungai, perahu, pasar terapung, rumah lanting
+Palette: Water Blue #2E86AB, Teal #17A2B8, Orange #F4A261
+
+
+BABAK 1: Navigasi Dermaga
+---------------------------
+
+Visual Assets:
+- Background Scene: Dermaga kayu dengan perahu-perahu kecil, sungai tenang (1920x1080)
+    Versi pagi (cerah)
+    Versi siang (ramai)
+- Character Sprites:
+    Pemain di atas jukung/sampan (3 pose: dayung, idle, talking)
+    Pedagang buah (ibu-ibu, 3 pose)
+    Pedagang ikan (bapak-bapak, 3 pose)
+    Anak-anak di perahu (NPC background)
+- Vehicles/Objects:
+    Jukung/sampan pemain (side view, top view)
+    Perahu pedagang (5-7 variasi ukuran)
+    Rombongan perahu (background)
+    Buah-buahan (pisang, jeruk, mangga - icon)
+    Ikan segar (3-5 jenis)
+- UI Elements Babak 1:
+    3 tombol pilihan dialog (vertical stack)
+    Compass/mini-map pojok kanan
+    Counter "Pedagang disapa: 0/3"
+
+Audio Assets:
+- BGM: Keroncong/sape dayak (loop 3 menit)
+- SFX: dayung mengayuh air
+- SFX: air sungai (gentle flow)
+- SFX: teriakan pedagang (ambient)
+- Voice lines pedagang (5-7 kalimat)
+
+Animation Assets:
+- Perahu bergerak (bobbing water effect)
+- Air bergelombang (loop)
+- Karakter melambaikan tangan
+- Transisi siang/malam (optional)
+
+
+BABAK 2: Simulasi Barter & Logistik
+-------------------------------------
+
+Visual Assets:
+- Background Scene: Tampak atas (top-down view) dermaga dengan perahu berjejer (1920x1080)
+- Game Grid:
+    Area perahu pemain (grid 5x5 untuk muatan)
+    5-7 perahu pedagang di sekitar (clickable)
+    Arus air (visual indicator panah bergerak)
+- Items/Commodities (icon 64x64):
+    Beras (karung)
+    Ikan (segara)
+    Buah (pisang, jeruk)
+    Sayur (daun, cabai)
+    Rempah (cengkeh, lada)
+    Kain (gulungan)
+- Perahu Pedagang:
+    Masing-masing dengan stok barang berbeda
+    Harga tertera (angka/token)
+    Emotion bubble (senang/netral/marah)
+- UI Elements Babak 2:
+    Inventory panel (grid 5x5)
+    Weight indicator "Bobot: X/Y kg" (progress bar)
+    Timer "Waktu: 05:00"
+    Budget counter "Koin: 50"
+    Route map (mini-map dengan garis rute)
+    Tombol "Barter" / "Lanjut"
+- Feedback Visual:
+    Perahu tenggelam sebagian (jika overload)
+    Green check/red X saat transaksi
+    Coin animation (+/-)
+
+Audio Assets:
+- BGM: Upbeat traditional (loop 2 menit)
+- SFX: barang dipindahkan
+- SFX: koin berdenting
+- SFX: perahu bersandar
+- SFX: arus air deras
+- Voice pedagang tawar-menawar (5-10 lines)
+
+Animation Assets:
+- Drag & drop barang ke inventory
+- Perahu bergerak mengikuti arus
+- Transaksi (barang pindah tangan)
+- Bobot perahu (naik/turun animation)
+- Timer countdown
+
+
+BABAK 3: Mediasi Perselisihan Ruang
+-------------------------------------
+
+Visual Assets:
+- Background Scene: Dermaga sempit dengan 2 perahu besar berebut tempat (1920x1080)
+    Suasana tegang (awan gelap optional)
+- Character Sprites:
+    Kepala perahu A (bapak tegas, 3 pose: marah, listening, calm)
+    Kepala perahu B (ibu tegas, 3 pose: marah, listening, calm)
+    Pemain di tengah (pose mediator)
+    Warga sekitar (background, 3-4 NPC)
+- Objects:
+    Tiang tambat (1-2, contested)
+    Tali tambat (visible)
+    Lapak/pondasi kayu
+- UI Elements Babak 3:
+    4 tombol pilihan dialog mediasi (horizontal/vertical)
+    Emotion meter kedua kepala perahu (happy/neutral/angry bar)
+    Progress "Kesepakatan: 0%"
+    Tombol "Ajukan Solusi"
+- Feedback Visual:
+    Emotion bubble berubah (marah ke netral ke senang)
+    Salaman antara kedua pihak (animation)
+    Tiang tambat shared (visual indicator)
+
+Audio Assets:
+- BGM: Tense traditional music (loop 2 menit)
+- SFX: debat/teriakan (muffled)
+- SFX: tali diikat
+- SFX: tepuk tangan warga (saat berhasil)
+- Voice kepala perahu A (5 lines marah, 3 lines calm)
+- Voice kepala perahu B (5 lines marah, 3 lines calm)
+- Voice NALA: narasi mediasi
+
+Animation Assets:
+- Karakter berdebat (gesture marah)
+- Pemain berbicara (mouth sync)
+- Emotion transition (smooth)
+- Salaman/kompromi animation
+- Transisi ke Api Unggun
+
+
+API UNGGUN (Pulau Pasar Terapung)
+-----------------------------------
+
+Visual Assets:
+- Background: Malam di atas perahu, lampion menyala, sungai tenang (1920x1080)
+- Characters:
+    Pemain duduk di perahu
+    NALA duduk di samping
+    Lampion gantung (3-5 buah)
+- UI Elements:
+    Sama seperti Pulau Candi (mic, visualizer, text area)
+- Reward Screen:
+    Motif tenun "Sasirangan" atau "Batik Mega Mendung"
+    Badge "Negosiator Ulung"
+    Stats cards
+
+Audio Assets:
+- BGM: Suling bambu + gemericik air (loop 3 menit)
+- SFX: lampion bergoyang (wind chime soft)
+- SFX: air sungai malam
+- Voice NALA: pertanyaan refleksi interpersonal
+
+Animation Assets:
+- Lampion bergoyang
+- Perahu bergoyang lembut
+- Motif tenun reveal
+
+
+================================================================================
+PULAU RIMBA
+================================================================================
+
+Tema: Hutan hujan tropis, kanopi, satwa liar, sungai
+Palette: Forest Green #4A7C59, Leaf Green #6B9B6F, Earth Brown #8B6F47
+
+
+BABAK 1: Ekspedisi Kanopi
+---------------------------
+
+Visual Assets:
+- Background Scene: Hutan lebat dengan kanopi tinggi, cahaya matahari tembus (1920x1080)
+    Versi dasar (ground level)
+    Versi kanopi (tree top view)
+- Character Sprites:
+    Pemain dengan backpack (3 pose: jalan, panjat, observasi)
+    Guide hutan (opsional, 2 pose)
+- Flora (PNG transparan):
+    Pohon besar (5 variasi: meranti, ulin, dll)
+    Tanaman obat (jahe hutan, pasak bumi, dll - 5 variasi)
+    Anggrek liar (3-4 variasi)
+    Lumut & fern
+- Fauna (PNG transparan):
+    Burung (enggang, rangkong - 3 variasi)
+    Monyet (proboscis, long-tailed - 2 variasi)
+    Kupu-kupu (5 variasi warna)
+- Interactive Objects:
+    Jalur setapak (3 pilihan: kiri, tengah, kanan)
+    Sungai kecil (clickable)
+    Pohon tumbang (obstacle)
+- UI Elements Babak 1:
+    3 tombol pilihan rute (vertical)
+    Counter "Flora dicatat: 0/5"
+    Compass dengan arah mata angin
+    Inventory "Catatan lapangan"
+
+Audio Assets:
+- BGM: Suara hutan ambient + suling (loop 3 menit)
+- SFX: daun bergesek
+- SFX: burung berkicau (5-7 jenis)
+- SFX: monyet bersuara
+- SFX: langkah di daun kering
+- SFX: air sungai
+
+Animation Assets:
+- Daun bergoyang (wind)
+- Burung terbang (fly cycle)
+- Cahaya matahari (god rays moving)
+- Karakter memanjat (climb animation)
+
+
+BABAK 2: Detektif Satwa & Jejak
+---------------------------------
+
+Visual Assets:
+- Background Scene: Area tanah berlumpur dengan berbagai jejak (1920x1080)
+- Tracks/Jejak (PNG):
+    Jejak kaki monyet (3 ukuran)
+    Jejak kaki rusa (3 ukuran)
+    Jejak kaki beruang madu (3 ukuran)
+    Jejak kaki burung (2 ukuran)
+    Jejak tidak dikenal (1-2)
+- Audio Clues (visual indicator):
+    Speaker icon dengan gelombang suara
+    5 variasi suara satwa
+- Environmental Clues:
+    Dahan patah (3 variasi)
+    Kotoran satwa (3 variasi)
+    Bulu/bulu burung (3 variasi)
+    Sisa makanan (buah tergigit)
+- Target Satwa (hidden):
+    Satwa terperangkap (jaring/sumur - 3 variasi)
+    Lokasi tersembunyi (click to reveal)
+- UI Elements Babak 2:
+    Panel "Petunjuk terkumpul: X/5"
+    Dropdown "Prediksi satwa: [pilih]"
+    Tombol "Cocokkan Jejak"
+    Tombol "Gunakan Kaca Pembesar" (hint)
+    Progress "Vegetasi rusak: 0%" (harus minimal)
+- Feedback Visual:
+    Highlight jejak yang cocok
+    X merah pada prediksi salah
+    Check hijau pada prediksi benar
+    Satwa bebas (animation)
+
+Audio Assets:
+- BGM: Misterius, suspense (loop 2 menit)
+- SFX: kaca pembesar (zoom sound)
+- SFX: catatan ditulis
+- SFX: suara satwa (5 variasi - clue)
+- SFX: satwa terlepas (happy sound)
+- Voice NALA: hint detektif
+
+Animation Assets:
+- Zoom in/out (magnifying glass)
+- Jejak highlighted
+- Satwa bergerak bebas
+- Vegetasi pulih (optional)
+
+
+BABAK 3: Rekonstruksi Filtrasi Ekosistem
+------------------------------------------
+
+Visual Assets:
+- Background Scene: Desa di kaki bukit dengan sungai keruh (1920x1080)
+    Versi sebelum (air keruh)
+    Versi sesudah (air jernih)
+- Filtration System Components:
+    Wadah filter besar (container kosong, layered)
+    Material filter (drag & drop):
+        Ijuk (bundle)
+        Batu kerikil (pile)
+        Arang kelapa (chunks)
+        Pasir halus (pile)
+        Kerikil kecil
+    5-7 material dengan icon berbeda
+- Water Visualization:
+    Air keruh (brown, opacity 70%)
+    Air setengah bersih (light brown)
+    Air jernih (blue, clear)
+    Flow animation melalui layers
+- Planting Zone:
+    Area tanah kosong (grid 5x5)
+    Pohon penyerap air:
+        Pohon beringin (large)
+        Pohon bambu (medium)
+        Pohon pisang (small)
+        Tanaman vetiver (grass)
+    4-5 jenis pohon (icon 64x64)
+- UI Elements Babak 3:
+    Panel "Lapisan filter: X/5"
+    Quality meter "Kejernihan: 0-100%"
+    Tombol "Test Filter"
+    Tombol "Reset Filter"
+    Inventory pohon (drag to plant)
+    Counter "Pohon ditanam: 0/10"
+    4 tombol pilihan naratif akhir
+- Feedback Visual:
+    Air berubah warna (gradient)
+    Pohon tumbuh (time-lapse effect)
+    Warga senang (NPC smile)
+    Sungai mengalir jernih
+
+Audio Assets:
+- BGM: Hopeful, building up (loop 2 menit)
+- SFX: air dituang
+- SFX: material diletakkan
+- SFX: air mengalir melalui filter
+- SFX: pohon ditanam
+- SFX: air jernih (splash clean)
+- Voice warga berterima kasih (3-5 lines)
+
+Animation Assets:
+- Air mengalir (layer by layer)
+- Filter bekerja (particle capture)
+- Pohon tumbuh (scale up + leaf appear)
+- Air sungai berubah warna
+- Transisi ke Api Unggun
+
+
+API UNGGUN (Pulau Rimba)
+--------------------------
+
+Visual Assets:
+- Background: Malam di hutan, api unggun, kunang-kunang (1920x1080)
+- Characters:
+    Pemain duduk di atas batu
+    NALA duduk di dekat api
+    Kunang-kunang (5-7 particles)
+- UI Elements:
+    Sama seperti sebelumnya
+- Reward Screen:
+    Motif tenun "Dayak" atau "Kampung"
+    Badge "Penjaga Rimba"
+    Stats cards
+
+Audio Assets:
+- BGM: Serangga malam + suling (loop 3 menit)
+- SFX: kunang-kunang (soft chime)
+- SFX: api unggun
+- Voice NALA: pertanyaan refleksi naturalis
+
+Animation Assets:
+- Kunang-kunang terbang (random path)
+- Api unggun flicker
+- Motif tenun reveal
+
+
+================================================================================
+PULAU HARMONI
+================================================================================
+
+Tema: Festival seni, gamelan, tenun, tari
+Palette: Magenta #A23B72, Purple #8E44AD, Gold #D4A574, Pink #F4A261
+
+
+BABAK 1: Eksplorasi Bunyi & Warna
+-----------------------------------
+
+Visual Assets:
+- Background Scene: Festival seni dengan stan-stan berbeda (1920x1080)
+    Stan pewarna alami
+    Stan musik
+    Stan kerajinan
+- Character Sprites:
+    Pemain (3 pose: observasi, mengambil, eksperimen)
+    Seniman tradisional (3-4 NPC, berbeda stan)
+- Collectible Items:
+    Bahan Pewarna:
+        Daun suji (hijau) - icon
+        Manggis (ungu) - icon
+        Kunyit (kuning) - icon
+        Secang (merah) - icon
+        Indigo/nila (biru) - icon
+    Bahan Musik:
+        Bambu berongga (3 ukuran)
+        Kayu resonansi
+        Senar (string)
+    Tools:
+        Lesung batu
+        Panci perebus
+        Kain putih (canvas)
+- Interactive Stan:
+    Stan pewarna (clickable, animation)
+    Stan musik (clickable)
+    Stan kerajinan (clickable)
+- UI Elements Babak 1:
+    Inventory grid (3x3 untuk bahan)
+    Counter "Bahan terkumpul: 0/8"
+    3 tombol pilihan eksplorasi
+    Color palette preview
+
+Audio Assets:
+- BGM: Gamelan festival (upbeat, loop 3 menit)
+- SFX: festival crowd (ambient)
+- SFX: bahan diambil
+- SFX: lesung ditumbuk
+- SFX: bambu dipukul (tone berbeda)
+- Voice seniman (3-5 lines per stan)
+
+Animation Assets:
+- Stan festival (decorations moving)
+- Pemain mengambil bahan
+- Warna berubah (dye animation)
+- Partikel festival (confetti)
+
+
+BABAK 2: Laras Melodi Gamelan
+-------------------------------
+
+Visual Assets:
+- Background Scene: Panggung gamelan dengan instrumen berjejer (1920x1080)
+- Instruments (clickable, PNG dengan shadow):
+    Gong (large, 1 buah)
+    Bonang (medium, 6-8 pots)
+    Gambang (xylophone, 10-12 keys)
+    Saron (metal bars, 6-7 bars)
+    Kendang (drum, 2 buah)
+    Suling (bamboo flute)
+- Tuning Interface:
+    Slider untuk setiap instrumen (-5 to +5)
+    Visual indicator "Sum bang" (red) ke "Pas" (green)
+    Frequency wave visualization (optional)
+- Reference Melody:
+    Tombol "Dengar Lagu Referensi"
+    Notasi musik sederhana (visual guide)
+- Dancer NPC:
+    Penari tradisional (idle, dancing, happy)
+    Reaction bubble (senang/biasa/sedih)
+- UI Elements Babak 2:
+    Progress "Instrumen disetel: 0/6"
+    Toggle "Mode Klasik" / "Mode Kontemporer"
+    Tombol "Play Melody"
+    Tombol "Reset Tuning"
+    Timer (optional)
+- Feedback Visual:
+    Instrumen glow hijau saat pas
+    Penari bergerak (dance animation)
+    Particle effect (sparkles saat harmonis)
+
+Audio Assets:
+- BGM: Gamelan sumbang (awal) ke harmonis (akhir)
+- SFX: setiap instrumen (individual samples):
+    Gong (1 sample)
+    Bonang (8 samples, nada berbeda)
+    Gambang (12 samples)
+    Saron (7 samples)
+    Kendang (3 samples: tinggi, sedang, rendah)
+    Suling (5 samples)
+- SFX: slider digeser
+- SFX: penari bertepuk tangan
+- Voice NALA: instruksi tuning
+
+Animation Assets:
+- Instrumen bergetar (saat dipukul)
+- Penari menari (traditional dance cycle 16-24 frames)
+- Slider move
+- Waveform animation
+- Harmony sparkle effect
+
+
+BABAK 3: Kanvas Tenun Digital
+-------------------------------
+
+Visual Assets:
+- Background Scene: Ruang tenun dengan alat tenun tradisional (1920x1080)
+- Weaving Loom Interface:
+    Alat tenun (visual framework)
+    Grid tenun (20x20 atau 30x30 pixels)
+    Benang lungsin (vertical threads - base)
+    Benang pakan (horizontal threads - draggable)
+- Pattern Library (draggable motifs):
+    Fraktal Tradisional:
+        Parang (diagonal)
+        Kawung (geometric circles)
+        Megamendung (clouds)
+        Lereng (slope)
+    Floral:
+        Bunga teratai
+        Daun
+        Vine pattern
+    Geometric:
+        Diamond
+        Triangle
+        Zigzag
+    Total: 10-15 motif berbeda
+- Color Palette:
+    Pigmen alami (5-7 warna):
+        Hijau daun suji
+        Ungu manggis
+        Kuning kunyit
+        Merah secang
+        Biru indigo
+        Coklat tanah
+        Hitam arang
+    Color picker (click to select)
+- Preview Panel:
+    Kain tenun real-time preview
+    Zoom in/out
+- UI Elements Babak 3:
+    Toolbar: Pilih motif | Pilih warna | Undo | Redo | Clear
+    Counter "Pola diterapkan: X"
+    Toggle "Tradisional" / "Abstrak Modern"
+    Tombol "Selesaikan Tenun"
+    4 tombol pilihan naratif akhir
+- Feedback Visual:
+    Kain tenun jadi (high-res render)
+    Badge "Master Weaver"
+    Stats cards
+
+Audio Assets:
+- BGM: Instrumental tenang (loop 3 menit)
+- SFX: benang ditarik
+- SFX: alat tenun bergerak (rhythmic)
+- SFX: kain selesai (unfurl sound)
+- Voice NALA: narasi kreativitas
+
+Animation Assets:
+- Benang ditenun (weaving animation)
+- Motif muncul (pattern build-up)
+- Kain bergerak (loom mechanism)
+- Kain selesai (reveal full)
+- Transisi ke Api Unggun
+
+
+API UNGGUN (Pulau Harmoni)
+----------------------------
+
+Visual Assets:
+- Background: Malam di panggung festival, lampion, kain tenun tergantung (1920x1080)
+- Characters:
+    Pemain dengan kain tenun
+    NALA
+    Penari background (silhouette)
+- UI Elements:
+    Sama seperti sebelumnya
+- Reward Screen:
+    Motif tenun hasil kreasi pemain (dynamic)
+    Badge "Kreator Harmoni"
+    Stats cards
+
+Audio Assets:
+- BGM: Gamelan lembut + vokal sinden (loop 3 menit)
+- SFX: festival malam (ambient)
+- Voice NALA: pertanyaan refleksi artistik
+
+Animation Assets:
+- Lampion bergoyang
+- Kain tenun berkibar
+- Motif reveal
+
+
+================================================================================
+PULAU AKSARA
+================================================================================
+
+Tema: Prasasti, naskah kuno, wayang, sastra
+Palette: Gold #E8A838, Brown #8B6F47, Cream #F5EBDD, Black #2C3E50
+
+
+BABAK 1: Penelusuran Prasasti
+-------------------------------
+
+Visual Assets:
+- Background Scene: Perpustakaan kuno/ruang prasasti dengan naskah lontar (1920x1080)
+    Rak naskah
+    Meja baca
+    Cahaya temaram
+- Character Sprites:
+    Pemain (3 pose: baca, tulis, berpikir)
+    Penjaga naskah (kakek/nenek, 2 pose)
+- Manuscripts/Prasasti:
+    Naskah lontar (5-7 variasi, berbeda kondisi)
+    Prasasti batu (3 variasi)
+    Daun lontar individual (clickable)
+    Aksara kuno (visible pada naskah):
+        Aksara Jawa
+        Aksara Bali
+        Aksara Sunda
+        Aksara Lontara
+- Erased Text (missing parts):
+    Blank space dengan dotted lines
+    Faded text (opacity 30%)
+- Tools:
+    Kaca pembesar (magnifying glass)
+    Pena tradisional (stylus)
+    Kertas transliterasi
+- UI Elements Babak 1:
+    3 tombol pilihan strategi baca (vertical)
+    Counter "Naskah dibaca: 0/5"
+    Inventory "Catatan aksara"
+    Tombol "Terjemahkan"
+- Feedback Visual:
+    Teks terungkap (fade in)
+    Highlight aksara penting
+
+Audio Assets:
+- BGM: Gamelan slow + reading ambient (loop 3 menit)
+- SFX: daun lontar dibalik
+- SFX: pena menulis
+- SFX: kaca pembesar (zoom)
+- Voice penjaga naskah (3-5 lines)
+- Voice NALA: narasi sejarah
+
+Animation Assets:
+- Daun lontar bergoyang (wind)
+- Teks muncul (typewriter effect)
+- Cahaya lilin (flicker)
+- Karakter membaca (eye movement)
+
+
+BABAK 2: Rekonstruksi Bait Sastra
+-----------------------------------
+
+Visual Assets:
+- Background Scene: Taman sastra dengan batu bertulis (1920x1080)
+- Poetry/Literature Pieces:
+    Pantun (5-7 sets):
+        Baris acak (4 bars per pantun)
+        Missing rhyme (___)
+    Gurindam (3-5 sets):
+        Baris pertama given
+        Baris kedua kosong (pilihan ganda)
+    Teka-teki Sastra (5-7 items):
+        Pertanyaan dalam bahasa kias
+        4 pilihan jawaban
+- Word Bank (draggable words):
+    20-30 kata kosa kata sastra
+    Kata-kata kiasan (metafora)
+    Sinonim/antonim
+- Puzzle Interface:
+    Drop zones untuk setiap baris
+    Slot kosong (dotted outline)
+    Word tiles (draggable)
+- Hints:
+    Ikon bola lampu
+    Context clue (text box)
+- UI Elements Babak 2:
+    Progress "Bait selesai: 0/5"
+    Counter "Kosa kata digunakan: X"
+    Timer (optional, stealth)
+    Tombol "Cek Jawaban"
+    Tombol "Hint"
+    Score "Kesesuaian makna: 0-100%"
+- Feedback Visual:
+    Green check pada baris benar
+    Red X pada baris salah
+    Suggestion popup (optional)
+    Confetti saat selesai
+
+Audio Assets:
+- BGM: Instrumental sastra (loop 2 menit)
+- SFX: kata dipindahkan
+- SFX: jawaban benar (chime)
+- SFX: jawaban salah (soft buzz)
+- Voice NALA: baca pantun/gurindam (5-7 recordings)
+- SFX: kertas bergeser
+
+Animation Assets:
+- Drag & drop kata
+- Snap-to-slot animation
+- Text highlight
+- Confetti burst
+- Transition ke babak 3
+
+
+BABAK 3: Panggung Lakon Bayang
+--------------------------------
+
+Visual Assets:
+- Background Scene: Panggung wayang kulit dengan kelir (layar putih) (1920x1080)
+    Kelir/layar wayang
+    Bayangan wayang (silhouette)
+    Penonton (silhouette warga)
+    Blencong (lampu tradisional)
+- Wayang Characters (silhouette PNG):
+    Tokoh utama (pahlawan, 3 pose)
+    Tokoh antagonis (2 pose)
+    Tokoh pendukung (3-4 variasi)
+    Tokoh rakyat (2-3 variasi)
+- Stage Props:
+    Pohon kayon/gunungan (center stage)
+    Background scenery (hutan, istana, desa)
+    Sound effect icons (petir, angin, langkah)
+- Script Editor Interface:
+    Text area untuk dialog
+    Character selector (dropdown)
+    Emotion selector (senang, marah, sedih, berani)
+    Scene timeline (3-5 scenes)
+- Voice Input UI:
+    Tombol mic besar (Web Speech API)
+    Visualizer gelombang suara
+    Transcript text (real-time)
+    Tombol "Rekam Ulang"
+- UI Elements Babak 3:
+    4 tombol pilihan pesan moral (vertical)
+    Dropdown "Pilih tokoh utama"
+    Text area "Tulis dialog/naskah"
+    Tombol "Mode Suara" / "Mode Teks"
+    Tombol "Pentaskan"
+    Progress "Naskah selesai: 0-100%"
+- Feedback Visual:
+    Wayang bergerak di kelir (shadow puppet animation)
+    Penonton bertepuk tangan
+    Pesan moral muncul (text overlay)
+    Badge "Dalang Cilik"
+
+Audio Assets:
+- BGM: Gamelan wayang (loop 3 menit)
+- SFX: wayang digerakkan (wood sound)
+- SFX: tepuk tangan penonton
+- SFX: petir (sound effect)
+- SFX: angin (sound effect)
+- Voice NALA: narasi wayang
+- Voice player (via Web Speech API - recorded)
+- SFX: rekaman suara
+
+Animation Assets:
+- Wayang bergerak (arm/leg articulation)
+- Bayangan di kelir (shadow movement)
+- Blencong berkedip (flicker)
+- Kayon/gunungan berputar (scene transition)
+- Penonton bertepuk tangan
+- Transisi ke Api Unggun
+
+
+API UNGGUN (Pulau Aksara)
+---------------------------
+
+Visual Assets:
+- Background: Malam di perpustakaan, lampu minyak, naskah terbuka (1920x1080)
+- Characters:
+    Pemain dengan naskah
+    NALA
+    Bayangan wayang di dinding (subtle)
+- UI Elements:
+    Sama seperti sebelumnya
+- Reward Screen:
+    Motif tenun "Parang Rusak" atau "Sidomukti"
+    Badge "Sastrawan Nusantara"
+    Stats cards
+
+Audio Assets:
+- BGM: Suling + gamelan lembut (loop 3 menit)
+- SFX: lampu minyak (flame)
+- SFX: naskah ditutup
+- Voice NALA: pertanyaan refleksi linguistik
+
+Animation Assets:
+- Api lampu minyak (flicker)
+- Naskah terbuka (page turn)
+- Motif tenun reveal
+
+
+================================================================================
+ASSET DASHBOARD & REPORT
+================================================================================
+
+Teacher Dashboard Assets:
+- Radar chart template (6-axis, Profil Pelajar Pancasila)
+- Heatmap grid (30 students x 6 dimensions)
+- Progress bar components
+- Class list table template
+- Student card component
+- Insight card (3 varian: strength, growth, attention)
+- Export button (PDF icon)
+- Filter dropdown
+- Search bar component
+
+Parent Report Assets:
+- Surat template (kertas tua texture background)
+- Border ornamen tenun (SVG)
+- Signature NALA (handwriting font)
+- Radar chart (individual child)
+- Profession icons (10-15 icons: Data Analyst, UX Researcher, dll)
+- Activity cards (3 varian)
+- Download PDF button
+- Share button
+
+
+================================================================================
+ASSET DATABASE & CONTENT
+================================================================================
+
+Narrative Content:
+- Script cerita Pulau Candi (3 babak, 15+ decision points)
+- Script cerita Pulau Pasar Terapung (3 babak, 15+ decision points)
+- Script cerita Pulau Rimba (3 babak, 15+ decision points)
+- Script cerita Pulau Harmoni (3 babak, 15+ decision points)
+- Script cerita Pulau Aksara (3 babak, 15+ decision points)
+- Refleksi Api Unggun questions (5 questions per pulau)
+- NALA dialogue lines (100+ lines total)
+
+Scoring & Analytics:
+- Evidence rules mapping (behavior ke trait)
+- Weight system (Babak 3 > 2 > 1)
+- Triangulation logic (cross-island analysis)
+- Profil Pelajar Pancasila mapping (6 dimensions)
+- WEF 2030 skills database (10-15 skills)
+- Profession recommendation database (20-30 professions)
+
+
+================================================================================
+TECHNICAL ASSETS
+================================================================================
+
+Code/Development:
+- Ink.js story files (5 JSON files, satu per pulau)
+- Web Speech API integration code
+- Gemini API integration code
+- Supabase schema (tables: users, events, scores, trends)
+- Telemetry tracking code (clicks, latency, revisions)
+- Scoring engine algorithm
+- PDF generation library
+- Responsive breakpoints (375px, 768px, 1440px)
+
+Icons & SVGs:
+- Icon set lengkap (50+ icons):
+    Navigation icons
+    Action icons (play, pause, reset, hint)
+    Status icons (lock, unlock, check, X)
+    Emotion icons (happy, sad, neutral, angry)
+    Item icons (all collectibles)
+    Profession icons
+    Skill icons
+
+
+================================================================================
+CHECKLIST TIM PRODUKSI
+================================================================================
+
+Desainer Grafis:
+- Semua background scenes (15 scenes total)
+- Semua character sprites (50+ characters)
+- Semua UI components
+- Semua motif tenun (10-15 motifs)
+- Semua icons (50+ icons)
+- Semua feedback visual effects
+
+Ilustrator:
+- Character design sheet (turnaround)
+- Environment concept art
+- Item illustrations
+- Wayang silhouettes
+- Flora & fauna illustrations
+
+Animator:
+- Character animations (walk, talk, gestures)
+- UI animations (buttons, transitions)
+- Particle effects (confetti, sparkles)
+- Mini-game animations
+- Reward animations
+
+Sound Designer:
+- BGM semua pulau (15 tracks)
+- SFX semua interaksi (100+ sounds)
+- Voice lines NALA (100+ lines)
+- Voice lines NPCs (50+ lines)
+- Audio mixing & mastering
+
+Writer/Narrative Designer:
+- Script semua cerita (75+ decision points)
+- Dialogue trees
+- Reflection questions
+- Report narratives
+- UI copy (all text)
+
+Developer:
+- Frontend implementation (Next.js)
+- Story engine integration (Ink.js)
+- AI agent integration (Gemini API)
+- Database setup (Supabase)
+- Telemetry tracking
+- Scoring engine
+- PDF generation
+- Deployment (Vercel)
+
+
+================================================================================
+ESTIMASI WAKTU PRODUKSI
+================================================================================
+
+Fase 1 - MVP (Pulau Candi saja):
+- Design: 2-3 minggu
+- Development: 2-3 minggu
+- Testing: 1 minggu
+- Total: 5-7 minggu
+
+Fase 2 - Full 5 Pulau:
+- Design: 6-8 minggu
+- Development: 6-8 minggu
+- Testing: 2 minggu
+- Total: 14-18 minggu
+
+
+================================================================================
+DOKUMEN SELESAI - COMPLETE ASSET LIST
+================================================================================
+
+Dokumen ini adalah complete asset list yang bisa langsung digunakan tim Anda 
+untuk mulai produksi. Setiap item sudah detail dan terstruktur per pulau 
+dan per babak.

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tenun Nusantara - Peta Bakat</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bgDark: '#09242B',
+              bgLight: '#060F14',
+              card: '#0F3943',
+              accent: '#FFB319',
+              teal: '#19D29F',
+              border: '#124B56',
+              textMuted: '#E2ECEF',
+              subtle: '#8DA2A6'
+            }
+          },
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif'],
+            manrope: ['Manrope', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-b from-brand-bgDark to-brand-bgLight text-white font-manrope min-h-screen flex flex-col items-center justify-start antialiased">
+
+  <div class="w-full max-w-[1440px] relative flex flex-col items-center">
+    
+    <!-- NAVBAR -->
+    <header class="w-full h-[88px] px-6 lg:px-[80px] py-6 flex items-center justify-between">
+      <!-- Logo Group -->
+      <div class="flex items-center gap-[12px]">
+        <div class="w-10 h-10 bg-brand-accent rounded-[12px] flex items-center justify-center">
+          <svg class="w-6 h-6 text-brand-bgDark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+          </svg>
+        </div>
+        <span class="font-outfit font-extrabold text-[22px] leading-[28px] text-white tracking-wide">
+          TENUN NUSANTARA
+        </span>
+      </div>
+
+      <!-- Nav Links & Badge -->
+      <div class="flex items-center gap-8">
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="#" class="font-manrope font-extrabold text-[15px] text-brand-accent">Peta Bakat</a>
+          <a href="#" class="font-manrope font-semibold text-[15px] text-brand-textMuted/70 hover:text-white transition">Dashboard Guru</a>
+          <a href="#" class="font-manrope font-semibold text-[15px] text-brand-textMuted/70 hover:text-white transition">Laporan Orang Tua</a>
+        </nav>
+        
+        <!-- Bisa AI Badge -->
+        <div class="box-border flex items-center gap-2 px-4 py-2 bg-brand-card border border-brand-accent rounded-full">
+          <span class="font-manrope font-bold text-[11px] uppercase tracking-wider text-brand-subtle">POWERED BY</span>
+          <span class="font-outfit font-black text-[14px] text-white">BISA.AI</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- HEADER SECTION -->
+    <section class="w-full px-6 lg:px-[80px] pt-6 pb-2 flex flex-col gap-[12px]">
+      <!-- Tenun Pattern Border -->
+      <div class="w-full h-2 flex justify-between items-center opacity-40">
+        <script>
+          for (let i = 0; i < 24; i++) {
+            document.write('<div class="w-2 h-2 bg-brand-accent rotate-45 transform"></div>');
+          }
+        </script>
+      </div>
+
+      <!-- Title & Profile -->
+      <div class="w-full pt-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div class="flex flex-col gap-1">
+          <h1 class="font-outfit font-extrabold text-3xl md:text-[40px] leading-tight text-brand-accent">
+            Peta Bakatmu
+          </h1>
+          <p class="font-manrope text-base text-brand-textMuted/80">
+            Analisis kecerdasan majemuk petualang cilik berdasarkan eksplorasi 5 pulau nusantara.
+          </p>
+        </div>
+
+        <!-- Profile Summary Card -->
+        <div class="flex items-center gap-3 px-4 py-2 bg-brand-card border border-brand-accent rounded-[16px]">
+          <div class="w-9 h-9 rounded-full bg-cover bg-center border border-brand-accent" style="background-image: url('https://placehold.co/100x100?text=Siti');"></div>
+          <div class="flex flex-col">
+            <span class="font-outfit font-bold text-sm text-white">Siti Anindya</span>
+            <span class="font-manrope text-[11px] text-brand-teal">Kadet Penjelajah</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN SPLIT (Radar + Companion) -->
+    <section class="w-full px-6 lg:px-[80px] py-4 md:py-6 flex flex-col lg:flex-row items-stretch gap-8">
+      
+      <!-- Radar Card -->
+      <div class="flex-1 bg-brand-card border-[1.5px] border-brand-accent rounded-[24px] p-6 lg:p-8 flex flex-col items-center gap-6">
+        <h2 class="font-outfit font-extrabold text-xl text-brand-accent uppercase tracking-wider text-center">
+          Grafik Potensi Majemuk
+        </h2>
+        
+        <div class="w-full flex flex-wrap md:flex-nowrap items-center justify-center gap-6 lg:gap-12">
+          <!-- Left Indicators -->
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-2 px-3 py-2 bg-brand-bgDark rounded-[12px] border border-transparent">
+              <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <span class="font-outfit font-bold text-xs md:text-sm text-white">Logika-Matematika</span>
+            </div>
+            <div class="flex items-center gap-2 px-3 py-2 bg-brand-bgDark rounded-[12px]">
+              <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+              <span class="font-outfit font-bold text-xs md:text-sm text-white">Naturalis</span>
+            </div>
+          </div>
+
+          <!-- SVG Radar Simulation Container -->
+          <div class="relative w-[260px] h-[260px] flex items-center justify-center">
+            <svg class="w-full h-full overflow-visible" viewBox="0 0 280 280">
+              <!-- Radar Background Polygons -->
+              <polygon points="140,10 263,100 216,245 64,245 17,100" fill="rgba(15, 57, 67, 0.2)" stroke="#124B56" stroke-width="1.5" stroke-dasharray="4" />
+              <polygon points="140,49 226,112 193,213 87,213 54,112" fill="none" stroke="#124B56" stroke-width="1" />
+              <polygon points="140,88 189,124 170,182 110,182 91,124" fill="none" stroke="#124B56" stroke-width="1" />
+
+              <!-- Radar Axis Lines -->
+              <line x1="140" y1="140" x2="140" y2="10" stroke="#124B56" stroke-width="1.5"/>
+              <line x1="140" y1="140" x2="263" y2="100" stroke="#124B56" stroke-width="1.5"/>
+              <line x1="140" y1="140" x2="216" y2="245" stroke="#124B56" stroke-width="1.5"/>
+              <line x1="140" y1="140" x2="64" y2="245" stroke="#124B56" stroke-width="1.5"/>
+              <line x1="140" y1="140" x2="17" y2="100" stroke="#124B56" stroke-width="1.5"/>
+
+              <!-- Data Shape (Yellow Highlight Area) -->
+              <polygon points="140,25 245,108 200,230 75,225 32,105" fill="rgba(255, 179, 25, 0.2)" stroke="#FFB319" stroke-width="2.5" />
+
+              <!-- Vertex Dots -->
+              <circle cx="140" cy="25" r="6" fill="#FFB319" stroke="#FFFFFF" stroke-width="2" />
+              <circle cx="245" cy="108" r="5" fill="#FFB319" stroke="#FFFFFF" stroke-width="2" />
+              <circle cx="200" cy="230" r="5" fill="#FFB319" stroke="#FFFFFF" stroke-width="2" />
+              <circle cx="75" cy="225" r="5" fill="#FFB319" stroke="#FFFFFF" stroke-width="2" />
+              <circle cx="32" cy="105" r="5" fill="#FFB319" stroke="#FFFFFF" stroke-width="2" />
+            </svg>
+          </div>
+
+          <!-- Right Indicators -->
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-2 px-3 py-2 bg-brand-bgDark rounded-[12px]">
+              <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+              </svg>
+              <span class="font-outfit font-bold text-xs md:text-sm text-white">Seni-Kreativitas</span>
+            </div>
+            <div class="flex items-center gap-2 px-3 py-2 bg-brand-bgDark rounded-[12px]">
+              <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span class="font-outfit font-bold text-xs md:text-sm text-white">Interpersonal</span>
+            </div>
+            <div class="flex items-center gap-2 px-4 py-2 bg-brand-bgDark rounded-[12px]">
+              <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span class="font-outfit font-bold text-xs md:text-sm text-white">Linguistik & Sastra</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nala Companion & Badges -->
+      <div class="w-full lg:w-[480px] flex flex-col gap-6">
+        
+        <!-- NALA Speech Bubble -->
+        <div class="bg-white border-2 border-brand-accent rounded-[24px] p-6 shadow-xl text-brand-bgDark flex flex-col gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 bg-brand-bgDark rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+            </div>
+            <span class="font-outfit font-extrabold text-lg leading-tight">Pesan Hangat NALA</span>
+          </div>
+          <p class="font-manrope text-sm leading-relaxed text-brand-bgDark/90">
+            "Luar biasa, Siti! Eksplorasimu di Pulau Candi menunjukkan ketelitian tinggi dalam memecahkan teka-teki logika candi kuno. Bakat senimu juga memancar indah!"
+          </p>
+        </div>
+
+        <!-- Badges Panel -->
+        <div class="bg-brand-card rounded-[20px] p-5 flex flex-col gap-3">
+          <span class="font-outfit font-bold text-sm text-brand-accent uppercase tracking-wider">
+            Lencana Permata Nusantara
+          </span>
+          <div class="flex items-center justify-between pt-2">
+            <!-- Active Badge 1 -->
+            <div class="flex flex-col items-center gap-1.5">
+              <div class="w-12 h-12 bg-brand-accent border-2 border-brand-accent rounded-full flex items-center justify-center shadow-[0_4px_12px_#FFB319]">
+                <div class="w-4 h-4 bg-brand-bgDark rotate-45"></div>
+              </div>
+              <span class="font-manrope text-[10px] text-brand-textMuted">Candi</span>
+            </div>
+
+            <!-- Active Badge 2 -->
+            <div class="flex flex-col items-center gap-1.5">
+              <div class="w-12 h-12 bg-brand-accent border-2 border-brand-accent rounded-full flex items-center justify-center shadow-[0_4px_12px_#FFB319]">
+                <div class="w-4 h-4 bg-brand-bgDark rotate-45"></div>
+              </div>
+              <span class="font-manrope text-[10px] text-brand-textMuted">Rimba</span>
+            </div>
+
+            <!-- Active Badge 3 -->
+            <div class="flex flex-col items-center gap-1.5">
+              <div class="w-12 h-12 bg-brand-accent border-2 border-brand-accent rounded-full flex items-center justify-center shadow-[0_4px_12px_#FFB319]">
+                <div class="w-4 h-4 bg-brand-bgDark rotate-45"></div>
+              </div>
+              <span class="font-manrope text-[10px] text-brand-textMuted">Harmoni</span>
+            </div>
+
+            <!-- Locked Badge 4 -->
+            <div class="flex flex-col items-center gap-1.5 opacity-40">
+              <div class="w-12 h-12 bg-brand-bgDark border-2 border-brand-accent rounded-full flex items-center justify-center">
+                <div class="w-4 h-4 border-2 border-brand-accent rotate-45"></div>
+              </div>
+              <span class="font-manrope text-[10px] text-brand-textMuted">Aksara</span>
+            </div>
+
+            <!-- Locked Badge 5 -->
+            <div class="flex flex-col items-center gap-1.5 opacity-40">
+              <div class="w-12 h-12 bg-brand-bgDark border-2 border-brand-accent rounded-full flex items-center justify-center">
+                <div class="w-4 h-4 border-2 border-brand-accent rotate-45"></div>
+              </div>
+              <span class="font-manrope text-[10px] text-brand-textMuted">Pasar</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STRENGTHS SECTION & FOOTER ACTION -->
+    <section class="w-full px-6 lg:px-[80px] pt-2 pb-10 flex flex-col gap-[20px]">
+      <h2 class="font-outfit font-bold text-[22px] leading-[28px] text-white">
+        Bakat Dominanmu
+      </h2>
+
+      <!-- Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-[20px]">
+        
+        <!-- Strength Card 1 -->
+        <div class="bg-brand-card border border-brand-accent rounded-[16px] p-[24px] flex flex-col gap-[12px]">
+          <div class="flex items-center gap-3">
+            <div class="w-[34px] h-[34px] bg-brand-bgDark rounded-[8px] flex items-center justify-center">
+              <svg class="w-[18px] h-[18px] text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <h3 class="font-outfit font-bold text-[18px] leading-[23px] text-brand-accent">Penjelajah Logis</h3>
+          </div>
+          <p class="font-manrope text-[13px] leading-[150%] text-brand-textMuted">
+            Sangat lihai menganalisis pola, mengurutkan struktur candi, dan memecahkan sandi misterius nusantara.
+          </p>
+        </div>
+
+        <!-- Strength Card 2 -->
+        <div class="bg-brand-card border border-brand-accent rounded-[16px] p-[24px] flex flex-col gap-[12px]">
+          <div class="flex items-center gap-3">
+            <div class="w-[34px] h-[34px] bg-brand-bgDark rounded-[8px] flex items-center justify-center">
+              <svg class="w-[18px] h-[18px] text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+              </svg>
+            </div>
+            <h3 class="font-outfit font-bold text-[18px] leading-[23px] text-brand-accent">Kreator Estetik</h3>
+          </div>
+          <p class="font-manrope text-[13px] leading-[150%] text-brand-textMuted">
+            Memiliki kepekaan visual yang kaya, menyusun benang tenun dan merancang arsitektur tradisi secara harmoni.
+          </p>
+        </div>
+
+        <!-- Strength Card 3 -->
+        <div class="bg-brand-card border border-brand-accent rounded-[16px] p-[24px] flex flex-col gap-[12px]">
+          <div class="flex items-center gap-3">
+            <div class="w-[34px] h-[34px] bg-brand-bgDark rounded-[8px] flex items-center justify-center">
+              <svg class="w-[18px] h-[18px] text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+            </div>
+            <h3 class="font-outfit font-bold text-[18px] leading-[23px] text-brand-accent">Penjaga Rimba</h3>
+          </div>
+          <p class="font-manrope text-[13px] leading-[150%] text-brand-textMuted">
+            Sensitif terhadap kelestarian alam dan satwa liar, fasih memahami ekosistem kepulauan Nusantara.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Action Footer Buttons -->
+      <div class="w-full pt-6 flex flex-wrap justify-center items-center gap-4">
+        <button class="px-8 py-4 bg-brand-accent text-brand-bgDark rounded-[24px] font-outfit font-extrabold text-[16px] leading-[20px] flex items-center gap-2 hover:brightness-110 transition shadow-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          UNDUH LAPORAN LENGKAP
+        </button>
+        <button class="px-8 py-4 bg-brand-card border border-brand-accent text-brand-accent rounded-[24px] font-outfit font-extrabold text-[16px] leading-[20px] flex items-center gap-2 hover:bg-brand-card/80 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+          </svg>
+          BAGIKAN HASIL
+        </button>
+      </div>
+
+    </section>
+
+  </div>
+
+</body>
+</html>

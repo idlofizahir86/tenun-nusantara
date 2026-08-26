@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tenun Nusantara - Gameplay Pulau Candi</title>
+  
+  <!-- Google Fonts: Outfit & Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Reset & CSS Global */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(180deg, #09242B 0%, #060F14 100%);
+      font-family: 'Manrope', sans-serif;
+      color: #FFFFFF;
+      min-height: 1024px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    /* Container Utama */
+    .gameplay-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      width: 1440px;
+      height: 1024px;
+      min-height: 1024px;
+      background: linear-gradient(180deg, #09242B 0%, #060F14 100%);
+      overflow: hidden;
+    }
+
+    /* Top Bar Header Navigation */
+    .top-bar {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      width: 1440px;
+      height: 73px;
+      background: #0F3943;
+      flex: none;
+      z-index: 10;
+    }
+
+    .island-info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+      width: 208px;
+      height: 41px;
+    }
+
+    .island-icon-holder {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 36px;
+      height: 36px;
+      background: #FFB319;
+      border-radius: 18px;
+      color: #0B1D23;
+    }
+
+    .island-titles {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      width: 160px;
+      height: 41px;
+    }
+
+    .island-name {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 23px;
+      color: #FFFFFF;
+    }
+
+    .island-category {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      color: #19D29F;
+    }
+
+    .stage-timer-group {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 24px;
+      width: 191px;
+      height: 34px;
+    }
+
+    .stage-badge {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 8px 16px;
+      width: 95px;
+      height: 34px;
+      background: #09242B;
+      border-radius: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 18px;
+      color: #FFFFFF;
+    }
+
+    .timer-display {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      width: 72px;
+      height: 20px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 20px;
+      color: #FFB319;
+    }
+
+    /* Main Area Layout (3 Columns) */
+    .gameplay-body {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      width: 1440px;
+      height: 760px;
+      flex: none;
+      align-self: stretch;
+    }
+
+    /* Left Sidebar - Character Guide */
+    .left-sidebar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 32px;
+      gap: 24px;
+      width: 320px;
+      height: 760px;
+      background: #09242B;
+      border-right: 2px solid #0F3943;
+      flex: none;
+    }
+
+    .guide-avatar-card {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      width: 256px;
+      height: 200px;
+      border: 1px solid #FFB319;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .guide-avatar-img {
+      width: 256px;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .guide-name {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 23px;
+      color: #FFB319;
+    }
+
+    .guide-dialog-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px;
+      gap: 8px;
+      width: 256px;
+      height: 116px;
+      background: #0F3943;
+      border-radius: 16px;
+    }
+
+    .dialog-text {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 150%;
+      color: #FFFFFF;
+    }
+
+    /* Main Gameplay Canvas */
+    .main-canvas {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      gap: 32px;
+      width: 840px;
+      height: 760px;
+      background-image: url('temple_wall_bg.png');
+      background-size: cover;
+      background-position: center;
+      flex: 1;
+    }
+
+    .canvas-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 559px;
+      height: 61px;
+      text-align: center;
+    }
+
+    .canvas-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 30px;
+      color: #FFB319;
+    }
+
+    .canvas-instruction {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      color: #E2ECEF;
+    }
+
+    /* Puzzle Working Area */
+    .puzzle-workspace {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 32px;
+      gap: 32px;
+      width: 700px;
+      height: 364px;
+      background: rgba(18, 62, 71, 0.8);
+      border: 2px solid #FFB319;
+      border-radius: 24px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Puzzle Grid Board */
+    .puzzle-board-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      width: 400px;
+      height: 300px;
+      background: #09242B;
+      border-radius: 16px;
+    }
+
+    .puzzle-grid {
+      position: relative;
+      width: 360px;
+      height: 240px;
+    }
+
+    .grid-slot {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: #0F3943;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .slot-missing {
+      width: 60px;
+      height: 60px;
+      border: 2px dashed #FFB319;
+      background: rgba(15, 57, 67, 0.5);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #FFB319;
+    }
+
+    .slot-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+
+    /* Puzzle Pieces Panel */
+    .pieces-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      width: 204px;
+      height: 130px;
+    }
+
+    .panel-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 18px;
+      color: #FFFFFF;
+    }
+
+    .pieces-list {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 12px;
+      width: 204px;
+      height: 96px;
+    }
+
+    .piece-card {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 8px;
+      width: 96px;
+      height: 96px;
+      background: #09242B;
+      border: 1px solid #FFB319;
+      border-radius: 12px;
+      cursor: grab;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .piece-card:hover {
+      transform: scale(1.05);
+      border-color: #19D29F;
+    }
+
+    .piece-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    /* Right Sidebar - Assistance & Progress */
+    .right-sidebar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 32px;
+      gap: 24px;
+      width: 280px;
+      height: 760px;
+      background: #09242B;
+      border-left: 2px solid #0F3943;
+      flex: none;
+    }
+
+    .sidebar-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      width: 216px;
+    }
+
+    .section-tag {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 15px;
+      text-transform: uppercase;
+      color: #8DA2A6;
+    }
+
+    .btn-hint {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 16px;
+      gap: 12px;
+      width: 216px;
+      height: 52px;
+      background: #0F3943;
+      border: 1px solid #FFB319;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #FFB319;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 18px;
+      transition: background 0.2s ease;
+    }
+
+    .btn-hint:hover {
+      background: #144955;
+    }
+
+    .progress-bar-group {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      width: 100px;
+      height: 16px;
+    }
+
+    .progress-track {
+      width: 67px;
+      height: 8px;
+      background: #0F3943;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 33%;
+      height: 100%;
+      background: #19D29F;
+      border-radius: 4px;
+    }
+
+    .progress-text {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      color: #19D29F;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="gameplay-container">
+    
+    <!-- Header Navigation Bar -->
+    <header class="top-bar">
+      
+      <!-- Island Details -->
+      <div class="island-info">
+        <div class="island-icon-holder">
+          <i data-lucide="landmark" size="20"></i>
+        </div>
+        <div class="island-titles">
+          <h1 class="island-name">Pulau Candi</h1>
+          <span class="island-category">Logika-Matematika & Analitis</span>
+        </div>
+      </div>
+
+      <!-- Stage & Timer Badge -->
+      <div class="stage-timer-group">
+        <div class="stage-badge">
+          <span>Babak 1/3</span>
+        </div>
+        <div class="timer-display">
+          <i data-lucide="clock" size="20"></i>
+          <span>04:32</span>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- Main Gameplay Area (Left Sidebar, Canvas, Right Sidebar) -->
+    <div class="gameplay-body">
+      
+      <!-- Left Sidebar: Character Guide (Nala) -->
+      <aside class="left-sidebar">
+        
+        <div class="guide-avatar-card">
+          <img src="nala_avatar.png" alt="Nala Guide" class="guide-avatar-img" />
+        </div>
+
+        <h2 class="guide-name">NALA</h2>
+
+        <div class="guide-dialog-box">
+          <p class="dialog-text">
+            "Relief kuno ini memiliki pola simetri yang hilang. Bisakah kamu membantu menyusun kembali batuan candi ini agar seimbang?"
+          </p>
+        </div>
+
+      </aside>
+
+      <!-- Main Interactive Puzzle Workspace -->
+      <section class="main-canvas">
+        
+        <div class="canvas-header">
+          <h2 class="canvas-title">Rekonstruksi Relief Kuno</h2>
+          <p class="canvas-instruction">Seret batuan di bawah dan susun pada bidang relief yang kosong agar polanya simetris.</p>
+        </div>
+
+        <!-- Working Board Frame -->
+        <div class="puzzle-workspace">
+          
+          <!-- Grid Relief Target Board -->
+          <div class="puzzle-board-container">
+            <div class="puzzle-grid">
+              
+              <!-- Row 1 Slot 1 -->
+              <div class="grid-slot" style="left: 0px; top: 0px;">
+                <img src="stone_relief_1.png" alt="Relief Tile 1" class="slot-img" />
+              </div>
+
+              <!-- Row 1 Slot 2 (Missing / Empty Target) -->
+              <div class="grid-slot slot-missing" style="left: 122.67px; top: 0px;">
+                ?
+              </div>
+
+              <!-- Row 1 Slot 3 -->
+              <div class="grid-slot" style="left: 245.33px; top: 0px;">
+                <img src="stone_relief_2.png" alt="Relief Tile 2" class="slot-img" />
+              </div>
+
+              <!-- Row 2 Slot 1 -->
+              <div class="grid-slot" style="left: 0px; top: 124px;">
+                <img src="stone_relief_3.png" alt="Relief Tile 3" class="slot-img" />
+              </div>
+
+              <!-- Row 2 Slot 2 -->
+              <div class="grid-slot" style="left: 122.67px; top: 124px;">
+                <img src="stone_relief_4.png" alt="Relief Tile 4" class="slot-img" />
+              </div>
+
+              <!-- Row 2 Slot 3 (Missing / Empty Target) -->
+              <div class="grid-slot slot-missing" style="left: 245.33px; top: 124px;">
+                ?
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Draggable Stone Piece Options -->
+          <div class="pieces-panel">
+            <span class="panel-title">Potongan Batuan Kuno:</span>
+            <div class="pieces-list">
+              <div class="piece-card" draggable="true">
+                <img src="piece_stone_a.png" alt="Potongan 1" class="piece-img" />
+              </div>
+              <div class="piece-card" draggable="true">
+                <img src="piece_stone_b.png" alt="Potongan 2" class="piece-img" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Right Sidebar: Hints & Level Progress -->
+      <aside class="right-sidebar">
+        
+        <!-- Hint Section -->
+        <div class="sidebar-section">
+          <span class="section-tag">Bantuan</span>
+          <button class="btn-hint">
+            <i data-lucide="scroll" size="20"></i>
+            <span>Petunjuk Candi</span>
+          </button>
+        </div>
+
+        <!-- Island Progress Section -->
+        <div class="sidebar-section">
+          <span class="section-tag">Kemajuan Pulau</span>
+          <div class="progress-bar-group">
+            <div class="progress-track">
+              <div class="progress-fill"></div>
+            </div>
+            <span class="progress-text">33%</span>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

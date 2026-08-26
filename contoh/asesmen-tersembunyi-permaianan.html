@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tenun Nusantara - Story Choice Dialog</title>
+
+  <!-- Google Fonts: Outfit & Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Reset & CSS Global */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #060F14;
+      font-family: 'Manrope', sans-serif;
+      color: #FFFFFF;
+      min-height: 1024px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Container Utama Page */
+    .story-choice-dialog {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 1440px;
+      height: 1024px;
+      min-height: 1024px;
+      background: linear-gradient(180deg, #09242B 0%, #060F14 100%);
+      overflow: hidden;
+    }
+
+    /* Backdrop Frame (Latar Belakang Candi & Overlay) */
+    .backdrop-frame {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px;
+      gap: 40px;
+      width: 1440px;
+      height: 773px;
+      background: linear-gradient(0deg, rgba(6, 15, 20, 0.75), rgba(6, 15, 20, 0.75)), 
+                  url('misty_ancient_temple_bg.png');
+      background-size: cover;
+      background-position: center;
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    /* Modal Dialog Container */
+    .dialog-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 40px;
+      gap: 32px;
+      width: 840px;
+      height: 613px;
+      background: #0F3943;
+      border: 2px solid #FFB319;
+      box-shadow: 0px 24px 48px rgba(0, 0, 0, 0.8);
+      border-radius: 24px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    /* Section Header Story (Pola Tenun + Judul + Narasi) */
+    .story-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 16px;
+      width: 760px;
+      height: 168px;
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    /* Pattern Diamond Tenun Horizontal */
+    .tenun-pattern-border {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0px;
+      width: 760px;
+      height: 8px;
+      opacity: 0.3;
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    .tenun-diamond {
+      width: 8px;
+      height: 8px;
+      background: #FFB319;
+      transform: rotate(45deg); /* Efek bentuk belah ketupat/diamond tenun */
+      flex: none;
+    }
+
+    .story-category {
+      width: 147px;
+      height: 23px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 23px;
+      text-transform: uppercase;
+      color: #FFB319;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+
+    .story-text {
+      width: 760px;
+      height: 105px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 160%;
+      color: #FFFFFF;
+      flex: none;
+      order: 2;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    /* Container Pilihan Ganda (Choices List) */
+    .choices-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 16px;
+      width: 760px;
+      height: 281px;
+      flex: none;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    /* Generic Option Card Style */
+    .choice-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 20px;
+      gap: 16px;
+      width: 760px;
+      height: 83px;
+      background: #09242B;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      flex: none;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    .choice-card:hover {
+      transform: translateX(4px);
+      background: #0C2E37;
+    }
+
+    /* Option Variants (Border & Theme Colors) */
+    .choice-card.option-a {
+      border: 1px solid #19D29F;
+    }
+
+    .choice-card.option-b {
+      border: 1px solid #FFB319;
+    }
+
+    .choice-card.option-c {
+      border: 1px solid #9E77F3;
+    }
+
+    /* Icon Containers */
+    .icon-badge {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    .option-a .icon-badge {
+      background: rgba(25, 210, 159, 0.2);
+      color: #19D29F;
+    }
+
+    .option-b .icon-badge {
+      background: rgba(255, 179, 25, 0.2);
+      color: #FFB319;
+    }
+
+    .option-c .icon-badge {
+      background: rgba(158, 119, 243, 0.2);
+      color: #9E77F3;
+    }
+
+    /* Text Wrapper Inside Choice Card */
+    .choice-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 4px;
+      width: 664px;
+      height: 43px;
+      flex: none;
+      order: 1;
+      flex-grow: 1;
+    }
+
+    .choice-title {
+      height: 20px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 20px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    .option-a .choice-title { color: #19D29F; }
+    .option-b .choice-title { color: #FFB319; }
+    .option-c .choice-title { color: #9E77F3; }
+
+    .choice-description {
+      height: 19px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      color: #E2ECEF;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+
+    /* Footer / Hidden Assessment Tracker */
+    .dialog-footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px;
+      width: 760px;
+      height: 20px;
+      flex: none;
+      order: 2;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    .assessment-tracker {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 8px;
+      width: 210px;
+      height: 20px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      color: #FFB319;
+    }
+
+    .tracker-label {
+      width: 182px;
+      height: 16px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      color: #8DA2A6;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+
+    .tracker-progress-bg {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 0px;
+      width: 120px;
+      height: 6px;
+      background: #09242B;
+      border-radius: 3px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+
+    .tracker-progress-fill {
+      width: 40px;
+      height: 6px;
+      background: #FFB319;
+      border-radius: 3px;
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="story-choice-dialog">
+    
+    <!-- Latar Belakang Candi dengan Overlay -->
+    <div class="backdrop-frame">
+      
+      <!-- Modal Kartu Dialog -->
+      <div class="dialog-card">
+        
+        <!-- Header Narasi & Pola Tenun -->
+        <div class="story-header">
+          
+          <!-- Pola Berlian Tenun (24 Dots) -->
+          <div class="tenun-pattern-border">
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+            <div class="tenun-diamond"></div><div class="tenun-diamond"></div>
+          </div>
+
+          <span class="story-category">Kejadian Kuno</span>
+
+          <p class="story-text">
+            "Kabut tebal tiba-tiba menyelimuti candi kuno. Relief di depanmu tiba-tiba runtuh, menghilangkan pola simetris yang menjadi kuncinya. Apa tindakan pertama yang akan kamu lakukan?"
+          </p>
+
+        </div>
+
+        <!-- Daftar Pilihan Tindakan -->
+        <div class="choices-container">
+          
+          <!-- Pilihan A -->
+          <div class="choice-card option-a">
+            <div class="icon-badge">
+              <i data-lucide="database-zap" size="20"></i>
+            </div>
+            <div class="choice-content">
+              <span class="choice-title">Pilihan A: Analitis & Pola</span>
+              <p class="choice-description">Cocokkan secara matematis pola ukiran batuan relief yang tersisa.</p>
+            </div>
+          </div>
+
+          <!-- Pilihan B -->
+          <div class="choice-card option-b">
+            <div class="icon-badge">
+              <i data-lucide="message-circle" size="20"></i>
+            </div>
+            <div class="choice-content">
+              <span class="choice-title">Pilihan B: Kontekstual & Sosial</span>
+              <p class="choice-description">Ajak penjaga candi bercerita untuk mencari petunjuk legenda relief.</p>
+            </div>
+          </div>
+
+          <!-- Pilihan C -->
+          <div class="choice-card option-c">
+            <div class="icon-badge">
+              <i data-lucide="paint-brush" size="20"></i>
+            </div>
+            <div class="choice-content">
+              <span class="choice-title">Pilihan C: Visual-Kreatif</span>
+              <p class="choice-description">Gambar ulang motifnya secara bebas menggunakan imajinasimu sendiri.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer: Status Asesmen Tersembunyi -->
+        <div class="dialog-footer">
+          <div class="assessment-tracker">
+            <i data-lucide="hourglass" size="20"></i>
+            <span class="tracker-label">Asesmen Tersembunyi Berjalan...</span>
+          </div>
+
+          <div class="tracker-progress-bg">
+            <div class="tracker-progress-fill"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Inisialisasi ikon Lucide
+    lucide.createIcons();
+  </script>
+</body>
+</html>

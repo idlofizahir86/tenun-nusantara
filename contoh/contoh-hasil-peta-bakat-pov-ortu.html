@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tenun Nusantara - Laporan Orang Tua</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bgDark: '#09242B',
+              bgLight: '#060F14',
+              card: '#0F3943',
+              accent: '#FFB319',
+              border: '#FFB319',
+              textMuted: '#E2ECEF',
+              subtle: '#8DA2A6'
+            }
+          },
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif'],
+            manrope: ['Manrope', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-b from-brand-bgDark to-brand-bgLight text-white font-manrope min-h-screen flex flex-col items-center justify-start antialiased">
+
+  <div class="w-full max-w-[1440px] relative flex flex-col items-center">
+    
+    <!-- NAVBAR -->
+    <header class="w-full h-[88px] px-6 lg:px-[80px] py-6 flex items-center justify-between">
+      <!-- Logo Group -->
+      <div class="flex items-center gap-[12px]">
+        <div class="w-10 h-10 bg-brand-accent rounded-[12px] flex items-center justify-center">
+          <svg class="w-6 h-6 text-brand-bgDark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+          </svg>
+        </div>
+        <span class="font-outfit font-extrabold text-[22px] leading-[28px] text-white tracking-wide">
+          TENUN NUSANTARA
+        </span>
+      </div>
+
+      <!-- Nav Links & Badge -->
+      <div class="flex items-center gap-8">
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="#" class="font-manrope font-semibold text-[15px] text-brand-textMuted/70 hover:text-white transition">Peta Bakat</a>
+          <a href="#" class="font-manrope font-semibold text-[15px] text-brand-textMuted/70 hover:text-white transition">Dashboard Guru</a>
+          <a href="#" class="font-manrope font-extrabold text-[15px] text-brand-accent">Laporan Orang Tua</a>
+        </nav>
+        
+        <!-- Bisa AI Badge -->
+        <div class="box-border flex items-center gap-2 px-4 py-2 bg-brand-card border border-brand-accent rounded-full">
+          <span class="font-manrope font-bold text-[11px] uppercase tracking-wider text-brand-subtle">POWERED BY</span>
+          <span class="font-outfit font-black text-[14px] text-white">BISA.AI</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- REPORT CANVAS -->
+    <main class="w-full max-w-[1440px] bg-brand-bgDark border-x border-brand-accent/40 px-6 lg:px-[160px] py-[40px] flex flex-col gap-[40px]">
+      
+      <!-- REPORT TOP PANEL -->
+      <section class="w-full bg-brand-card border border-brand-accent rounded-[24px] p-6 lg:p-[32px] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+        <div class="flex items-center gap-[20px]">
+          <!-- Profile Avatar -->
+          <div class="w-[64px] h-[64px] rounded-full bg-cover bg-center border-2 border-brand-accent flex-shrink-0" style="background-image: url('https://placehold.co/100x100?text=Siti');"></div>
+          <div class="flex flex-col gap-1">
+            <h1 class="font-outfit font-extrabold text-2xl lg:text-[24px] leading-[30px] text-brand-accent">
+              Siti Anindya
+            </h1>
+            <p class="font-manrope text-[14px] leading-[19px] text-brand-textMuted">
+              SD Nusantara - Kelas 4A • Tanggal: 24 Januari 2026
+            </p>
+          </div>
+        </div>
+
+        <!-- Print Button -->
+        <button onclick="window.print()" class="px-6 py-3 bg-brand-accent rounded-[12px] flex items-center gap-2 hover:brightness-110 transition cursor-pointer flex-shrink-0">
+          <svg class="w-4 h-4 text-brand-bgDark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          <span class="font-outfit font-bold text-[14px] leading-[18px] text-brand-bgDark uppercase">CETAK LAPORAN</span>
+        </button>
+      </section>
+
+      <!-- TENUN PATTERN BORDER -->
+      <div class="w-full flex justify-between items-center opacity-60">
+        <script>
+          for (let i = 0; i < 24; i++) {
+            document.write('<div class="w-2 h-2 bg-brand-accent rotate-45 transform"></div>');
+          }
+        </script>
+      </div>
+
+      <!-- NARRATIVE BLOCKS -->
+      <section class="flex flex-col gap-[24px]">
+        <h2 class="font-outfit font-bold text-[22px] leading-[28px] text-brand-accent">
+          Bagaimana Siti Menyelesaikan Tantangan?
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
+          <!-- Block 1 -->
+          <div class="bg-brand-card rounded-[16px] p-[24px] flex flex-col gap-[12px]">
+            <h3 class="font-outfit font-bold text-[18px] leading-[23px] text-brand-accent">
+              Tantangan Pulau Candi
+            </h3>
+            <p class="font-manrope text-[14px] leading-[160%] text-brand-textMuted">
+              Saat menyusun kepingan struktur candi, Siti menunjukkan konsentrasi mendalam. Alih-alih menebak acak, ia menganalisis pola geometri candi dengan teliti. Ini menandakan kemampuan penalaran logis yang kuat.
+            </p>
+          </div>
+
+          <!-- Block 2 -->
+          <div class="bg-brand-card rounded-[16px] p-[24px] flex flex-col gap-[12px]">
+            <h3 class="font-outfit font-bold text-[18px] leading-[23px] text-brand-accent">
+              Tantangan Pulau Rimba
+            </h3>
+            <p class="font-manrope text-[14px] leading-[160%] text-brand-textMuted">
+              Siti sangat peka dalam mengelompokkan ragam fauna langka. Ia menyelesaikan tantangan konservasi dengan kepedulian alam yang menonjol, merefleksikan kecerdasan ekologis alami.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CAREER TRENDS -->
+      <section class="flex flex-col gap-[24px]">
+        <div class="flex flex-col gap-[6px]">
+          <h2 class="font-outfit font-bold text-[22px] leading-[28px] text-white">
+            Rekomendasi Karir Masa Depan (Tren 2030)
+          </h2>
+          <p class="font-manrope text-[14px] leading-[19px] text-brand-subtle">
+            NALA memetakan bakat dominan Siti pada kemungkinan bidang studi dan profesi masa depan.
+          </p>
+        </div>
+
+        <!-- Career Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-[20px]">
+          
+          <!-- Career Card 1 -->
+          <div class="bg-brand-card border border-brand-accent rounded-[16px] p-[20px] flex flex-col gap-[12px]">
+            <h3 class="font-outfit font-extrabold text-[16px] leading-[20px] text-white">
+              Data Analyst / AI Ethicist
+            </h3>
+            <div class="self-start px-[8px] py-[2px] bg-brand-bgDark rounded-[4px]">
+              <span class="font-manrope text-[11px] leading-[15px] text-brand-accent">
+                Koneksi Bakat: Logika-Matematika
+              </span>
+            </div>
+            <p class="font-manrope text-[13px] leading-[150%] text-brand-textMuted">
+              Kemampuan Siti memetakan algoritma dan pola kompleks sangat ideal untuk pemecahan masalah Big Data di masa depan.
+            </p>
+          </div>
+
+          <!-- Career Card 2 -->
+          <div class="bg-brand-card border border-brand-accent rounded-[16px] p-[20px] flex flex-col gap-[12px]">
+            <h3 class="font-outfit font-extrabold text-[16px] leading-[20px] text-white">
+              Rimba Conservation Scientist
+            </h3>
+            <div class="self-start px-[8px] py-[2px] bg-brand-bgDark rounded-[4px]">
+              <span class="font-manrope text-[11px] leading-[15px] text-brand-accent">
+                Koneksi Bakat: Naturalis
+              </span>
+            </div>
+            <p class="font-manrope text-[13px] leading-[150%] text-brand-textMuted">
+              Kecintaan ekologisnya membuka jalan lebar bagi kepemimpinan konservasi hutan, kehutanan sirkular, atau energi hijau.
+            </p>
+          </div>
+
+          <!-- Career Card 3 -->
+          <div class="bg-brand-card border border-brand-accent rounded-[16px] p-[20px] flex flex-col gap-[12px]">
+            <h3 class="font-outfit font-extrabold text-[16px] leading-[20px] text-white">
+              Creative Director
+            </h3>
+            <div class="self-start px-[8px] py-[2px] bg-brand-bgDark rounded-[4px]">
+              <span class="font-manrope text-[11px] leading-[15px] text-brand-accent">
+                Koneksi Bakat: Seni-Kreativitas
+              </span>
+            </div>
+            <p class="font-manrope text-[13px] leading-[150%] text-brand-textMuted">
+              Siti berbakat mengawinkan unsur tradisi nusantara ke dalam desain multimedia modern, gim, atau kriya kontemporer.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- NEXT STEPS CARD -->
+      <section class="bg-brand-card border-[1.5px] border-brand-accent rounded-[20px] p-6 lg:p-[32px] flex flex-col gap-[16px]">
+        <h2 class="font-outfit font-extrabold text-[20px] leading-[25px] text-brand-accent">
+          Langkah Stimulasi Selanjutnya
+        </h2>
+
+        <div class="flex flex-col gap-[12px]">
+          <!-- Step 1 -->
+          <div class="flex items-start gap-[12px]">
+            <div class="w-[24px] h-[24px] bg-brand-accent rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="font-outfit font-extrabold text-[12px] leading-[15px] text-brand-bgDark">1</span>
+            </div>
+            <p class="font-manrope text-[14px] leading-[150%] text-brand-textMuted flex-grow">
+              Berikan buku bacaan bertema misteri detektif atau teka-teki logika matematika ringan di rumah.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex items-start gap-[12px]">
+            <div class="w-[24px] h-[24px] bg-brand-accent rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="font-outfit font-extrabold text-[12px] leading-[15px] text-brand-bgDark">2</span>
+            </div>
+            <p class="font-manrope text-[14px] leading-[150%] text-brand-textMuted flex-grow">
+              Ajak Siti berkunjung ke taman nasional atau kebun raya untuk memberi makan hewan peliharaan sambil mengamati pola dedaunan.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex items-start gap-[12px]">
+            <div class="w-[24px] h-[24px] bg-brand-accent rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="font-outfit font-extrabold text-[12px] leading-[15px] text-brand-bgDark">3</span>
+            </div>
+            <p class="font-manrope text-[14px] leading-[150%] text-brand-textMuted flex-grow">
+              Eksplorasi menggambar ornamen batik sederhana bersama untuk terus memupuk bakat spasial visualnya.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
