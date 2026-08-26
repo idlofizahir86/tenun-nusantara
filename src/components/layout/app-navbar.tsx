@@ -132,9 +132,9 @@ export function AppNavbar({ active, hideMenu }: { active?: NavKey; hideMenu?: bo
         </button>
         <div className="box-border flex items-center gap-2 rounded-full border border-[#FFB319] bg-[#0F3943] px-4 py-1.5">
           <span className="font-nunito text-[10px] font-bold uppercase tracking-wider text-[#8DA2A6]">
-            Powered by
+            Dev💖 by
           </span>
-          <span className="font-outfit text-[13px] font-black text-white">BISA.AI</span>
+          <span className="font-outfit text-[13px] font-black text-white">ATEAM</span>
         </div>
       </div>
     </header>
