@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Gem, Settings, Ship, Anchor, Maximize, BarChart3, Zap, Check } from "lucide-react";
+import { Gem, Settings, Ship, Anchor, Maximize, BarChart3, Zap, Check, Copy, CheckCheck } from "lucide-react";
 import { getSession } from "@/lib/session/session";
 import { AppNavbar } from "@/components/layout/app-navbar";
 import { useDemo } from "@/hooks/use-demo";
@@ -88,8 +88,20 @@ export function MapCanvas() {
   const [demoAuthOpen, setDemoAuthOpen] = useState(false);
   const [demoPasswordInput, setDemoPasswordInput] = useState("");
   const [demoError, setDemoError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const gameCode = getActiveGameCode();
+
+  function copyGameCode() {
+    if (!gameCode) return;
+    try {
+      navigator.clipboard?.writeText(gameCode);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch {
+      // abaikan
+    }
+  }
 
   function tryEnableDemo() {
     if (enable(demoPasswordInput)) {
@@ -411,6 +423,26 @@ export function MapCanvas() {
             })}
           </div>
         </div>
+
+        {/* Kode Game (bisa disalin untuk melanjutkan / membagikan) */}
+        {gameCode && (
+          <button
+            type="button"
+            onClick={copyGameCode}
+            title="Salin kode game untuk melanjutkan atau membagikan"
+            className="inline-flex items-center gap-2 rounded-full border border-[#19D29F]/50 bg-[#09242B] px-3 py-1.5 transition-colors hover:bg-[#0F3943]"
+          >
+            <span className="flex flex-col items-start leading-none">
+              <span className="font-manrope text-[9px] font-bold uppercase tracking-wide text-[#19D29F]">
+                Kode Game
+              </span>
+              <span className="font-outfit text-[13px] font-extrabold text-white">{gameCode}</span>
+            </span>
+            <span className="flex h-6 w-6 items-center justify-center text-[#19D29F]">
+              {copied ? <CheckCheck size={15} /> : <Copy size={14} />}
+            </span>
+          </button>
+        )}
 
         {/* Report / Settings */}
         <div className="flex items-center gap-2">
