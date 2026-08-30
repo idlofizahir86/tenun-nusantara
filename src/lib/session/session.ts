@@ -28,6 +28,7 @@ export interface PlayerInfo {
 
 export interface Session {
   id: string;
+  gameCode?: string; // kode pendek publik (mis. TN-7K3M9X) untuk share/lanjutkan
   startedAt: string;
   lastActiveAt: string;
   player?: PlayerInfo;
@@ -61,6 +62,16 @@ function uuid(): string {
   return "s-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
 }
 
+/** Kode pendek publik (tanpa karakter mudah tertukar seperti 0/O, 1/I). */
+export function makeGameCode(): string {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let code = "TN-";
+  for (let i = 0; i < 6; i++) {
+    code += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return code;
+}
+
 function read<T>(key: string, fallback: T): T {
   try {
     if (typeof localStorage === "undefined") return fallback;
@@ -90,21 +101,30 @@ export function levelFromXp(xp: number): { level: number; title: string } {
   return { level: current.level, title: current.title };
 }
 
+/** Buat sesi baru yang bersih (dipakai "Mulai Baru" / game baru). */
+export function createNewSession(player?: PlayerInfo): Session {
+  const s: Session = {
+    id: uuid(),
+    gameCode: makeGameCode(),
+    startedAt: new Date().toISOString(),
+    lastActiveAt: new Date().toISOString(),
+    player,
+    completedIslands: [],
+    xp: 0,
+    level: 1,
+    badges: [],
+  };
+  write(SESSION_KEY, s);
+  recordEvent("session_start", { sessionId: s.id, gameCode: s.gameCode });
+  ensurePageHideFlush();
+  return s;
+}
+
 /** Ambil/muat sesi aktif. Jika belum ada, buat baru. */
 export function ensureSession(): Session {
-  let s = getSession();
+  const s = getSession();
   if (!s.id) {
-    s = {
-      id: uuid(),
-      startedAt: new Date().toISOString(),
-      lastActiveAt: new Date().toISOString(),
-      completedIslands: [],
-      xp: 0,
-      level: 1,
-      badges: [],
-    };
-    write(SESSION_KEY, s);
-    recordEvent("session_start", { sessionId: s.id });
+    return createNewSession();
   }
   ensurePageHideFlush();
   return s;
@@ -114,6 +134,7 @@ export function getSession(): Session {
   const s = read<Partial<Session>>(SESSION_KEY, {});
   return {
     id: s.id || "",
+    gameCode: s.gameCode,
     startedAt: s.startedAt || "",
     lastActiveAt: s.lastActiveAt || "",
     player: s.player,

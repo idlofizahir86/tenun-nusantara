@@ -7,6 +7,7 @@ import { Reflection } from "./reflection";
 import { useIslandProgress } from "@/hooks/use-island-progress";
 import { getIslandAsset, getReflectionBackground } from "@/config/asset-paths";
 import { islands } from "@/config/islands";
+import { getActiveGameCode } from "@/lib/session/game-store";
 
 // Wrapper client untuk halaman Refleksi terpisah (gaya Nala Companion Chat).
 export function ReflectionClient({ island }: { island: IslandConfig }) {
@@ -42,7 +43,16 @@ export function ReflectionClient({ island }: { island: IslandConfig }) {
       exploredCount = 0;
     }
     const allExplored = exploredCount >= islands.length;
-    router.push(allExplored ? "/report" : "/map");
+    const gameCode = getActiveGameCode();
+    router.push(
+      allExplored
+        ? gameCode
+          ? `/report/${gameCode}`
+          : "/report"
+        : gameCode
+          ? `/map/${gameCode}`
+          : "/map"
+    );
   }
 
   const asset = getIslandAsset(island.id);
@@ -51,6 +61,7 @@ export function ReflectionClient({ island }: { island: IslandConfig }) {
     <div className="flex h-full w-full items-center justify-center px-2 py-1">
       <Reflection
         reflection={island.reflection}
+        islandId={island.id}
         image={getReflectionBackground(island.id)}
         fallbackImage={asset.fallbackBackground}
         playerName={playerName}

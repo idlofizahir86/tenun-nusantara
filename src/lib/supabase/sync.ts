@@ -107,6 +107,27 @@ export async function pullMyRemoteData(): Promise<{
   }
 }
 
+/** Tarik data sesi + event dari Supabase berdasarkan gameCode (kode pendek). */
+export async function pullRemoteByGameCode(gameCode: string): Promise<{
+  session: Record<string, unknown> | null;
+  events: SessionEvent[];
+}> {
+  if (!telemetryEnabled() || !gameCode) {
+    return { session: null, events: [] };
+  }
+  try {
+    const res = await fetch(`/api/telemetry?gameCode=${encodeURIComponent(gameCode)}`);
+    if (!res.ok) return { session: null, events: [] };
+    const data = await res.json();
+    return {
+      session: data.session || null,
+      events: Array.isArray(data.events) ? (data.events as SessionEvent[]) : [],
+    };
+  } catch {
+    return { session: null, events: [] };
+  }
+}
+
 /** Simpan userId akun yang login ke localStorage (dipakai push telemetri). */
 export function storeAccount(userId: string | null): void {
   try {

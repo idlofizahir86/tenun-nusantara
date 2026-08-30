@@ -36,6 +36,7 @@ export async function POST(req: Request) {
       const s = body.session as Record<string, unknown>;
       const row: Record<string, unknown> = {
         id: s.id,
+        game_code: s.gameCode || null,
         started_at: (s.startedAt as string) || new Date().toISOString(),
         last_active_at: (s.lastActiveAt as string) || new Date().toISOString(),
         current_island: s.currentIsland || null,
@@ -106,6 +107,27 @@ export async function GET(req: Request) {
         db.from("events").select("*").eq("profile_id", user.id).order("t", { ascending: true }),
       ]);
 
+      return NextResponse.json({ ok: true, session: sRes.data || null, events: eRes.data || [] });
+    }
+
+    // Pull per gameCode (kode pendek, untuk lanjutkan/share lintas perangkat).
+    const gameCode = searchParams.get("gameCode");
+    if (gameCode) {
+      const db = createServiceClient();
+      if (!db) return NextResponse.json({ ok: true, skipped: true });
+      const sRes = await db
+        .from("sessions")
+        .select("*")
+        .eq("game_code", gameCode)
+        .limit(1)
+        .maybeSingle();
+      const sid = (sRes.data as { id?: string } | null)?.id;
+      if (!sid) return NextResponse.json({ ok: true, session: null, events: [] });
+      const eRes = await db
+        .from("events")
+        .select("*")
+        .eq("session_id", sid)
+        .order("t", { ascending: true });
       return NextResponse.json({ ok: true, session: sRes.data || null, events: eRes.data || [] });
     }
 

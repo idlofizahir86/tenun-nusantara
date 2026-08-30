@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { Pencil, Ticket, Anchor } from "lucide-react";
+import { newGame } from "@/lib/session/game-store";
+import type { PlayerInfo } from "@/lib/session/session";
 
 const DIAMONDS = Array.from({ length: 24 }, (_, i) => i);
 
@@ -47,16 +49,17 @@ export default function CharSelectPage() {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     // Simpan pilihan pemain agar dipakai di halaman map
-    localStorage.setItem(
-      "tenun-player",
-      JSON.stringify({
-        name,
-        characterId: selected.id,
-        motif: selected.motif,
-        origin: selected.origin,
-      })
-    );
-    router.push("/map");
+    const player: PlayerInfo = {
+      name,
+      characterId: selected.id,
+      motif: selected.motif,
+      origin: selected.origin,
+    };
+    localStorage.setItem("tenun-player", JSON.stringify(player));
+    // Buat permainan baru (uuid internal + kode pendek publik) lalu menuju
+    // /map/{gameCode} agar bisa dilanjutkan/dibagikan.
+    const gameCode = newGame(player);
+    router.push(`/map/${gameCode}`);
   }
 
   return (

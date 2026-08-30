@@ -10,9 +10,11 @@ import { useTTS } from "@/hooks/use-tts";
 import { useVoiceInput } from "@/hooks/use-voice-input";
 import { useNala } from "@/hooks/use-nala";
 import { useDemo } from "@/hooks/use-demo";
+import { recordEvent } from "@/lib/session/session";
 
 interface Props {
   reflection: ReflectionConfig;
+  islandId?: string;
   image: string;
   fallbackImage: string;
   playerName: string;
@@ -26,7 +28,7 @@ interface ChatMsg {
 
 const DIAMONDS = Array.from({ length: 24 }, (_, i) => i);
 
-export function Reflection({ reflection, image, fallbackImage, playerName, onFinish }: Props) {
+export function Reflection({ reflection, islandId, image, fallbackImage, playerName, onFinish }: Props) {
   const { speak, stop, speaking } = useTTS();
   const voice = useVoiceInput();
   const nala = useNala();
@@ -68,6 +70,9 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
     setStarted(true);
     setNalaThinking(true);
 
+    // Rekam awal refleksi (masuk laporan sebagai hitungan refleksi).
+    recordEvent("reflection_answer", { islandId, step: 0, text: reflection.intro });
+
     // Live Demo "NALA Instan": balasan langsung, tanpa menunggu AI.
     if (demo && demoInstant) {
       const first = choices[0];
@@ -100,6 +105,9 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
     voice.stop();
     setMessages((m) => [...m, { role: "user", text }]);
     setNalaThinking(true);
+
+    // Rekam jawaban refleksi anak (masuk laporan sebagai hitungan refleksi).
+    recordEvent("reflection_answer", { islandId, step, text });
 
     const isLast = step >= turns;
 

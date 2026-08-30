@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Compass } from "lucide-react";
+import { ContinueGame } from "./continue-game";
 
 const DIAMONDS = Array.from({ length: 24 }, (_, i) => i);
 
@@ -47,6 +48,9 @@ export function HeroSection() {
             <Compass className="h-6 w-6" />
           </div>
         </Link>
+
+        {/* Lanjutkan Penjelajahan (masukkan kode game) */}
+        <ContinueGame />
       </div>
 
       {/* Hero Artwork */}
