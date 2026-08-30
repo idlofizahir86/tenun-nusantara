@@ -77,6 +77,7 @@ export default function MapPage() {
   }>({ name: "", characterId: "siti" });
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [completedCount, setCompletedCount] = useState(0);
   const [session] = useState(getSession());
 
@@ -130,6 +131,23 @@ export default function MapPage() {
     }
     document.addEventListener("fullscreenchange", onFsChange);
     return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, []);
+
+  // Tutup menu pengaturan saat klik di luar / tekan Escape
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      const t = e.target as HTMLElement | null;
+      if (t && !t.closest("[data-settings-menu]")) setIsSettingsOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setIsSettingsOpen(false);
+    }
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   const selected = ISLANDS.find((i) => i.id === selectedId) ?? null;
@@ -339,13 +357,45 @@ export default function MapPage() {
             <BarChart3 size={16} />
             Peta Bakat
           </button>
-          <button
-            aria-label="Pengaturan"
-            onClick={toggleFullscreen}
-            className="flex h-10 w-10 items-center justify-center rounded-full border-none bg-[#09242B] text-[#FFB319] transition-colors hover:bg-[#0F3943]"
-          >
-            <Settings size={20} />
-          </button>
+          {/* Pengaturan: menu pilihan (Layar Penuh dll. — siap diperluas) */}
+          <div className="relative" data-settings-menu>
+            <button
+              aria-label="Pengaturan"
+              aria-expanded={isSettingsOpen}
+              onClick={() => setIsSettingsOpen((o) => !o)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border-none bg-[#09242B] text-[#FFB319] transition-colors hover:bg-[#0F3943]"
+            >
+              <Settings size={20} />
+            </button>
+            {isSettingsOpen && (
+              <div className="absolute bottom-14 right-0 z-30 w-64 rounded-2xl border border-[#FFB319] bg-[#0F3943] p-2 shadow-2xl">
+                <p className="px-3 pb-1 pt-1 font-outfit text-[11px] font-bold uppercase tracking-wide text-[#19D29F]">
+                  Pengaturan
+                </p>
+                <ul className="flex flex-col gap-1">
+                  {/* Pilihan pengaturan — tambahkan item baru di sini ke depannya */}
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        toggleFullscreen();
+                        setIsSettingsOpen(false);
+                      }}
+                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 font-manrope text-[14px] font-semibold text-white transition-colors hover:bg-[#09242B]"
+                    >
+                      <Maximize size={18} className="shrink-0 text-[#FFB319]" />
+                      <span className="flex-1 text-left">
+                        {isFullscreen ? "Keluar Layar Penuh" : "Layar Penuh"}
+                      </span>
+                      {isFullscreen && (
+                        <span className="text-[12px] font-bold text-[#19D29F]">AKTIF</span>
+                      )}
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </footer>
       </div>
