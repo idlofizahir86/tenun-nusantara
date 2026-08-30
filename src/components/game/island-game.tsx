@@ -54,7 +54,7 @@ interface Props {
 
 export function IslandGame({ island }: Props) {
   const router = useRouter();
-  const { speak } = useTTS();
+  const { speak, stop } = useTTS();
 
   const [actIndex, setActIndex] = useState(0);
   const [interruptOpen, setInterruptOpen] = useState(false);
@@ -148,6 +148,12 @@ export function IslandGame({ island }: Props) {
   useEffect(() => {
     speak(minigame.nalaDialog);
   }, [actIndex, minigame.nalaDialog, speak]);
+
+  // Hentikan narasi saat overlay muncul (apresiasi babak, asesmen, timeout)
+  // agar tidak ada suara instruksi yang masih berbicara di bawah popup.
+  useEffect(() => {
+    if (actComplete || timeUp || interruptOpen) stop();
+  }, [actComplete, timeUp, interruptOpen, stop]);
 
   const onWrong = useCallback(
     (detail?: string) => {

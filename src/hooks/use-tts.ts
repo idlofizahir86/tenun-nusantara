@@ -25,6 +25,9 @@ export function useTTS() {
   const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const cancelRef = useRef(false);
+  // Token generasi bicara: setiap speak() menambah counter. Fetch Edge yang selesai
+  // setelah token-nya bukan lagi yang terbaru dibuang (mencegah narasi ganda/telat).
+  const speakTokenRef = useRef(0);
 
   useEffect(() => {
     if (!wsSupported) return;
@@ -78,31 +81,32 @@ export function useTTS() {
   }, []);
 
   // --- Mode Edge TTS (prioritas) ---
-  const playEdge = useCallback(
-    async (text: string) => {
-      const res = await fetch("/api/tts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
-      });
-      if (!res.ok) throw new Error(`tts http ${res.status}`);
-      const blob = await res.blob();
-      if (cancelRef.current) return;
-      const url = URL.createObjectURL(blob);
-      const audio = new Audio(url);
-      audioRef.current = audio;
-      setSpeaking(true);
-      await new Promise<void>((resolve) => {
-        audio.onended = () => resolve();
-        audio.onerror = () => resolve();
-        audio.play().catch(() => resolve());
-      });
-      URL.revokeObjectURL(url);
+  const playEdge = useCallback(async (text: string, token: number) => {
+    const res = await fetch("/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+    if (!res.ok) throw new Error(`tts http ${res.status}`);
+    const blob = await res.blob();
+    // Basi: dibatalkan atau sudah digantikan speak() yang lebih baru → jangan mainkan.
+    if (cancelRef.current || token !== speakTokenRef.current) return;
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    audioRef.current = audio;
+    setSpeaking(true);
+    await new Promise<void>((resolve) => {
+      audio.onended = () => resolve();
+      audio.onerror = () => resolve();
+      audio.play().catch(() => resolve());
+    });
+    URL.revokeObjectURL(url);
+    // Hanya reset status bila masih jadi suara terbaru.
+    if (token === speakTokenRef.current) {
       audioRef.current = null;
       setSpeaking(false);
-    },
-    []
-  );
+    }
+  }, []);
 
   // --- Mode Web Speech (fallback), dengan pembagian per kalimat ---
   const speakWebSpeech = useCallback(
@@ -139,6 +143,7 @@ export function useTTS() {
 
   const stop = useCallback(() => {
     cancelRef.current = true;
+    speakTokenRef.current++; // invalidasi fetch Edge yang masih berjalan
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current = null;
@@ -152,6 +157,7 @@ export function useTTS() {
       if (!text) return;
       if (isMuted()) return; // mode hening global: jangan keluarkan suara
       cancelRef.current = false;
+      const token = ++speakTokenRef.current; // generasi baru → membatalkan yang in-flight
       // hentikan yang sedang berjalan
       if (audioRef.current) {
         audioRef.current.pause();
@@ -159,8 +165,10 @@ export function useTTS() {
       }
       if (wsSupported) window.speechSynthesis.cancel();
 
-      // Coba Edge TTS dulu; kalau gagal, fallback Web Speech.
-      playEdge(text).catch(() => speakWebSpeech(text));
+      // Coba Edge TTS dulu; kalau gagal, fallback Web Speech (hanya jika masih terbaru).
+      playEdge(text, token).catch(() => {
+        if (token === speakTokenRef.current) speakWebSpeech(text);
+      });
     },
     [playEdge, speakWebSpeech, wsSupported]
   );
@@ -170,6 +178,7 @@ export function useTTS() {
     return subscribeSound(() => {
       if (isMuted()) {
         cancelRef.current = true;
+        speakTokenRef.current++; // invalidasi fetch yang sedang berjalan
         if (audioRef.current) {
           audioRef.current.pause();
           audioRef.current = null;
