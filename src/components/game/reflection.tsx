@@ -97,11 +97,15 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
       islandName: reflection.title,
     });
 
-    setMessages((m) => [...m, { role: "nala", text: reply }]);
     if (isLast) {
+      // Bubble penutup: gunakan pesan penyemangat yang jelas, bukan balasan AI
+      // (yang saat mode tanpa kunci AI berupa fallback generik yang sama berulang).
+      const closing = "Terima kasih sudah berefleksi ya! Kamu hebat! Sampai jumpa di petualangan berikutnya!";
+      setMessages((m) => [...m, { role: "nala", text: closing }]);
       setFinished(true);
-      speak("Terima kasih sudah berefleksi ya! Kamu hebat!");
+      speak(closing);
     } else {
+      setMessages((m) => [...m, { role: "nala", text: reply }]);
       speak(reply);
     }
     setStep(step + 1);
@@ -144,6 +148,20 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
 
             {/* Percakapan (muncul 1 per 1) */}
             {started && (
+              <>
+                {/* Indikator progres: berapa pertanyaan & kapan bisa lanjut */}
+                {!finished && (
+                  <div className="flex items-center justify-between gap-2 rounded-xl bg-[#EFE8DD] px-3 py-1.5">
+                    <span className="font-outfit text-[10px] font-extrabold uppercase tracking-wide text-[#8a5a2b]">
+                      Refleksi • Pertanyaan {Math.min(step, turns)} dari {turns}
+                    </span>
+                    <span className="font-nunito text-[10px] font-bold text-[#8a5a2b]">
+                      {step >= turns
+                        ? "✨ Pertanyaan terakhir!"
+                        : `Sisa ${turns - step} pertanyaan lagi`}
+                    </span>
+                  </div>
+                )}
               <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pr-1">
                 {messages.map((m, i) => (
                   <motion.div
@@ -183,6 +201,7 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
                 )}
                 <div ref={bottomRef} />
               </div>
+              </>
             )}
 
             {/* Input */}
