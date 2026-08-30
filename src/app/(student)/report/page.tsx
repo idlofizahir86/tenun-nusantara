@@ -34,10 +34,13 @@ export default function ReportPage() {
         : []) as SessionEvent[];
       const session = getSession();
       const prog = localStorage.getItem("tenun-progress");
-      let completed = session.completedIslands.length;
+      // Hitung pulau UNIK yang diselesaikan (memainkan ulang tidak menambah).
+      let completed = new Set(session.completedIslands).size;
       if (prog) {
         const d = JSON.parse(prog);
-        completed = Array.isArray(d?.completedIslands) ? d.completedIslands.length : completed;
+        completed = Array.isArray(d?.completedIslands)
+          ? new Set(d.completedIslands as string[]).size
+          : completed;
       }
       setProfile(computeTalentProfile(events as ReportEvent[], completed));
     } catch {

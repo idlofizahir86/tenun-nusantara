@@ -96,16 +96,17 @@ export default function MapPage() {
     }
   }, []);
 
-  // Baca jumlah pulau yang sudah diselesaikan
+  // Baca jumlah pulau UNIK yang sudah diselesaikan (maks 5).
+  // Memainkan pulau yang sama berulang kali tidak menambah hitungan.
   useEffect(() => {
     try {
       const raw = localStorage.getItem("tenun-progress");
       if (raw) {
         const data = JSON.parse(raw);
         const list = Array.isArray(data?.completedIslands)
-          ? data.completedIslands
+          ? (data.completedIslands as string[])
           : [];
-        setCompletedCount(list.length);
+        setCompletedCount(new Set(list).size);
       }
     } catch {
       // abaikan

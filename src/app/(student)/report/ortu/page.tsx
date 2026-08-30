@@ -119,10 +119,12 @@ export default function ParentReportPage() {
         : []) as SessionEvent[];
       const session = getSession();
       const prog = localStorage.getItem("tenun-progress");
-      let list = session.completedIslands;
+      let list = [...new Set(session.completedIslands)];
       if (prog) {
         const d = JSON.parse(prog);
-        list = Array.isArray(d?.completedIslands) ? d.completedIslands : list;
+        list = Array.isArray(d?.completedIslands)
+          ? [...new Set(d.completedIslands as string[])]
+          : list;
       }
       setCompleted(list);
       setProfile(computeTalentProfile(events as ReportEvent[], list.length));

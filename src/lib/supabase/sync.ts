@@ -44,6 +44,14 @@ function applyRemoteToLocal(session: Record<string, unknown> | null, events: Ses
       const curXp = Number(current?.xp || 0);
       const newXp = Number(session.xp || 0);
       if (newXp >= curXp) {
+        // Gabungkan pulau lokal + remote, lalu dedupe agar tak ada yang
+        // hilang ("skip") atau terulang (duplikat lencana).
+        const mergedIslands = [
+          ...new Set([
+            ...(Array.isArray(current.completedIslands) ? current.completedIslands : []),
+            ...(Array.isArray(session.completed_islands) ? session.completed_islands : []),
+          ]),
+        ];
         localStorage.setItem(
           "tenun-session",
           JSON.stringify({
@@ -53,9 +61,7 @@ function applyRemoteToLocal(session: Record<string, unknown> | null, events: Ses
             lastActiveAt: session.last_active_at || current.lastActiveAt,
             currentIsland: session.current_island || current.currentIsland,
             currentAct: typeof session.current_act === "number" ? session.current_act : current.currentAct,
-            completedIslands: Array.isArray(session.completed_islands)
-              ? session.completed_islands
-              : current.completedIslands || [],
+            completedIslands: mergedIslands,
             xp: newXp,
             level: Number(session.level || 1),
             badges: Array.isArray(session.badges) ? session.badges : current.badges || [],
@@ -63,11 +69,7 @@ function applyRemoteToLocal(session: Record<string, unknown> | null, events: Ses
         );
         localStorage.setItem(
           "tenun-progress",
-          JSON.stringify({
-            completedIslands: Array.isArray(session.completed_islands)
-              ? session.completed_islands
-              : [],
-          })
+          JSON.stringify({ completedIslands: mergedIslands })
         );
       }
     }
