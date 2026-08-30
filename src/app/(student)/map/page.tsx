@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Gem, Settings, Ship, Anchor, Maximize, BarChart3, Zap } from "lucide-react";
+import { Gem, Settings, Ship, Anchor, Maximize, BarChart3, Zap, Check } from "lucide-react";
 import { getSession } from "@/lib/session/session";
 import { AppNavbar } from "@/components/layout/app-navbar";
 import { useDemo } from "@/hooks/use-demo";
@@ -246,25 +246,24 @@ export default function MapPage() {
         {/* Island Pins */}
         {ISLANDS.map((island) => {
           const isSelected = selectedId === island.id;
-          const isLocked = isIslandLocked(island.id);
+          const isExplored = completedSet.has(island.id);
           return (
             <button
               key={island.id}
               type="button"
               onClick={() => setSelectedId(island.id)}
-              disabled={isLocked}
               className={`absolute flex flex-col items-center gap-2 transition-all duration-200 ${
-                isLocked
-                  ? "cursor-not-allowed opacity-45 saturate-50"
-                  : isSelected
-                    ? "scale-105 hover:scale-105"
-                    : "opacity-90 hover:scale-105"
+                isSelected ? "scale-105" : "opacity-90 hover:scale-105"
               }`}
               style={{ left: `${island.left}%`, top: `${island.top}%`, zIndex: 2 }}
             >
               <div
-                className={`flex items-start rounded-2xl bg-[#0F3943] ${
-                  isSelected ? "border-2 border-[#FFB319] p-2" : "border border-[#8DA2A6] p-2"
+                className={`relative flex items-start rounded-2xl bg-[#0F3943] p-2 ${
+                  isExplored
+                    ? "border-[3px] border-[#19D29F]"
+                    : isSelected
+                      ? "border-2 border-[#FFB319]"
+                      : "border border-[#8DA2A6]"
                 }`}
               >
                 <Image
@@ -274,6 +273,12 @@ export default function MapPage() {
                   height={isSelected ? 100 : 80}
                   className={`rounded-lg object-cover ${isSelected ? "h-[100px] w-[140px]" : "h-20 w-[120px]"}`}
                 />
+                {/* Badge/lencana di gambar pulau yang sudah dijelajahi */}
+                {isExplored && (
+                  <span className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full border-2 border-[#0B1D23] bg-[#19D29F] text-[#0B1D23] shadow-lg">
+                    <Check size={16} strokeWidth={3.5} />
+                  </span>
+                )}
               </div>
               <span
                 className={`inline-block rounded-lg px-2 py-0.5 text-center font-outfit ${
@@ -284,8 +289,8 @@ export default function MapPage() {
               >
                 {island.name}
               </span>
-              {isLocked ? (
-                <div className="flex items-start rounded-lg bg-[#8DA2A6] px-2.5 py-1">
+              {isExplored ? (
+                <div className="flex items-start rounded-lg bg-[#19D29F] px-2.5 py-1">
                   <span className="font-manrope text-[11px] font-bold leading-[15px] text-[#0B1D23]">
                     SUDAH DIJELAJAHI
                   </span>
@@ -318,24 +323,42 @@ export default function MapPage() {
           </span>
         </motion.div>
 
-        {/* Sail CTA */}
+        {/* Sail CTA — pulau yang sudah dijelajahi (belum semua selesai) diblokir */}
         {selected && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-4 rounded-2xl border border-[#FFB319] bg-[#0F3943] px-5 py-3 shadow-lg"
           >
-            <span className="font-outfit text-[16px] font-bold text-white">
-              Berlayar ke <span className="text-[#FFB319]">{selected.name}</span>?
-            </span>
-            <button
-              type="button"
-              onClick={() => router.push(selected.href)}
-              className="inline-flex items-center gap-2 rounded-[32px] bg-[#FFB319] px-6 py-2.5 font-outfit text-[15px] font-extrabold uppercase leading-[19px] text-[#0B1D23] transition-transform hover:scale-105"
-            >
-              Berlayar!
-              <Anchor className="h-5 w-5" />
-            </button>
+            {isIslandLocked(selected.id) ? (
+              <>
+                <span className="font-outfit text-[16px] font-bold text-white">
+                  <span className="text-[#19D29F]">{selected.name}</span> sudah dijelajahi. Jelajahi pulau lain dulu ya!
+                </span>
+                <button
+                  type="button"
+                  disabled
+                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-[32px] bg-[#8DA2A6] px-6 py-2.5 font-outfit text-[15px] font-extrabold uppercase leading-[19px] text-[#0B1D23]"
+                >
+                  <Check className="h-5 w-5" strokeWidth={3} />
+                  Sudah Dijelajahi
+                </button>
+              </>
+            ) : (
+              <>
+                <span className="font-outfit text-[16px] font-bold text-white">
+                  Berlayar ke <span className="text-[#FFB319]">{selected.name}</span>?
+                </span>
+                <button
+                  type="button"
+                  onClick={() => router.push(selected.href)}
+                  className="inline-flex items-center gap-2 rounded-[32px] bg-[#FFB319] px-6 py-2.5 font-outfit text-[15px] font-extrabold uppercase leading-[19px] text-[#0B1D23] transition-transform hover:scale-105"
+                >
+                  Berlayar!
+                  <Anchor className="h-5 w-5" />
+                </button>
+              </>
+            )}
           </motion.div>
         )}
       </main>
