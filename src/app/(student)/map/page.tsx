@@ -80,6 +80,7 @@ export default function MapPage() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [completedCount, setCompletedCount] = useState(0);
+  const [completedSet, setCompletedSet] = useState<Set<string>>(new Set());
   const [session] = useState(getSession());
   // Live Demo Mode — status + gate password
   const { demo, enable, disable } = useDemo();
@@ -122,7 +123,9 @@ export default function MapPage() {
         const list = Array.isArray(data?.completedIslands)
           ? (data.completedIslands as string[])
           : [];
-        setCompletedCount(new Set(list).size);
+        const set = new Set(list);
+        setCompletedSet(set);
+        setCompletedCount(set.size);
       }
     } catch {
       // abaikan
@@ -168,6 +171,10 @@ export default function MapPage() {
   }, []);
 
   const selected = ISLANDS.find((i) => i.id === selectedId) ?? null;
+  // Aturan jelajah: pulau yang sudah dijelajahi tidak bisa dikunjungi lagi,
+  // KECUALI semua pulau sudah dijelajahi (baru bisa dijelajahi ulang).
+  const allExplored = completedCount >= ISLANDS.length;
+  const isIslandLocked = (id: string) => completedSet.has(id) && !allExplored;
   // Kapalmu memosisikan diri di pulau terakhir yang dibuka (dari resume sesi),
   // bukan selalu kembali ke titik awal (Candi).
   const lastOpened = ISLANDS.find((i) => i.id === session.currentIsland) ?? null;
@@ -239,13 +246,19 @@ export default function MapPage() {
         {/* Island Pins */}
         {ISLANDS.map((island) => {
           const isSelected = selectedId === island.id;
+          const isLocked = isIslandLocked(island.id);
           return (
             <button
               key={island.id}
               type="button"
               onClick={() => setSelectedId(island.id)}
-              className={`absolute flex flex-col items-center gap-2 transition-all duration-200 hover:scale-105 ${
-                isSelected ? "scale-105" : "opacity-90"
+              disabled={isLocked}
+              className={`absolute flex flex-col items-center gap-2 transition-all duration-200 ${
+                isLocked
+                  ? "cursor-not-allowed opacity-45 saturate-50"
+                  : isSelected
+                    ? "scale-105 hover:scale-105"
+                    : "opacity-90 hover:scale-105"
               }`}
               style={{ left: `${island.left}%`, top: `${island.top}%`, zIndex: 2 }}
             >
@@ -271,12 +284,20 @@ export default function MapPage() {
               >
                 {island.name}
               </span>
-              {isSelected && (
-                <div className="flex items-start rounded-lg bg-[#19D29F] px-2.5 py-1">
+              {isLocked ? (
+                <div className="flex items-start rounded-lg bg-[#8DA2A6] px-2.5 py-1">
                   <span className="font-manrope text-[11px] font-bold leading-[15px] text-[#0B1D23]">
-                    DIPILIH
+                    SUDAH DIJELAJAHI
                   </span>
                 </div>
+              ) : (
+                isSelected && (
+                  <div className="flex items-start rounded-lg bg-[#19D29F] px-2.5 py-1">
+                    <span className="font-manrope text-[11px] font-bold leading-[15px] text-[#0B1D23]">
+                      DIPILIH
+                    </span>
+                  </div>
+                )
               )}
             </button>
           );
