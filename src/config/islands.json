@@ -1,0 +1,891 @@
+[
+  {
+    "id": "candi",
+    "name": "Pulau Candi",
+    "category": "Logika-Matematika & Analitis",
+    "background": "/assets/images/landing/island-preview-candi.jpg",
+    "accent": "#D4A574",
+    "acts": [
+      {
+        "number": 1,
+        "minigame": {
+          "id": "observasi-lapangan",
+          "type": "observe",
+          "title": "Observasi Lapangan",
+          "instructions": "Amati pelataran candi yang diselimuti kabut. Temukan dan hitung semua pilar candi yang terlihat.",
+          "hint": "Pilar candi berdiri tegak dan besar. Batuan relief yang pecah tersebar di lantai — bukan pilar.",
+          "nalaDialog": "Kabut tebal menyelimuti pelataran candi. Bantu aku menghitung semua pilar candi yang masih berdiri, ya!",
+          "game": {
+            "type": "observe",
+            "target": "Pilar",
+            "total": 4,
+            "items": [
+              { "id": "p1", "label": "Pilar besar", "kind": "target", "emoji": "🏛️", "image": "/assets/images/islands/candi/minigames/observe/pilar-besar.png" },
+              { "id": "r1", "label": "Batu relief pecah", "kind": "distractor", "emoji": "🪨", "image": "/assets/images/islands/candi/minigames/observe/batu-relief-pecah.png" },
+              { "id": "p2", "label": "Pilar sedang", "kind": "target", "emoji": "🏛️", "image": "/assets/images/islands/candi/minigames/observe/pilar-sedang.png" },
+              { "id": "r2", "label": "Tumpukan batu", "kind": "distractor", "emoji": "🪨", "image": "/assets/images/islands/candi/minigames/observe/tumpukan-batu.png" },
+              { "id": "p3", "label": "Pilar kecil", "kind": "target", "emoji": "🏛️", "image": "/assets/images/islands/candi/minigames/observe/pilar-kecil.png" },
+              { "id": "r3", "label": "Pecahan relief", "kind": "distractor", "emoji": "🪨", "image": "/assets/images/islands/candi/minigames/observe/pecahan-relief.png" },
+              { "id": "p4", "label": "Pilar runtuh", "kind": "target", "emoji": "🏛️", "image": "/assets/images/islands/candi/minigames/observe/pilar-runtuh.png" },
+              { "id": "r4", "label": "Serpihan batu", "kind": "distractor", "emoji": "🪨", "image": "/assets/images/islands/candi/minigames/observe/serpihan-batu.png" }
+            ],
+            "question": "Kabut mulai menipis. Di antara pilar, kamu melihat peta denah kosong dan kompas kuno. Apa tindakan pertamamu?",
+            "options": [
+              { "label": "A", "text": "Gambar ulang denah candi dengan teliti", "trait": "observatif" },
+              { "label": "B", "text": "Ikuti arah kompas untuk mencari jalan", "trait": "eksploratif" },
+              { "label": "C", "text": "Bertanya kepada juru kunci tua", "trait": "sosial" }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "candi-a1",
+              "category": "Analitis & Pola",
+              "prompt": "Saat menghadapi pola yang rumit, bagaimana caramu paling nyaman menyelesaikannya?",
+              "options": [
+                { "label": "A", "text": "Menganalisis urutan & keteraturan polanya", "trait": "logis" },
+                { "label": "B", "text": "Mencoba langsung dan melihat hasilnya", "trait": "eksperimental" },
+                { "label": "C", "text": "Bertanya kepada teman untuk berdiskusi", "trait": "sosial" }
+              ]
+            },
+            {
+              "id": "candi-a2",
+              "category": "Ketekunan",
+              "prompt": "Jika tebakanmu salah beberapa kali, apa yang biasanya kamu lakukan?",
+              "options": [
+                { "label": "A", "text": "Mencari tahu penyebab kesalahannya", "trait": "analitis" },
+                { "label": "B", "text": "Mencoba pendekatan yang berbeda", "trait": "kreatif" },
+                { "label": "C", "text": "Meminta bantuan orang lain", "trait": "sosial" }
+              ]
+            },
+            {
+              "id": "candi-a3",
+              "category": "Pengambilan Keputusan",
+              "prompt": "Menurutmu, apa kunci agar teka-teki ini berhasil diselesaikan?",
+              "options": [
+                { "label": "A", "text": "Ketelitian dan kesabaran", "trait": "teliti" },
+                { "label": "B", "text": "Kecepatan dan intuisi", "trait": "cepat" },
+                { "label": "C", "text": "Kerja sama dengan orang lain", "trait": "sosial" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "number": 2,
+        "minigame": {
+          "id": "puzzle-pola-relief",
+          "type": "puzzle",
+          "title": "Puzzle Pola Relief",
+          "instructions": "Lengkapi 4 pola relief yang rusak dengan memilih keping batu yang tepat.",
+          "hint": "Perhatikan bentuk & arah pola pada relief. Pilih keping yang paling cocok melengkapi pola.",
+          "nalaDialog": "Relief candi ini rusak dan polanya hilang. Bantu aku menyusun kembali 4 pola relief yang utuh, ya!",
+          "game": {
+            "type": "puzzle16",
+            "master": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-master.png",
+            "pieces": [
+              { "id": "k1", "slot": 0, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-1.png", "label": "Keping 1" },
+              { "id": "k2", "slot": 1, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-2.png", "label": "Keping 2" },
+              { "id": "k3", "slot": 2, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-3.png", "label": "Keping 3" },
+              { "id": "k4", "slot": 3, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-4.png", "label": "Keping 4" },
+              { "id": "k5", "slot": 4, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-5.png", "label": "Keping 5" },
+              { "id": "k6", "slot": 5, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-6.png", "label": "Keping 6" },
+              { "id": "k7", "slot": 6, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-7.png", "label": "Keping 7" },
+              { "id": "k8", "slot": 7, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-8.png", "label": "Keping 8" },
+              { "id": "k9", "slot": 8, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-9.png", "label": "Keping 9" },
+              { "id": "k10", "slot": 9, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-10.png", "label": "Keping 10" },
+              { "id": "k11", "slot": 10, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-11.png", "label": "Keping 11" },
+              { "id": "k12", "slot": 11, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-12.png", "label": "Keping 12" },
+              { "id": "k13", "slot": 12, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-13.png", "label": "Keping 13" },
+              { "id": "k14", "slot": 13, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-14.png", "label": "Keping 14" },
+              { "id": "k15", "slot": 14, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-15.png", "label": "Keping 15" },
+              { "id": "k16", "slot": 15, "image": "/assets/images/islands/candi/minigames/puzzle/candi-puzzle-16.png", "label": "Keping 16" }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "candi-b1",
+              "category": "Perencanaan",
+              "prompt": "Saat menyusun urutan, hal apa yang paling kamu perhatikan?",
+              "options": [
+                { "label": "A", "text": "Alasan logis setiap langkah", "trait": "logis" },
+                { "label": "B", "text": "Gambaran besar hasil akhirnya", "trait": "visioner" },
+                { "label": "C", "text": "Cara orang lain biasa melakukannya", "trait": "sosial" }
+              ]
+            },
+            {
+              "id": "candi-b2",
+              "category": "Pola Pikir",
+              "prompt": "Bagaimana kamu memastikan urutanmu sudah benar?",
+              "options": [
+                { "label": "A", "text": "Memeriksa ulang setiap langkah", "trait": "teliti" },
+                { "label": "B", "text": "Membandingkan dengan contoh lain", "trait": "referensial" },
+                { "label": "C", "text": "Meminta konfirmasi teman", "trait": "sosial" }
+              ]
+            },
+            {
+              "id": "candi-b3",
+              "category": "Ketahanan",
+              "prompt": "Jika ada langkah yang keliru di tengah jalan, kamu akan...",
+              "options": [
+                { "label": "A", "text": "Memperbaiki dan mulai lagi dengan tenang", "trait": "sabar" },
+                { "label": "B", "text": "Mencari cara yang lebih cepat", "trait": "efisien" },
+                { "label": "C", "text": "Mengajak teman mengerjakan bersama", "trait": "sosial" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "number": 3,
+        "minigame": {
+          "id": "rekayasa-aliran-air",
+          "type": "pipe",
+          "title": "Rekayasa Aliran Air",
+          "instructions": "Susun pipa batu dengan benar agar air mengalir dari sumber ke poros timbangan.",
+          "hint": "Ikuti jalur dari kiri ke kanan. Pipa lurus (I) untuk lurus, pipa siku (L) untuk belok, percabangan (T) untuk bercabang.",
+          "nalaDialog": "Mekanisme kuno ini butuh air untuk membuka poros timbangan. Bantu aku menyusun pipa agar air sampai ke tujuannya!",
+          "game": {
+            "type": "pipe",
+            "target": "Poros Timbangan",
+            "slots": [
+              { "id": "s1", "required": "I-datar", "label": "Pipa lurus", "image": "/assets/images/islands/candi/minigames/pipe/pipa-I-datar.png" },
+              { "id": "s2", "required": "L-a", "label": "Pipa siku (kiri→bawah)", "image": "/assets/images/islands/candi/minigames/pipe/pipa-L-sudut-kanan-atas.png" },
+              { "id": "s3", "required": "L-b", "label": "Pipa siku (atas→kanan)", "image": "/assets/images/islands/candi/minigames/pipe/pipa-L-sudut-kiri-bawah.png" },
+              { "id": "s4", "required": "I-datar", "label": "Pipa lurus", "image": "/assets/images/islands/candi/minigames/pipe/pipa-I-datar.png" }
+            ],
+            "pieces": [
+              { "id": "I-datar", "label": "Pipa lurus", "image": "/assets/images/islands/candi/minigames/pipe/pipa-I-datar.png" },
+              { "id": "L-a", "label": "Pipa siku A", "image": "/assets/images/islands/candi/minigames/pipe/pipa-L-sudut-kanan-atas.png" },
+              { "id": "L-b", "label": "Pipa siku B", "image": "/assets/images/islands/candi/minigames/pipe/pipa-L-sudut-kiri-bawah.png" },
+              { "id": "T", "label": "Percabangan", "image": "/assets/images/islands/candi/minigames/pipe/pipa-T.png" },
+              { "id": "I-berdiri", "label": "Pipa tegak", "image": "/assets/images/islands/candi/minigames/pipe/pipa-I-berdiri.png" }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "candi-c1",
+              "category": "Pemecahan Masalah",
+              "prompt": "Bagaimana kamu menemukan jawaban teka-teki tadi?",
+              "options": [
+                { "label": "A", "text": "Menghubungkan setiap petunjuk", "trait": "analitis" },
+                { "label": "B", "text": "Berimajinasi bentuknya", "trait": "kreatif" },
+                { "label": "C", "text": "Menebak dari pengalaman sebelumnya", "trait": "intuitif" }
+              ]
+            },
+            {
+              "id": "candi-c2",
+              "category": "Kepercayaan Diri",
+              "prompt": "Saat jawabanmu ragu-ragu, apa yang kamu lakukan?",
+              "options": [
+                { "label": "A", "text": "Meyakinkan diri dengan logika", "trait": "logis" },
+                { "label": "B", "text": "Mencoba beberapa kemungkinan", "trait": "eksperimental" },
+                { "label": "C", "text": "Bertanya pada NALA", "trait": "sosial" }
+              ]
+            },
+            {
+              "id": "candi-c3",
+              "category": "Nilai",
+              "prompt": "Kualitas apa yang menurutmu paling penting untuk menjadi penjelajah hebat?",
+              "options": [
+                { "label": "A", "text": "Kecerdasan & ketelitian", "trait": "intelektual" },
+                { "label": "B", "text": "Keberanian & semangat", "trait": "berani" },
+                { "label": "C", "text": "Kebaikan & kerja sama", "trait": "sosial" }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "reflection": {
+      "theme": "Sesi Api Unggun",
+      "title": "Api Unggun Candi",
+      "intro": "Duduklah di dekat api unggun, Penjelajah. Mari NALA ajak kamu merenungkan pilihan-pilihan yang tadi kamu buat.",
+      "questions": [
+        "Tadi saat relief runtuh, kenapa kamu memilih jawaban itu?",
+        "Apa yang kamu rasakan saat harus menyusun urutan candi?",
+        "Dari semua teka-teki tadi, mana yang paling kamu sukai dan mengapa?"
+      ]
+    }
+  },
+  {
+    "id": "rimba",
+    "name": "Pulau Rimba",
+    "category": "Naturalis & Sustainability",
+    "background": "/assets/images/landing/island-preview-rimba.jpg",
+    "accent": "#4A7C59",
+    "acts": [
+      {
+        "number": 1,
+        "minigame": {
+          "id": "rimba-ekspedisi-kanopi",
+          "type": "observe",
+          "title": "Ekspedisi Kanopi",
+          "instructions": "Klik 5 tumbuhan (flora) yang tumbuh di hutan! Burung, monyet, kupu-kupu, dan sungai bukan tumbuhan, jadi jangan diklik.",
+          "hint": "Cari anggrek liar, tanaman obat, pohon meranti, lumut lembut, dan pakis hutan.",
+          "nalaDialog": "Hutan rimba penuh keajaiban! Bantu aku menemukan 5 jenis tumbuhan untuk jurnal alam kita.",
+          "game": {
+            "type": "observe",
+            "target": "Flora",
+            "total": 5,
+            "items": [
+              { "id": "f1", "label": "Anggrek liar", "kind": "target", "emoji": "🌸", "image": "/assets/images/islands/rimba/minigames/observe/anggrek-liar.png" },
+              { "id": "a1", "label": "Burung enggang", "kind": "distractor", "emoji": "🦜", "image": "/assets/images/islands/rimba/minigames/observe/burung-enggang.png" },
+              { "id": "f2", "label": "Tanaman obat", "kind": "target", "emoji": "🌿", "image": "/assets/images/islands/rimba/minigames/observe/tanaman-obat.png" },
+              { "id": "a2", "label": "Monyet", "kind": "distractor", "emoji": "🐒", "image": "/assets/images/islands/rimba/minigames/observe/monyet.png" },
+              { "id": "f3", "label": "Pohon meranti", "kind": "target", "emoji": "🌳", "image": "/assets/images/islands/rimba/minigames/observe/pohon-meranti.png" },
+              { "id": "a3", "label": "Kupu-kupu", "kind": "distractor", "emoji": "🦋", "image": "/assets/images/islands/rimba/minigames/observe/kupu-kupu.png" },
+              { "id": "f4", "label": "Lumut lembut", "kind": "target", "emoji": "🍃", "image": "/assets/images/islands/rimba/minigames/observe/lumut-lembut.png" },
+              { "id": "a4", "label": "Sungai kecil", "kind": "distractor", "emoji": "💧", "image": "/assets/images/islands/rimba/minigames/observe/sungai-kecil.png" },
+              { "id": "f5", "label": "Pakis hutan", "kind": "target", "emoji": "🌱", "image": "/assets/images/islands/rimba/minigames/observe/pakis-hutan.png" }
+            ],
+            "question": "Kamu melihat tiga jalur setapak: ke kiri menuju sungai, ke tengah menuju kanopi, ke kanan menuju gua. Mana yang kamu pilih?",
+            "options": [
+              { "label": "A", "text": "Ikuti jalur sungai mencari air jernih", "trait": "eksploratif" },
+              { "label": "B", "text": "Panjat ke kanopi untuk melihat luas hutan", "trait": "pemberani" },
+              { "label": "C", "text": "Jelajahi gua untuk mencari jejak satwa", "trait": "penasaran" }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "rimba-a1",
+              "category": "Observasi",
+              "prompt": "Saat mengamati alam, apa yang paling menarik perhatianmu?",
+              "options": [
+                { "label": "A", "text": "Detail & pola di sekitarnya", "trait": "teliti" },
+                { "label": "B", "text": "Suara & suasana alam", "trait": "sensorik" },
+                { "label": "C", "text": "Bagaimana makhluk hidup saling terhubung", "trait": "ekologis" }
+              ]
+            },
+            {
+              "id": "rimba-a2",
+              "category": "Peduli Lingkungan",
+              "prompt": "Menurutmu, mengapa menjaga alam itu penting?",
+              "options": [
+                { "label": "A", "text": "Agar makhluk hidup tetap bertahan", "trait": "ekologis" },
+                { "label": "B", "text": "Karena alam indah untuk dinikmati", "trait": "apresiatif" },
+                { "label": "C", "text": "Karena itu tanggung jawab bersama", "trait": "sosial" }
+              ]
+            },
+            {
+              "id": "rimba-a3",
+              "category": "Pola Pikir",
+              "prompt": "Jika ada hewan kehilangan rumahnya, apa yang kamu lakukan?",
+              "options": [
+                { "label": "A", "text": "Mencari tahu penyebabnya", "trait": "analitis" },
+                { "label": "B", "text": "Membuat rumah baru untuknya", "trait": "kreatif" },
+                { "label": "C", "text": "Mengajak orang lain membantu", "trait": "sosial" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "number": 2,
+        "minigame": {
+          "id": "rimba-detektif",
+          "type": "match",
+          "title": "Detektif Satwa & Jejak",
+          "instructions": "Cocokkan setiap jejak di tanah berlumpur dengan satwa pemiliknya.",
+          "hint": "Perhatikan bentuk jejak: cakar tajam punya harimau, kuku runcing milik rusa.",
+          "nalaDialog": "Ada jejak misterius di hutan! Bantu aku jadi detektif satwa dan cocokkan jejaknya.",
+          "game": {
+            "type": "match",
+            "pairs": [
+              { "id": "m1", "left": { "label": "Jejak cakar tajam", "emoji": "🐾", "image": "/assets/images/islands/rimba/minigames/match/jejak-kaki-harimau.png" }, "right": { "label": "Harimau", "emoji": "🐅", "image": "/assets/images/islands/rimba/minigames/match/harimau.png" } },
+              { "id": "m2", "left": { "label": "Jejak kecil bercabang", "emoji": "🦶", "image": "/assets/images/islands/rimba/minigames/match/jejak-kaki-burung.png" }, "right": { "label": "Burung", "emoji": "🐦", "image": "/assets/images/islands/rimba/minigames/match/burung.png" } },
+              { "id": "m3", "left": { "label": "Jejak tapak besar", "emoji": "🫎", "image": "/assets/images/islands/rimba/minigames/match/jejak-kaki-beruang-madu.png" }, "right": { "label": "Beruang madu", "emoji": "🐻", "image": "/assets/images/islands/rimba/minigames/match/beruang-madu.png" } },
+              { "id": "m4", "left": { "label": "Jejak kuku runcing", "emoji": "🦌", "image": "/assets/images/islands/rimba/minigames/match/jejak-kaki-rusa.png" }, "right": { "label": "Rusa", "emoji": "🦌", "image": "/assets/images/islands/rimba/minigames/match/rusa.png" } }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "rimba-b1",
+              "category": "Logika",
+              "prompt": "Saat menyusun rantai makanan, kamu berpikir...",
+              "options": [
+                { "label": "A", "text": "Siapa makan apa secara logis", "trait": "logis" },
+                { "label": "B", "text": "Bagaimana keseimbangan alam terjaga", "trait": "ekologis" },
+                { "label": "C", "text": "Cerita di balik setiap hewan", "trait": "naratif" }
+              ]
+            },
+            {
+              "id": "rimba-b2",
+              "category": "Empati",
+              "prompt": "Hewan mana yang kamu rasa paling perlu dilindungi?",
+              "options": [
+                { "label": "A", "text": "Yang paling langka", "trait": "konservatif" },
+                { "label": "B", "text": "Yang paling kecil & lemah", "trait": "empati" },
+                { "label": "C", "text": "Semua sama pentingnya", "trait": "adil" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "number": 3,
+        "minigame": {
+          "id": "rimba-filtrasi",
+          "type": "filter",
+          "title": "Rekonstruksi Filtrasi",
+          "instructions": "Susun lapisan penyaring air dari atas ke bawah agar sungai yang keruh kembali jernih.",
+          "hint": "Urutan yang benar: ijuk, kerikil, arang, pasir, lalu batu besar di dasar.",
+          "nalaDialog": "Sungai desa keruh! Bantu aku menyusun lapisan penyaring agar airnya jernih kembali.",
+          "game": {
+            "type": "filter",
+            "layers": [
+              { "id": "ijuk", "name": "Ijuk", "emoji": "🧵", "image": "/assets/images/islands/rimba/minigames/filter/ijuk.png", "description": "Menahan kotoran kasar" },
+              { "id": "kerikil", "name": "Kerikil", "emoji": "🪨", "image": "/assets/images/islands/rimba/minigames/filter/kerikil.png", "description": "Menyaring endapan" },
+              { "id": "arang", "name": "Arang kelapa", "emoji": "🖤", "image": "/assets/images/islands/rimba/minigames/filter/arang.png", "description": "Menyerap bau & racun" },
+              { "id": "pasir", "name": "Pasir halus", "emoji": "🏖️", "image": "/assets/images/islands/rimba/minigames/filter/pasir.png", "description": "Menyaring lumpur halus" },
+              { "id": "batu", "name": "Batu besar", "emoji": "🗿", "image": "/assets/images/islands/rimba/minigames/filter/batu.png", "description": "Penahan dasar" }
+            ],
+            "correctOrder": ["ijuk", "kerikil", "arang", "pasir", "batu"]
+          },
+          "assessment": [
+            {
+              "id": "rimba-c1",
+              "category": "Pengetahuan",
+              "prompt": "Bagaimana perasaanmu setelah menyelesaikan petualangan di rimba?",
+              "options": [
+                { "label": "A", "text": "Semakin ingin menjaga alam", "trait": "ekologis" },
+                { "label": "B", "text": "Bangga bisa memecahkan teka-teki", "trait": "percaya diri" },
+                { "label": "C", "text": "Senang bisa belajar hal baru", "trait": "pembelajar" }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "reflection": {
+      "theme": "Senja di Kanopi",
+      "title": "Renungan di Kanopi",
+      "intro": "Angin senja berbisik di antara dedaunan. NALA mengajakmu merenung.",
+      "questions": [
+        "Saat melihat hutan, apa yang paling membuatmu terkesan?",
+        "Kenapa kamu memilih untuk menjaga alam dengan cara itu?",
+        "Apa satu hal yang ingin kamu lakukan untuk bumi?"
+      ]
+    }
+  },
+  {
+    "id": "harmoni",
+    "name": "Pulau Harmoni",
+    "category": "Seni & Creative Thinking",
+    "background": "/assets/images/landing/island-preview-harmoni.jpg",
+    "accent": "#A23B72",
+    "acts": [
+      {
+        "number": 1,
+        "minigame": {
+          "id": "harmoni-eksplorasi-bunyi",
+          "type": "observe",
+          "title": "Kumpulkan Warna Tenun",
+          "instructions": "Klik 5 bahan pewarna alami yang bisa dipakai mewarnai kain tenun! Daun, buah, dan rempah bisa dipakai. Penari, alat musik, dan lampion bukan bahan, jadi jangan diklik.",
+          "hint": "Cari daun suji, kunyit, manggis, bambu, dan indigo. Jangan klik penari, gong, suling, atau lampion.",
+          "nalaDialog": "Aku ingin mewarnai kain tenun! Bantu aku mengumpulkan 5 bahan pewarna alami, ya. Klik yang bisa dipakai mewarnai!",
+          "game": {
+            "type": "observe",
+            "target": "Bahan pewarna",
+            "total": 5,
+            "items": [
+              { "id": "b1", "label": "Daun suji", "kind": "target", "emoji": "🍃", "image": "/assets/images/islands/harmoni/minigames/observe/daun-suji.png" },
+              { "id": "x1", "label": "Penari", "kind": "distractor", "emoji": "💃", "image": "/assets/images/islands/harmoni/minigames/observe/penari.png" },
+              { "id": "b2", "label": "Kunyit", "kind": "target", "emoji": "🟡", "image": "/assets/images/islands/harmoni/minigames/observe/kunyit.png" },
+              { "id": "x2", "label": "Gong", "kind": "distractor", "emoji": "🪘", "image": "/assets/images/islands/harmoni/minigames/observe/gong.png" },
+              { "id": "b3", "label": "Manggis", "kind": "target", "emoji": "🍇", "image": "/assets/images/islands/harmoni/minigames/observe/manggis.png" },
+              { "id": "x3", "label": "Suling", "kind": "distractor", "emoji": "🎶", "image": "/assets/images/islands/harmoni/minigames/observe/suling.png" },
+              { "id": "b4", "label": "Bambu berongga", "kind": "target", "emoji": "🎋", "image": "/assets/images/islands/harmoni/minigames/observe/bambu-berongga.png" },
+              { "id": "x4", "label": "Lampion", "kind": "distractor", "emoji": "🏮", "image": "/assets/images/islands/harmoni/minigames/observe/lampion.png" },
+              { "id": "b5", "label": "Indigo", "kind": "target", "emoji": "🔵", "image": "/assets/images/islands/harmoni/minigames/observe/indigo.png" }
+            ],
+            "question": "Semua bahan pewarna sudah terkumpul! Sekarang kamu ingin membuat apa dari bahan-bahan indah ini?",
+            "options": [
+              { "label": "A", "text": "Mencampur warna untuk melukis kanvas", "trait": "kreatif" },
+              { "label": "B", "text": "Menabuh gamelan mengiringi penari", "trait": "musikal" },
+              { "label": "C", "text": "Mengajak teman menenun bersama", "trait": "sosial" }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "harmoni-a1",
+              "category": "Kreativitas",
+              "prompt": "Saat membuat karya seni, apa yang paling kamu nikmati?",
+              "options": [
+                { "label": "A", "text": "Proses bereksperimen", "trait": "eksploratif" },
+                { "label": "B", "text": "Hasil akhir yang indah", "trait": "apresiatif" },
+                { "label": "C", "text": "Berbagi karya dengan orang lain", "trait": "sosial" }
+              ]
+            },
+            {
+              "id": "harmoni-a2",
+              "category": "Ekspresi",
+              "prompt": "Jika kamu bisa mengekspresikan diri, kamu memilih...",
+              "options": [
+                { "label": "A", "text": "Menggambar atau melukis", "trait": "visual" },
+                { "label": "B", "text": "Menari atau bergerak", "trait": "kinestetik" },
+                { "label": "C", "text": "Menyanyi atau bermusik", "trait": "musikal" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "number": 2,
+        "minigame": {
+          "id": "harmoni-tuning",
+          "type": "tune",
+          "title": "Tuning Gamelan",
+          "instructions": "Atur setiap nada gamelan agar berada di dalam zona emas sehingga bunyinya selaras.",
+          "hint": "Geser posisi nada sampai masuk ke zona emas. Nada yang sudah pas akan terkunci.",
+          "nalaDialog": "Gamelannya belum selaras! Bantu setel nadanya agar festival berbunyi indah.",
+          "game": {
+            "type": "tune",
+            "notes": [
+              { "id": "n1", "name": "Slendro", "emoji": "🥁", "image": "/assets/images/islands/harmoni/minigames/tune/saron.png", "target": 30 },
+              { "id": "n2", "name": "Pelog", "emoji": "🛎️", "image": "/assets/images/islands/harmoni/minigames/tune/bonang.png", "target": 65 },
+              { "id": "n3", "name": "Bem", "emoji": "🪙", "image": "/assets/images/islands/harmoni/minigames/tune/gong.png", "target": 85 }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "harmoni-b1",
+              "category": "Perasaan",
+              "prompt": "Saat menyusun pertunjukan, kamu memperhatikan...",
+              "options": [
+                { "label": "A", "text": "Alur cerita yang runtut", "trait": "naratif" },
+                { "label": "B", "text": "Keindahan setiap bagian", "trait": "estetis" },
+                { "label": "C", "text": "Kenyamanan penonton", "trait": "empati" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "number": 3,
+        "minigame": {
+          "id": "harmoni-tenun",
+          "type": "weave",
+          "title": "Kanvas Tenun Digital",
+          "instructions": "Lengkapi pola kain tenun dengan memilih motif/benang yang tepat pada slot yang kosong.",
+          "hint": "Pilih motif tenun Nusantara yang sesuai dengan nama pola di setiap tahap.",
+          "nalaDialog": "Alat tenun menunggu! Bantu aku menyusun motif tenun Nusantara yang indah.",
+          "game": {
+            "type": "weave",
+            "patterns": [
+              {
+                "id": "w1",
+                "name": "Kawung",
+                "targetEmoji": "🔵",
+                "targetImage": "/assets/images/islands/harmoni/minigames/weave/kawung-linked.png",
+                "options": [
+                  { "id": "k1", "emoji": "🔵", "label": "Kawung", "image": "/assets/images/islands/harmoni/minigames/weave/kawung-linked.png" },
+                  { "id": "k2", "emoji": "🟡", "label": "Parang", "image": "/assets/images/islands/harmoni/minigames/weave/parang-gelombang.png" },
+                  { "id": "k3", "emoji": "🟢", "label": "Mega Mendung", "image": "/assets/images/islands/harmoni/minigames/weave/mega-mendung.png" },
+                  { "id": "k4", "emoji": "🟣", "label": "Lereng", "image": "/assets/images/islands/harmoni/minigames/weave/larik-daun-diagonal.png" }
+                ]
+              },
+              {
+                "id": "w2",
+                "name": "Parang",
+                "targetEmoji": "🟠",
+                "targetImage": "/assets/images/islands/harmoni/minigames/weave/parang-gelombang.png",
+                "options": [
+                  { "id": "p1", "emoji": "🟠", "label": "Parang", "image": "/assets/images/islands/harmoni/minigames/weave/parang-gelombang.png" },
+                  { "id": "p2", "emoji": "🔴", "label": "Kawung", "image": "/assets/images/islands/harmoni/minigames/weave/kawung-linked.png" },
+                  { "id": "p3", "emoji": "🟡", "label": "Sidomukti", "image": "/assets/images/islands/harmoni/minigames/weave/lereng-truntum-diagonal.png" },
+                  { "id": "p4", "emoji": "🔵", "label": "Truntum", "image": "/assets/images/islands/harmoni/minigames/weave/belah-ketupat-kecil.png" }
+                ]
+              },
+              {
+                "id": "w3",
+                "name": "Mega Mendung",
+                "targetEmoji": "⚪",
+                "targetImage": "/assets/images/islands/harmoni/minigames/weave/mega-mendung.png",
+                "options": [
+                  { "id": "m1", "emoji": "⚪", "label": "Mega Mendung", "image": "/assets/images/islands/harmoni/minigames/weave/mega-mendung.png" },
+                  { "id": "m2", "emoji": "🟢", "label": "Parang", "image": "/assets/images/islands/harmoni/minigames/weave/parang-gelombang.png" },
+                  { "id": "m3", "emoji": "🟣", "label": "Lereng", "image": "/assets/images/islands/harmoni/minigames/weave/sulur-diagonal-sederhana.png" },
+                  { "id": "m4", "emoji": "🟠", "label": "Kawung", "image": "/assets/images/islands/harmoni/minigames/weave/segititiga-sederhana.png" }
+                ]
+              }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "harmoni-c1",
+              "category": "Apresiasi",
+              "prompt": "Apa yang paling kamu hargai dari seni?",
+              "options": [
+                { "label": "A", "text": "Keindahan & maknanya", "trait": "estetis" },
+                { "label": "B", "text": "Kebebasan berekspresi", "trait": "ekspresif" },
+                { "label": "C", "text": "Kebersamaan saat menikmatinya", "trait": "sosial" }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "reflection": {
+      "theme": "Malam Harmoni",
+      "title": "Renungan Seni",
+      "intro": "Di bawah bintang, NALA mengajakmu merenungkan karya yang telah kamu ciptakan.",
+      "questions": [
+        "Saat berkarya, apa yang paling membuatmu bahagia?",
+        "Mengapa kamu memilih cara berekspresi itu tadi?",
+        "Jika bisa, karya apa yang ingin kamu buat untuk orang lain?"
+      ]
+    }
+  },
+  {
+    "id": "terapung",
+    "name": "Pulau Terapung",
+    "category": "Interpersonal & Kepemimpinan",
+    "background": "/assets/images/landing/island-preview-pasar.jpg",
+    "accent": "#2E86AB",
+    "acts": [
+      {
+        "number": 1,
+        "minigame": {
+          "id": "terapung-navigasi-dermaga",
+          "type": "observe",
+          "title": "Navigasi Dermaga",
+          "instructions": "Sapa para pedagang di dermaga sambil berkeliling dengan perahu. Temukan 3 pedagang untuk diajak bicara.",
+          "hint": "Pedagang berada di perahu dengan dagangannya. Perahu kosong atau tumpukan buah bukan pedagang.",
+          "nalaDialog": "Pasar terapung ini ramai! Ayo sapa para pedagang di dermaga sambil belajar tentang dagangan mereka.",
+          "game": {
+            "type": "observe",
+            "target": "Pedagang",
+            "total": 3,
+            "items": [
+              { "id": "t1", "label": "Pedagang buah", "kind": "target", "emoji": "🍌", "image": "/assets/images/islands/pasar-terapung/minigames/observe/pedagan-buah.png" },
+              { "id": "d1", "label": "Perahu kosong", "kind": "distractor", "emoji": "🛶", "image": "/assets/images/islands/pasar-terapung/minigames/observe/perahu-kosong.png" },
+              { "id": "t2", "label": "Pedagang ikan", "kind": "target", "emoji": "🐟", "image": "/assets/images/islands/pasar-terapung/minigames/observe/pedagan-ikan.png" },
+              { "id": "d2", "label": "Tumpukan buah", "kind": "distractor", "emoji": "🍉", "image": "/assets/images/islands/pasar-terapung/minigames/observe/tumpukan-buah.png" },
+              { "id": "t3", "label": "Pedagang rempah", "kind": "target", "emoji": "🌶️", "image": "/assets/images/islands/pasar-terapung/minigames/observe/pedagan-rempah.png" },
+              { "id": "d3", "label": "Karang tepi sungai", "kind": "distractor", "emoji": "🪨", "image": "/assets/images/islands/pasar-terapung/minigames/observe/karang-sungai.png" }
+            ],
+            "question": "Setelah menyapa para pedagang, kamu melihat peta rute dermaga dan dayung. Apa yang akan kamu lakukan?",
+            "options": [
+              { "label": "A", "text": "Tawar-menawar dagangan dengan ramah", "trait": "sosial" },
+              { "label": "B", "text": "Mengayuh perahu menjelajah rute lebih jauh", "trait": "eksploratif" },
+              { "label": "C", "text": "Mencatat semua jenis dagangan yang dilihat", "trait": "observatif" }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "terapung-a1",
+              "category": "Kerja Sama",
+              "prompt": "Saat bekerja bersama orang lain, peran apa yang kamu suka?",
+              "options": [
+                { "label": "A", "text": "Memimpin dan mengatur", "trait": "pemimpin" },
+                { "label": "B", "text": "Membantu dan mendukung", "trait": "pendukung" },
+                { "label": "C", "text": "Mendengarkan semua ide", "trait": "pendengar" }
+              ]
+            },
+            {
+              "id": "terapung-a2",
+              "category": "Empati",
+              "prompt": "Jika ada teman kesulitan berdagang, kamu akan...",
+              "options": [
+                { "label": "A", "text": "Membantunya dengan senang hati", "trait": "empati" },
+                { "label": "B", "text": "Mengajaknya bekerja sama", "trait": "kolaboratif" },
+                { "label": "C", "text": "Memberi semangat", "trait": "suportif" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "number": 2,
+        "minigame": {
+          "id": "terapung-barter",
+          "type": "barter",
+          "title": "Barter Logistik",
+          "instructions": "Tukarkan dagangan agar total nilainya pas mencapai 10 keranjang muatan perahu.",
+          "hint": "Pilih beberapa barang yang jumlah nilainya tepat 10.",
+          "nalaDialog": "Perahunya butuh muatan pas 10 keranjang. Yuk atur barang dagangannya!",
+          "game": {
+            "type": "barter",
+            "target": 10,
+            "targetLabel": "10 keranjang muatan",
+            "items": [
+              { "id": "t1", "label": "Beras", "emoji": "🍚", "image": "/assets/images/islands/pasar-terapung/minigames/barter/beras.png", "value": 4 },
+              { "id": "t2", "label": "Ikan", "emoji": "🐟", "image": "/assets/images/islands/pasar-terapung/minigames/barter/ikan.png", "value": 3 },
+              { "id": "t3", "label": "Rempah", "emoji": "🌶️", "image": "/assets/images/islands/pasar-terapung/minigames/barter/rempah.png", "value": 3 },
+              { "id": "t4", "label": "Buah", "emoji": "🍉", "image": "/assets/images/islands/pasar-terapung/minigames/barter/buah.png", "value": 5 },
+              { "id": "t5", "label": "Anyaman", "emoji": "🧺", "image": "/assets/images/islands/pasar-terapung/minigames/barter/anyaman.png", "value": 2 },
+              { "id": "t6", "label": "Madu", "emoji": "🍯", "image": "/assets/images/islands/pasar-terapung/minigames/barter/madu.png", "value": 6 }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "terapung-b1",
+              "category": "Keadilan",
+              "prompt": "Saat mengantre, apa yang paling penting menurutmu?",
+              "options": [
+                { "label": "A", "text": "Keadilan & ketertiban", "trait": "adil" },
+                { "label": "B", "text": "Kepedulian pada yang lemah", "trait": "empati" },
+                { "label": "C", "text": "Kecepatan pelayanan", "trait": "efisien" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "number": 3,
+        "minigame": {
+          "id": "terapung-mediasi",
+          "type": "mediate",
+          "title": "Mediasi Perselisihan",
+          "instructions": "Jadilah penengah dua kepala perahu yang berebut tempat sandar. Pilih respons agar keduanya tenang dan mencapai kesepakatan.",
+          "hint": "Pilih jawaban yang adil dan menenangkan kedua pihak. Hindari memihak atau memaksa.",
+          "nalaDialog": "Dua perahu berebut dermaga! Bantu aku menengahi agar mereka rukun kembali.",
+          "game": {
+            "type": "mediate",
+            "goal": 100,
+            "rounds": [
+              {
+                "id": "r1",
+                "situation": "Pak Karto dan Bu Sari berebut satu tiang tambat di dermaga yang sempit.",
+                "imageA": "/assets/images/islands/pasar-terapung/minigames/mediate/pak-karto.png",
+                "imageB": "/assets/images/islands/pasar-terapung/minigames/mediate/bu-sari.png",
+                "options": [
+                  { "id": "o1", "text": "Tawarkan mereka berbagi tiang secara bergantian", "effect": 40, "tone": "baik" },
+                  { "id": "o2", "text": "Diam saja menunggu keduanya lelah sendiri", "effect": 0, "tone": "netral" },
+                  { "id": "o3", "text": "Suruh Pak Karto pindah ke dermaga lain", "effect": -25, "tone": "buruk" }
+                ]
+              },
+              {
+                "id": "r2",
+                "situation": "Keduanya mulai berdebat keras soal urutan sandar perahu.",
+                "imageA": "/assets/images/islands/pasar-terapung/minigames/mediate/pak-karto.png",
+                "imageB": "/assets/images/islands/pasar-terapung/minigames/mediate/bu-sari.png",
+                "options": [
+                  { "id": "o1", "text": "Ajak mereka bicara bergantian dengan tenang", "effect": 35, "tone": "baik" },
+                  { "id": "o2", "text": "Ikut berdebat membela salah satu pihak", "effect": -20, "tone": "buruk" },
+                  { "id": "o3", "text": "Tawarkan jadwal sandar bersama yang adil", "effect": 15, "tone": "netral" }
+                ]
+              },
+              {
+                "id": "r3",
+                "situation": "Pak Karto masih keberatan. Bagaimana menyelesaikannya?",
+                "imageA": "/assets/images/islands/pasar-terapung/minigames/mediate/pak-karto.png",
+                "imageB": "/assets/images/islands/pasar-terapung/minigames/mediate/bu-sari.png",
+                "options": [
+                  { "id": "o1", "text": "Buat kesepakatan tertulis yang adil untuk berdua", "effect": 30, "tone": "baik" },
+                  { "id": "o2", "text": "Berikan hadiah kecil agar keduanya senang", "effect": 10, "tone": "netral" },
+                  { "id": "o3", "text": "Paksa mereka berjabat tangan sekarang juga", "effect": -15, "tone": "buruk" }
+                ]
+              }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "terapung-c1",
+              "category": "Nilai",
+              "prompt": "Sifat apa yang paling penting dalam berteman dan bekerja sama?",
+              "options": [
+                { "label": "A", "text": "Jujur", "trait": "jujur" },
+                { "label": "B", "text": "Cerdas", "trait": "cerdas" },
+                { "label": "C", "text": "Ramah", "trait": "ramah" }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "reflection": {
+      "theme": "Senyum Pasar",
+      "title": "Renungan Berbagi",
+      "intro": "Saat pasar sepi, NALA mengajakmu merenung tentang kebersamaan.",
+      "questions": [
+        "Saat membantu orang lain, apa yang kamu rasakan?",
+        "Mengapa kamu memilih cara bekerja sama itu tadi?",
+        "Nilai apa yang ingin kamu bawa dalam pertemananmu?"
+      ]
+    }
+  },
+  {
+    "id": "aksara",
+    "name": "Pulau Aksara",
+    "category": "Linguistik & Narrative Literacy",
+    "background": "/assets/images/landing/island-preview-aksara.jpg",
+    "accent": "#E8A838",
+    "acts": [
+      {
+        "number": 1,
+        "minigame": {
+          "id": "aksara-penelusuran-prasasti",
+          "type": "observe",
+          "title": "Penelusuran Prasasti",
+          "instructions": "Klik 5 naskah kuno yang berisi aksara untuk dibaca! Kaca pembesar, pena, rak, dan lampu bukan naskah, jadi jangan diklik.",
+          "hint": "Cari naskah lontar, prasasti batu, daun lontar, aksara Jawa, dan aksara Bali.",
+          "nalaDialog": "Perpustakaan ini penuh naskah kuno! Bantu aku menemukan 5 naskah berisi aksara untuk kita baca bersama.",
+          "game": {
+            "type": "observe",
+            "target": "Naskah",
+            "total": 5,
+            "items": [
+              { "id": "n1", "label": "Naskah lontar", "kind": "target", "emoji": "📜", "image": "/assets/images/islands/aksara/minigames/observe/naskah-lontar.png" },
+              { "id": "y1", "label": "Kaca pembesar", "kind": "distractor", "emoji": "🔍", "image": "/assets/images/islands/aksara/minigames/observe/kaca-pembesar.png" },
+              { "id": "n2", "label": "Prasasti batu", "kind": "target", "emoji": "🗿", "image": "/assets/images/islands/aksara/minigames/observe/prasasti-batu.png" },
+              { "id": "y2", "label": "Pena stylus", "kind": "distractor", "emoji": "🖋️", "image": "/assets/images/islands/aksara/minigames/observe/pena-stylus.png" },
+              { "id": "n3", "label": "Daun lontar", "kind": "target", "emoji": "🍂", "image": "/assets/images/islands/aksara/minigames/observe/daun-lontar.png" },
+              { "id": "y3", "label": "Rak kayu", "kind": "distractor", "emoji": "🪵", "image": "/assets/images/islands/aksara/minigames/observe/rak-kayu.png" },
+              { "id": "n4", "label": "Aksara Jawa", "kind": "target", "emoji": "🪬", "image": "/assets/images/islands/aksara/minigames/observe/aksara-jawa.png" },
+              { "id": "y4", "label": "Lampu minyak", "kind": "distractor", "emoji": "🪔", "image": "/assets/images/islands/aksara/minigames/observe/lampu-minyak.png" },
+              { "id": "n5", "label": "Aksara Bali", "kind": "target", "emoji": "🌀", "image": "/assets/images/islands/aksara/minigames/observe/aksara-bali.png" }
+            ],
+            "question": "Naskah kuno terbuka! Kamu ingin menyelami kisahnya dengan cara apa?",
+            "options": [
+              { "label": "A", "text": "Membaca naskah lebih dalam untuk petunjuk", "trait": "teliti" },
+              { "label": "B", "text": "Menyalin aksara ke kertas transliterasi", "trait": "rajin" },
+              { "label": "C", "text": "Bertanya kepada penjaga naskah", "trait": "sosial" }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "aksara-a1",
+              "category": "Bahasa",
+              "prompt": "Apa yang paling kamu sukai dari membaca atau bercerita?",
+              "options": [
+                { "label": "A", "text": "Menemukan kata & makna baru", "trait": "linguistik" },
+                { "label": "B", "text": "Membayangkan ceritanya", "trait": "imajinatif" },
+                { "label": "C", "text": "Menceritakannya ke orang lain", "trait": "naratif" }
+              ]
+            },
+            {
+              "id": "aksara-a2",
+              "category": "Rasa Ingin Tahu",
+              "prompt": "Jika menemukan tulisan asing, kamu akan...",
+              "options": [
+                { "label": "A", "text": "Mencari tahu artinya", "trait": "ingin tahu" },
+                { "label": "B", "text": "Menebak dari bentuknya", "trait": "intuitif" },
+                { "label": "C", "text": "Bertanya pada yang tahu", "trait": "sosial" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "number": 2,
+        "minigame": {
+          "id": "aksara-bait",
+          "type": "verse",
+          "title": "Rekonstruksi Bait Sastra",
+          "instructions": "Lengkapi bait pantun dan gurindam dengan memilih kata yang tepat agar bunyinya serasi.",
+          "hint": "Perhatikan rima dan makna: kata pelengkap harus membuat larik terakhir serasi dengan sebelumnya.",
+          "nalaDialog": "Naskah kuno kehilangan sebagian kata! Bantu aku merangkai kembali bait sastranya.",
+          "game": {
+            "type": "verse",
+            "stanzas": [
+              {
+                "id": "s1",
+                "title": "Pantun Nasihat",
+                "image": "/assets/images/islands/aksara/minigames/verse/pantun-nasihat.png",
+                "lines": [
+                  "Buah duren jatuh ke kolam,",
+                  "Dibawa Ibu ke pasar pagi.",
+                  "Rajin belajar sepanjang hari,",
+                  "Agar masa depan semakin __."
+                ],
+                "options": [
+                  { "id": "v1", "text": "terang", "correct": true },
+                  { "id": "v2", "text": "gelap", "correct": false },
+                  { "id": "v3", "text": "hujan", "correct": false }
+                ]
+              },
+              {
+                "id": "s2",
+                "title": "Gurindam",
+                "image": "/assets/images/islands/aksara/minigames/verse/gurindam.png",
+                "lines": [
+                  "Barang siapa ingin bahagia,",
+                  "Hendaklah ia suka __."
+                ],
+                "options": [
+                  { "id": "g1", "text": "berbagi", "correct": true },
+                  { "id": "g2", "text": "berpura-pura", "correct": false },
+                  { "id": "g3", "text": "marah-marah", "correct": false }
+                ]
+              },
+              {
+                "id": "s3",
+                "title": "Pantun Jenaka",
+                "image": "/assets/images/islands/aksara/minigames/verse/pantun-jenaka.png",
+                "lines": [
+                  "Ada kambing makan rumput,",
+                  "Rumput hijau di tepi kali.",
+                  "Kalau kamu rajin menabung,",
+                  "Nanti hidupmu makin __."
+                ],
+                "options": [
+                  { "id": "t1", "text": "cukup", "correct": true },
+                  { "id": "t2", "text": "habis", "correct": false },
+                  { "id": "t3", "text": "lari", "correct": false }
+                ]
+              }
+            ]
+          },
+          "assessment": [
+            {
+              "id": "aksara-b1",
+              "category": "Naratif",
+              "prompt": "Bagian cerita mana yang paling kamu sukai?",
+              "options": [
+                { "label": "A", "text": "Awal yang misterius", "trait": "penasaran" },
+                { "label": "B", "text": "Konflik yang menegangkan", "trait": "dinamis" },
+                { "label": "C", "text": "Akhir yang menyentuh", "trait": "empati" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "number": 3,
+        "minigame": {
+          "id": "aksara-wayang",
+          "type": "stage",
+          "title": "Alur Wayang",
+          "instructions": "Susun alur pertunjukan wayang dari pembuka dalang hingga penutup.",
+          "hint": "Mulai dari pembuka dalang, lalu tokoh muncul, konflik, hingga penutup.",
+          "nalaDialog": "Wayang siap dimainkan! Susun alur ceritanya agar kisahnya utuh.",
+          "game": {
+            "type": "stage",
+            "steps": [
+              { "id": "w1", "label": "Pembuka dalang", "emoji": "🎭", "image": "/assets/images/islands/aksara/minigames/stage/dalang.png", "description": "Dalang membuka cerita" },
+              { "id": "w2", "label": "Tokoh muncul", "emoji": "🧍", "image": "/assets/images/islands/aksara/minigames/stage/tokoh.png", "description": "Para tokoh tampil" },
+              { "id": "w3", "label": "Muncul konflik", "emoji": "⚔️", "image": "/assets/images/islands/aksara/minigames/stage/konflik.png", "description": "Masalah mulai terjadi" },
+              { "id": "w4", "label": "Klimaks", "emoji": "🌋", "image": "/assets/images/islands/aksara/minigames/stage/klimaks.png", "description": "Puncak ketegangan" },
+              { "id": "w5", "label": "Penyelesaian", "emoji": "🕊️", "image": "/assets/images/islands/aksara/minigames/stage/penyelesaian.png", "description": "Konflik terpecahkan" },
+              { "id": "w6", "label": "Penutup", "emoji": "🌙", "image": "/assets/images/islands/aksara/minigames/stage/penutup.png", "description": "Dalang menutup cerita" }
+            ],
+            "correctOrder": ["w1", "w2", "w3", "w4", "w5", "w6"]
+          },
+          "assessment": [
+            {
+              "id": "aksara-c1",
+              "category": "Cinta Bahasa",
+              "prompt": "Apa yang ingin kamu lakukan dengan kemampuan membaca & berceritamu?",
+              "options": [
+                { "label": "A", "text": "Menulis ceritaku sendiri", "trait": "penulis" },
+                { "label": "B", "text": "Membaca banyak buku", "trait": "pembaca" },
+                { "label": "C", "text": "Menceritakan untuk orang lain", "trait": "pendongeng" }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "reflection": {
+      "theme": "Perpustakaan Senja",
+      "title": "Renungan Kata",
+      "intro": "Di perpustakaan yang sunyi, NALA mengajakmu merenungkan kisah-kisahmu.",
+      "questions": [
+        "Cerita apa yang paling ingin kamu tulis atau sampaikan?",
+        "Mengapa kamu memilih alur cerita itu tadi?",
+        "Kata-kata apa yang membuatmu merasa berani?"
+      ]
+    }
+  }
+]
