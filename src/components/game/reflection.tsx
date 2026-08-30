@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, Mic, Square, Send, Ship } from "lucide-react";
+import { Flame, Mic, Square, Send, Ship, Zap } from "lucide-react";
 import { SafeImage } from "@/components/ui/safe-image";
 import type { ReflectionConfig } from "@/types/game";
 import type { AssessmentAnswer } from "./assessment-modal";
@@ -114,33 +114,16 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
     setNalaThinking(false);
   }
 
-  // ===================== Live Demo: auto-refleksi =====================
-  const beginRef = useRef(begin);
+  // ===================== Live Demo: auto-jawab per klik (presenter-driven) =====================
+  // Presenter yang menekan "Auto-jawab" untuk tiap pertanyaan NALA.
   const submitRef = useRef(submitAnswer);
   useEffect(() => {
-    beginRef.current = begin;
     submitRef.current = submitAnswer;
   });
 
-  // Auto-mulai refleksi (gantikan klik tombol "Mulai").
-  useEffect(() => {
-    if (demo && !started && !finished) {
-      const t = setTimeout(() => beginRef.current(), 500);
-      return () => clearTimeout(t);
-    }
-  }, [demo, started, finished]);
-
-  // Auto-jawab setiap pertanyaan NALA dengan jeda kecil hingga selesai.
-  useEffect(() => {
-    if (!demo || !started || finished || nalaThinking) return;
-    const last = messages[messages.length - 1];
-    if (last?.role !== "nala") return;
-    const t = setTimeout(
-      () => submitRef.current("Aku suka belajar hal baru! Terima kasih sudah menemani, NALA."),
-      700
-    );
-    return () => clearTimeout(t);
-  }, [demo, started, finished, nalaThinking, messages]);
+  function demoAutoAnswer() {
+    submitRef.current("Aku suka belajar hal baru! Terima kasih sudah menemani, NALA.");
+  }
 
   return (
     <div className="flex h-[calc(100dvh-108px)] w-full flex-col overflow-hidden">
@@ -232,6 +215,17 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
                 <div ref={bottomRef} />
               </div>
               </>
+            )}
+
+            {/* Live Demo: auto-jawab per klik (presenter-driven) */}
+            {demo && started && !finished && (
+              <button
+                type="button"
+                onClick={demoAutoAnswer}
+                className="flex items-center justify-center gap-2 self-start rounded-full border border-[#19D29F] bg-[#0F3943] px-4 py-1.5 text-[11px] font-extrabold uppercase text-[#19D29F] transition-colors hover:bg-[#144955]"
+              >
+                <Zap size={13} /> Auto-jawab
+              </button>
             )}
 
             {/* Input */}

@@ -36,40 +36,14 @@ export function Minigame({ game, onProgress, onComplete, onWrong, resumeKey = "d
     progressRef.current = onProgress;
     completeRef.current = onComplete;
   });
-  const doneRef = useRef(false);
-  // Reset penanda per babak (game berganti saat actIndex berubah).
-  useEffect(() => {
-    doneRef.current = false;
-  }, [game]);
 
-  // Live Demo: buka asesmen singkat (agar terlihat & datanya tercatat),
-  // lalu auto-selesaikan babak setelah jeda kecil.
+  // Live Demo: presenter-driven — TIDAK ada auto-play. Setiap klik tombol
+  // demo (sinyal skip) memunculkan modal asesmen & menandai babak selesai.
+  // Babak berikutnya hanya lanjut saat presenter mengklik lagi.
   useEffect(() => {
-    if (!demo) return;
-    const t = setTimeout(() => {
-      if (doneRef.current) return;
-      progressRef.current(); // memunculkan modal asesmen (di-auto-jawab island-game)
-    }, 350);
-    return () => clearTimeout(t);
-  }, [demo, game]);
-
-  useEffect(() => {
-    if (!demo) return;
-    const t = setTimeout(() => {
-      if (!doneRef.current) {
-        doneRef.current = true;
-        completeRef.current();
-      }
-    }, 1900);
-    return () => clearTimeout(t);
-  }, [demo, game]);
-
-  // Live Demo: sinyal "lewati sekarang" dari tombol demo → selesaikan seketika.
-  useEffect(() => {
-    if (demo && skip > 0 && !doneRef.current) {
-      doneRef.current = true;
-      progressRef.current();
-      completeRef.current();
+    if (demo && skip > 0) {
+      progressRef.current(); // buka modal asesmen agar bisa dijelaskan presenter
+      completeRef.current(); // tandai selesai (menunggu modal di-auto-jawab)
     }
   }, [demo, skip]);
 

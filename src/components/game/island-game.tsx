@@ -280,22 +280,6 @@ export function IslandGame({ island }: Props) {
     if (interruptOpen) assessmentAnsweredRef.current = false;
   }, [interruptOpen]);
 
-  // Demo: auto-jawab asesmen begitu muncul.
-  useEffect(() => {
-    if (demo && interruptOpen) {
-      const t = setTimeout(answerAssessmentNow, 250);
-      return () => clearTimeout(t);
-    }
-  }, [demo, interruptOpen, answerAssessmentNow]);
-
-  // Demo: auto-lanjut popup "Babak Selesai!".
-  useEffect(() => {
-    if (demo && actComplete) {
-      const t = setTimeout(() => nextActRef.current(), 900);
-      return () => clearTimeout(t);
-    }
-  }, [demo, actComplete]);
-
   function formatTime(t: number) {
     const m = String(Math.floor(t / 60)).padStart(2, "0");
     const s = String(t % 60).padStart(2, "0");
