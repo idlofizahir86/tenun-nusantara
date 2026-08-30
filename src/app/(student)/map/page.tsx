@@ -4,9 +4,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Gem, Settings, Ship, Anchor, Maximize, BarChart3 } from "lucide-react";
+import { Gem, Settings, Ship, Anchor, Maximize, BarChart3, Zap } from "lucide-react";
 import { getSession } from "@/lib/session/session";
 import { AppNavbar } from "@/components/layout/app-navbar";
+import { useDemo } from "@/hooks/use-demo";
 
 const AVATARS: Record<string, string> = {
   bayu: "/assets/images/characters/npcs/char_bayu.png",
@@ -80,6 +81,21 @@ export default function MapPage() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [completedCount, setCompletedCount] = useState(0);
   const [session] = useState(getSession());
+  // Live Demo Mode — status + gate password
+  const { demo, enable, disable } = useDemo();
+  const [demoAuthOpen, setDemoAuthOpen] = useState(false);
+  const [demoPasswordInput, setDemoPasswordInput] = useState("");
+  const [demoError, setDemoError] = useState<string | null>(null);
+
+  function tryEnableDemo() {
+    if (enable(demoPasswordInput)) {
+      setDemoAuthOpen(false);
+      setDemoPasswordInput("");
+      setDemoError(null);
+    } else {
+      setDemoError("Password salah. Coba lagi.");
+    }
+  }
 
   useEffect(() => {
     try {
@@ -392,6 +408,71 @@ export default function MapPage() {
                         <span className="text-[12px] font-bold text-[#19D29F]">AKTIF</span>
                       )}
                     </button>
+                  </li>
+
+                  {/* Live Demo Mode (gate password) */}
+                  <li>
+                    <div className="rounded-xl px-3 py-2.5">
+                      <div className="flex items-center gap-3">
+                        <Zap size={18} className="shrink-0 text-[#19D29F]" />
+                        <div className="flex-1">
+                          <div className="font-manrope text-[14px] font-semibold text-white">
+                            Live Demo Mode
+                          </div>
+                          {demo && (
+                            <div className="text-[10px] font-bold text-[#19D29F]">AKTIF</div>
+                          )}
+                        </div>
+                        {demo ? (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              disable();
+                              setDemoAuthOpen(false);
+                            }}
+                            className="text-[11px] font-bold text-[#E63946] hover:underline"
+                          >
+                            Matikan
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => setDemoAuthOpen((v) => !v)}
+                            className="text-[11px] font-bold text-[#FFB319] hover:underline"
+                          >
+                            Aktifkan
+                          </button>
+                        )}
+                      </div>
+
+                      {demoAuthOpen && !demo && (
+                        <div className="mt-2 flex flex-col gap-1.5">
+                          <input
+                            type="password"
+                            value={demoPasswordInput}
+                            onChange={(e) => {
+                              setDemoPasswordInput(e.target.value);
+                              setDemoError(null);
+                            }}
+                            onKeyDown={(e) => e.key === "Enter" && tryEnableDemo()}
+                            placeholder="Password demo"
+                            className="rounded-lg bg-[#09242B] px-3 py-2 font-manrope text-sm text-white outline-none placeholder:text-white/40"
+                          />
+                          {demoError && (
+                            <span className="text-[10px] font-semibold text-[#E63946]">
+                              {demoError}
+                            </span>
+                          )}
+                          <button
+                            type="button"
+                            onClick={tryEnableDemo}
+                            className="rounded-lg bg-[#19D29F] px-3 py-1.5 text-[11px] font-extrabold uppercase text-[#0B1D23] transition-colors hover:bg-[#15b888]"
+                          >
+                            Aktifkan Demo
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </li>
                 </ul>
               </div>

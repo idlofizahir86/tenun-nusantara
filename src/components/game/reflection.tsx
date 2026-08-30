@@ -9,6 +9,7 @@ import type { AssessmentAnswer } from "./assessment-modal";
 import { useTTS } from "@/hooks/use-tts";
 import { useVoiceInput } from "@/hooks/use-voice-input";
 import { useNala } from "@/hooks/use-nala";
+import { useDemo } from "@/hooks/use-demo";
 
 interface Props {
   reflection: ReflectionConfig;
@@ -29,6 +30,7 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
   const { speak, stop, speaking } = useTTS();
   const voice = useVoiceInput();
   const nala = useNala();
+  const { demo } = useDemo();
 
   const [started, setStarted] = useState(false);
   const [draft, setDraft] = useState("");
@@ -77,8 +79,8 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
     speak(reply);
   }
 
-  async function submitAnswer() {
-    const text = draft.trim() || voice.transcript.trim();
+  async function submitAnswer(forcedText?: string) {
+    const text = (forcedText ?? draft).trim() || voice.transcript.trim();
     if (!text || nalaThinking) return;
     setDraft("");
     voice.stop();
@@ -111,6 +113,34 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
     setStep(step + 1);
     setNalaThinking(false);
   }
+
+  // ===================== Live Demo: auto-refleksi =====================
+  const beginRef = useRef(begin);
+  const submitRef = useRef(submitAnswer);
+  useEffect(() => {
+    beginRef.current = begin;
+    submitRef.current = submitAnswer;
+  });
+
+  // Auto-mulai refleksi (gantikan klik tombol "Mulai").
+  useEffect(() => {
+    if (demo && !started && !finished) {
+      const t = setTimeout(() => beginRef.current(), 500);
+      return () => clearTimeout(t);
+    }
+  }, [demo, started, finished]);
+
+  // Auto-jawab setiap pertanyaan NALA dengan jeda kecil hingga selesai.
+  useEffect(() => {
+    if (!demo || !started || finished || nalaThinking) return;
+    const last = messages[messages.length - 1];
+    if (last?.role !== "nala") return;
+    const t = setTimeout(
+      () => submitRef.current("Aku suka belajar hal baru! Terima kasih sudah menemani, NALA."),
+      700
+    );
+    return () => clearTimeout(t);
+  }, [demo, started, finished, nalaThinking, messages]);
 
   return (
     <div className="flex h-[calc(100dvh-108px)] w-full flex-col overflow-hidden">
@@ -226,7 +256,7 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
                 />
                 <button
                   type="button"
-                  onClick={submitAnswer}
+                  onClick={() => submitAnswer()}
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#FFB319] text-[#0B1D23] transition-transform hover:scale-105"
                 >
                   <Send size={18} />

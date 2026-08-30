@@ -14,6 +14,7 @@ import {
   CheckCircle,
   ArrowLeft,
   Hourglass,
+  Zap,
 } from "lucide-react";
 import type { IslandConfig } from "@/types/game";
 import { Minigame } from "./minigame";
@@ -29,6 +30,7 @@ import {
   xpConstants,
 } from "@/lib/session/session";
 import { clearPersistentState } from "@/hooks/use-persistent-state";
+import { useDemo } from "@/hooks/use-demo";
 
 const AVATARS: Record<string, string> = {
   bayu: "/assets/images/characters/npcs/char_bayu.png",
@@ -55,6 +57,7 @@ interface Props {
 export function IslandGame({ island }: Props) {
   const router = useRouter();
   const { speak, stop } = useTTS();
+  const { demo, triggerSkip } = useDemo();
 
   const [actIndex, setActIndex] = useState(0);
   const [interruptOpen, setInterruptOpen] = useState(false);
@@ -249,6 +252,50 @@ export function IslandGame({ island }: Props) {
     }
   }
 
+  // ===================== Live Demo Mode =====================
+  // Referensi callback terbaru agar effect/tombol demo selalu memakai fungsi terkini.
+  const onAssessmentDoneRef = useRef(onAssessmentDone);
+  const nextActRef = useRef(nextAct);
+  useEffect(() => {
+    onAssessmentDoneRef.current = onAssessmentDone;
+    nextActRef.current = nextAct;
+  });
+  const assessmentAnsweredRef = useRef(false);
+
+  // Auto-jawab modal asesmen (pilih opsi pertama tiap pertanyaan).
+  const answerAssessmentNow = useCallback(() => {
+    if (!interruptOpenRef.current || assessmentAnsweredRef.current) return;
+    assessmentAnsweredRef.current = true;
+    const answers = minigame.assessment.map((q) => ({
+      questionId: q.id,
+      trait: q.options[0].trait,
+      chosen: q.options[0].text,
+      prompt: q.prompt,
+    }));
+    onAssessmentDoneRef.current(answers);
+  }, [minigame]);
+
+  // Reset penanda asesmen setiap modal dibuka.
+  useEffect(() => {
+    if (interruptOpen) assessmentAnsweredRef.current = false;
+  }, [interruptOpen]);
+
+  // Demo: auto-jawab asesmen begitu muncul.
+  useEffect(() => {
+    if (demo && interruptOpen) {
+      const t = setTimeout(answerAssessmentNow, 250);
+      return () => clearTimeout(t);
+    }
+  }, [demo, interruptOpen, answerAssessmentNow]);
+
+  // Demo: auto-lanjut popup "Babak Selesai!".
+  useEffect(() => {
+    if (demo && actComplete) {
+      const t = setTimeout(() => nextActRef.current(), 900);
+      return () => clearTimeout(t);
+    }
+  }, [demo, actComplete]);
+
   function formatTime(t: number) {
     const m = String(Math.floor(t / 60)).padStart(2, "0");
     const s = String(t % 60).padStart(2, "0");
@@ -260,6 +307,26 @@ export function IslandGame({ island }: Props) {
 
   return (
     <div className="flex h-full w-full flex-col overflow-hidden">
+      {/* Live Demo: indikator + tombol "Selesaikan Langkah" */}
+      {demo && (
+        <div className="fixed left-1/2 top-2 z-[70] flex -translate-x-1/2 items-center gap-2 rounded-full border border-[#19D29F] bg-[#0F3943]/95 px-3 py-1.5 shadow-lg">
+          <Zap size={13} className="text-[#19D29F]" />
+          <span className="font-outfit text-[10px] font-bold uppercase tracking-wide text-white">
+            Live Demo
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              if (interruptOpen) answerAssessmentNow();
+              else if (actComplete) nextActRef.current();
+              else triggerSkip();
+            }}
+            className="rounded-full bg-[#FFB319] px-3 py-1 font-outfit text-[10px] font-extrabold uppercase text-[#0B1D23] transition-transform hover:scale-105"
+          >
+            Selesaikan Langkah
+          </button>
+        </div>
+      )}
       {/* Main 3-column body */}
       <div className="flex min-h-0 flex-1 flex-row">
         {/* LEFT: Instruksi & NALA Guide */}
