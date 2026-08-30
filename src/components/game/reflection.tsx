@@ -117,17 +117,38 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
   // ===================== Live Demo: "Lanjutkan" (presenter-driven) =====================
   // Tekan "Lanjutkan" untuk mengisi jawaban tiap pertanyaan NALA otomatis lalu
   // berhenti di pertanyaan berikutnya — presenter bisa menjelaskan tiap bubble.
+  // Jika refleksi belum dimulai, "Lanjutkan" akan memulainya lebih dulu.
   const submitRef = useRef(submitAnswer);
   useEffect(() => {
     submitRef.current = submitAnswer;
   });
 
   function demoLanjutkan() {
-    submitRef.current("Aku suka belajar hal baru! Terima kasih sudah menemani, NALA.");
+    if (!started) {
+      begin();
+    } else {
+      submitRef.current("Aku suka belajar hal baru! Terima kasih sudah menemani, NALA.");
+    }
   }
 
   return (
     <div className="flex h-[calc(100dvh-108px)] w-full flex-col overflow-hidden">
+      {/* Live Demo: floating bar "Lanjutkan" — selalu terlihat, seperti di minigame */}
+      {demo && (
+        <div className="fixed left-1/2 top-2 z-[70] flex -translate-x-1/2 items-center gap-2 rounded-full border border-[#19D29F] bg-[#0F3943]/95 px-3 py-1.5 shadow-lg">
+          <Zap size={13} className="text-[#19D29F]" />
+          <span className="font-outfit text-[10px] font-bold uppercase tracking-wide text-white">
+            Live Demo
+          </span>
+          <button
+            type="button"
+            onClick={demoLanjutkan}
+            className="rounded-full bg-[#FFB319] px-3 py-1 font-outfit text-[10px] font-extrabold uppercase text-[#0B1D23] transition-transform hover:scale-105"
+          >
+            Lanjutkan
+          </button>
+        </div>
+      )}
       {/* Content */}
       <div className="flex min-h-0 flex-1 items-stretch justify-center overflow-hidden px-4 py-2 md:px-6">
         <div className="flex h-full w-full max-w-[1280px] flex-col items-center gap-5 lg:flex-row">
@@ -216,17 +237,6 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
                 <div ref={bottomRef} />
               </div>
               </>
-            )}
-
-            {/* Live Demo: tombol "Lanjutkan" — isi jawaban tiap pertanyaan otomatis */}
-            {demo && started && !finished && (
-              <button
-                type="button"
-                onClick={demoLanjutkan}
-                className="flex items-center justify-center gap-2 self-start rounded-full border border-[#19D29F] bg-[#0F3943] px-4 py-1.5 text-[11px] font-extrabold uppercase text-[#19D29F] transition-colors hover:bg-[#144955]"
-              >
-                <Zap size={13} /> Lanjutkan
-              </button>
             )}
 
             {/* Input */}
