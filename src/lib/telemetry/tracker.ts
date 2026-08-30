@@ -45,6 +45,7 @@ function readSessionPayload(): Record<string, unknown> | null {
     const s = JSON.parse(raw);
     return {
       id: s.id,
+      gameCode: s.gameCode,
       startedAt: s.startedAt,
       lastActiveAt: s.lastActiveAt,
       player: s.player || undefined,

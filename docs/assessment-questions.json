@@ -1,0 +1,392 @@
+{
+  "description": "Kumpulan semua pertanyaan Asesmen Dadakan (assessment) di setiap mini game per pulau. Asesmen dadakan muncul tersembunyi di tiap babak (act) setelah mini game.",
+  "totalQuestions": 27,
+  "islands": [
+    {
+      "id": "candi",
+      "name": "Pulau Candi",
+      "category": "Logika-Matematika & Analitis",
+      "questions": [
+        {
+          "act": 1,
+          "minigameId": "observasi-lapangan",
+          "minigameTitle": "Observasi Lapangan",
+          "questionId": "candi-a1",
+          "category": "Analitis & Pola",
+          "prompt": "Saat menghadapi pola yang rumit, bagaimana caramu paling nyaman menyelesaikannya?",
+          "options": [
+            { "label": "A", "text": "Menganalisis urutan & keteraturan polanya", "trait": "logis" },
+            { "label": "B", "text": "Mencoba langsung dan melihat hasilnya", "trait": "eksperimental" },
+            { "label": "C", "text": "Bertanya kepada teman untuk berdiskusi", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 1,
+          "minigameId": "observasi-lapangan",
+          "minigameTitle": "Observasi Lapangan",
+          "questionId": "candi-a2",
+          "category": "Ketekunan",
+          "prompt": "Jika tebakanmu salah beberapa kali, apa yang biasanya kamu lakukan?",
+          "options": [
+            { "label": "A", "text": "Mencari tahu penyebab kesalahannya", "trait": "analitis" },
+            { "label": "B", "text": "Mencoba pendekatan yang berbeda", "trait": "kreatif" },
+            { "label": "C", "text": "Meminta bantuan orang lain", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 1,
+          "minigameId": "observasi-lapangan",
+          "minigameTitle": "Observasi Lapangan",
+          "questionId": "candi-a3",
+          "category": "Pengambilan Keputusan",
+          "prompt": "Menurutmu, apa kunci agar teka-teki ini berhasil diselesaikan?",
+          "options": [
+            { "label": "A", "text": "Ketelitian dan kesabaran", "trait": "teliti" },
+            { "label": "B", "text": "Kecepatan dan intuisi", "trait": "cepat" },
+            { "label": "C", "text": "Kerja sama dengan orang lain", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 2,
+          "minigameId": "puzzle-pola-relief",
+          "minigameTitle": "Puzzle Pola Relief",
+          "questionId": "candi-b1",
+          "category": "Perencanaan",
+          "prompt": "Saat menyusun urutan, hal apa yang paling kamu perhatikan?",
+          "options": [
+            { "label": "A", "text": "Alasan logis setiap langkah", "trait": "logis" },
+            { "label": "B", "text": "Gambaran besar hasil akhirnya", "trait": "visioner" },
+            { "label": "C", "text": "Cara orang lain biasa melakukannya", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 2,
+          "minigameId": "puzzle-pola-relief",
+          "minigameTitle": "Puzzle Pola Relief",
+          "questionId": "candi-b2",
+          "category": "Pola Pikir",
+          "prompt": "Bagaimana kamu memastikan urutanmu sudah benar?",
+          "options": [
+            { "label": "A", "text": "Memeriksa ulang setiap langkah", "trait": "teliti" },
+            { "label": "B", "text": "Membandingkan dengan contoh lain", "trait": "referensial" },
+            { "label": "C", "text": "Meminta konfirmasi teman", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 2,
+          "minigameId": "puzzle-pola-relief",
+          "minigameTitle": "Puzzle Pola Relief",
+          "questionId": "candi-b3",
+          "category": "Ketahanan",
+          "prompt": "Jika ada langkah yang keliru di tengah jalan, kamu akan...",
+          "options": [
+            { "label": "A", "text": "Memperbaiki dan mulai lagi dengan tenang", "trait": "sabar" },
+            { "label": "B", "text": "Mencari cara yang lebih cepat", "trait": "efisien" },
+            { "label": "C", "text": "Mengajak teman mengerjakan bersama", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 3,
+          "minigameId": "rekayasa-aliran-air",
+          "minigameTitle": "Rekayasa Aliran Air",
+          "questionId": "candi-c1",
+          "category": "Pemecahan Masalah",
+          "prompt": "Bagaimana kamu menemukan jawaban teka-teki tadi?",
+          "options": [
+            { "label": "A", "text": "Menghubungkan setiap petunjuk", "trait": "analitis" },
+            { "label": "B", "text": "Berimajinasi bentuknya", "trait": "kreatif" },
+            { "label": "C", "text": "Menebak dari pengalaman sebelumnya", "trait": "intuitif" }
+          ]
+        },
+        {
+          "act": 3,
+          "minigameId": "rekayasa-aliran-air",
+          "minigameTitle": "Rekayasa Aliran Air",
+          "questionId": "candi-c2",
+          "category": "Kepercayaan Diri",
+          "prompt": "Saat jawabanmu ragu-ragu, apa yang kamu lakukan?",
+          "options": [
+            { "label": "A", "text": "Meyakinkan diri dengan logika", "trait": "logis" },
+            { "label": "B", "text": "Mencoba beberapa kemungkinan", "trait": "eksperimental" },
+            { "label": "C", "text": "Bertanya pada NALA", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 3,
+          "minigameId": "rekayasa-aliran-air",
+          "minigameTitle": "Rekayasa Aliran Air",
+          "questionId": "candi-c3",
+          "category": "Nilai",
+          "prompt": "Kualitas apa yang menurutmu paling penting untuk menjadi penjelajah hebat?",
+          "options": [
+            { "label": "A", "text": "Kecerdasan & ketelitian", "trait": "intelektual" },
+            { "label": "B", "text": "Keberanian & semangat", "trait": "berani" },
+            { "label": "C", "text": "Kebaikan & kerja sama", "trait": "sosial" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rimba",
+      "name": "Pulau Rimba",
+      "category": "Naturalis & Sustainability",
+      "questions": [
+        {
+          "act": 1,
+          "minigameId": "rimba-ekspedisi-kanopi",
+          "minigameTitle": "Ekspedisi Kanopi",
+          "questionId": "rimba-a1",
+          "category": "Observasi",
+          "prompt": "Saat mengamati alam, apa yang paling menarik perhatianmu?",
+          "options": [
+            { "label": "A", "text": "Detail & pola di sekitarnya", "trait": "teliti" },
+            { "label": "B", "text": "Suara & suasana alam", "trait": "sensorik" },
+            { "label": "C", "text": "Bagaimana makhluk hidup saling terhubung", "trait": "ekologis" }
+          ]
+        },
+        {
+          "act": 1,
+          "minigameId": "rimba-ekspedisi-kanopi",
+          "minigameTitle": "Ekspedisi Kanopi",
+          "questionId": "rimba-a2",
+          "category": "Peduli Lingkungan",
+          "prompt": "Menurutmu, mengapa menjaga alam itu penting?",
+          "options": [
+            { "label": "A", "text": "Agar makhluk hidup tetap bertahan", "trait": "ekologis" },
+            { "label": "B", "text": "Karena alam indah untuk dinikmati", "trait": "apresiatif" },
+            { "label": "C", "text": "Karena itu tanggung jawab bersama", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 1,
+          "minigameId": "rimba-ekspedisi-kanopi",
+          "minigameTitle": "Ekspedisi Kanopi",
+          "questionId": "rimba-a3",
+          "category": "Pola Pikir",
+          "prompt": "Jika ada hewan kehilangan rumahnya, apa yang kamu lakukan?",
+          "options": [
+            { "label": "A", "text": "Mencari tahu penyebabnya", "trait": "analitis" },
+            { "label": "B", "text": "Membuat rumah baru untuknya", "trait": "kreatif" },
+            { "label": "C", "text": "Mengajak orang lain membantu", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 2,
+          "minigameId": "rimba-detektif",
+          "minigameTitle": "Detektif Satwa & Jejak",
+          "questionId": "rimba-b1",
+          "category": "Logika",
+          "prompt": "Saat menyusun rantai makanan, kamu berpikir...",
+          "options": [
+            { "label": "A", "text": "Siapa makan apa secara logis", "trait": "logis" },
+            { "label": "B", "text": "Bagaimana keseimbangan alam terjaga", "trait": "ekologis" },
+            { "label": "C", "text": "Cerita di balik setiap hewan", "trait": "naratif" }
+          ]
+        },
+        {
+          "act": 2,
+          "minigameId": "rimba-detektif",
+          "minigameTitle": "Detektif Satwa & Jejak",
+          "questionId": "rimba-b2",
+          "category": "Empati",
+          "prompt": "Hewan mana yang kamu rasa paling perlu dilindungi?",
+          "options": [
+            { "label": "A", "text": "Yang paling langka", "trait": "konservatif" },
+            { "label": "B", "text": "Yang paling kecil & lemah", "trait": "empati" },
+            { "label": "C", "text": "Semua sama pentingnya", "trait": "adil" }
+          ]
+        },
+        {
+          "act": 3,
+          "minigameId": "rimba-filtrasi",
+          "minigameTitle": "Rekonstruksi Filtrasi",
+          "questionId": "rimba-c1",
+          "category": "Pengetahuan",
+          "prompt": "Bagaimana perasaanmu setelah menyelesaikan petualangan di rimba?",
+          "options": [
+            { "label": "A", "text": "Semakin ingin menjaga alam", "trait": "ekologis" },
+            { "label": "B", "text": "Bangga bisa memecahkan teka-teki", "trait": "percaya diri" },
+            { "label": "C", "text": "Senang bisa belajar hal baru", "trait": "pembelajar" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harmoni",
+      "name": "Pulau Harmoni",
+      "category": "Seni & Creative Thinking",
+      "questions": [
+        {
+          "act": 1,
+          "minigameId": "harmoni-eksplorasi-bunyi",
+          "minigameTitle": "Kumpulkan Warna Tenun",
+          "questionId": "harmoni-a1",
+          "category": "Kreativitas",
+          "prompt": "Saat membuat karya seni, apa yang paling kamu nikmati?",
+          "options": [
+            { "label": "A", "text": "Proses bereksperimen", "trait": "eksploratif" },
+            { "label": "B", "text": "Hasil akhir yang indah", "trait": "apresiatif" },
+            { "label": "C", "text": "Berbagi karya dengan orang lain", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 1,
+          "minigameId": "harmoni-eksplorasi-bunyi",
+          "minigameTitle": "Kumpulkan Warna Tenun",
+          "questionId": "harmoni-a2",
+          "category": "Ekspresi",
+          "prompt": "Jika kamu bisa mengekspresikan diri, kamu memilih...",
+          "options": [
+            { "label": "A", "text": "Menggambar atau melukis", "trait": "visual" },
+            { "label": "B", "text": "Menari atau bergerak", "trait": "kinestetik" },
+            { "label": "C", "text": "Menyanyi atau bermusik", "trait": "musikal" }
+          ]
+        },
+        {
+          "act": 2,
+          "minigameId": "harmoni-tuning",
+          "minigameTitle": "Tuning Gamelan",
+          "questionId": "harmoni-b1",
+          "category": "Perasaan",
+          "prompt": "Saat menyusun pertunjukan, kamu memperhatikan...",
+          "options": [
+            { "label": "A", "text": "Alur cerita yang runtut", "trait": "naratif" },
+            { "label": "B", "text": "Keindahan setiap bagian", "trait": "estetis" },
+            { "label": "C", "text": "Kenyamanan penonton", "trait": "empati" }
+          ]
+        },
+        {
+          "act": 3,
+          "minigameId": "harmoni-tenun",
+          "minigameTitle": "Kanvas Tenun Digital",
+          "questionId": "harmoni-c1",
+          "category": "Apresiasi",
+          "prompt": "Apa yang paling kamu hargai dari seni?",
+          "options": [
+            { "label": "A", "text": "Keindahan & maknanya", "trait": "estetis" },
+            { "label": "B", "text": "Kebebasan berekspresi", "trait": "ekspresif" },
+            { "label": "C", "text": "Kebersamaan saat menikmatinya", "trait": "sosial" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "terapung",
+      "name": "Pulau Terapung",
+      "category": "Interpersonal & Kepemimpinan",
+      "questions": [
+        {
+          "act": 1,
+          "minigameId": "terapung-navigasi-dermaga",
+          "minigameTitle": "Navigasi Dermaga",
+          "questionId": "terapung-a1",
+          "category": "Kerja Sama",
+          "prompt": "Saat bekerja bersama orang lain, peran apa yang kamu suka?",
+          "options": [
+            { "label": "A", "text": "Memimpin dan mengatur", "trait": "pemimpin" },
+            { "label": "B", "text": "Membantu dan mendukung", "trait": "pendukung" },
+            { "label": "C", "text": "Mendengarkan semua ide", "trait": "pendengar" }
+          ]
+        },
+        {
+          "act": 1,
+          "minigameId": "terapung-navigasi-dermaga",
+          "minigameTitle": "Navigasi Dermaga",
+          "questionId": "terapung-a2",
+          "category": "Empati",
+          "prompt": "Jika ada teman kesulitan berdagang, kamu akan...",
+          "options": [
+            { "label": "A", "text": "Membantunya dengan senang hati", "trait": "empati" },
+            { "label": "B", "text": "Mengajaknya bekerja sama", "trait": "kolaboratif" },
+            { "label": "C", "text": "Memberi semangat", "trait": "suportif" }
+          ]
+        },
+        {
+          "act": 2,
+          "minigameId": "terapung-barter",
+          "minigameTitle": "Barter Logistik",
+          "questionId": "terapung-b1",
+          "category": "Keadilan",
+          "prompt": "Saat mengantre, apa yang paling penting menurutmu?",
+          "options": [
+            { "label": "A", "text": "Keadilan & ketertiban", "trait": "adil" },
+            { "label": "B", "text": "Kepedulian pada yang lemah", "trait": "empati" },
+            { "label": "C", "text": "Kecepatan pelayanan", "trait": "efisien" }
+          ]
+        },
+        {
+          "act": 3,
+          "minigameId": "terapung-mediasi",
+          "minigameTitle": "Mediasi Perselisihan",
+          "questionId": "terapung-c1",
+          "category": "Nilai",
+          "prompt": "Sifat apa yang paling penting dalam berteman dan bekerja sama?",
+          "options": [
+            { "label": "A", "text": "Jujur", "trait": "jujur" },
+            { "label": "B", "text": "Cerdas", "trait": "cerdas" },
+            { "label": "C", "text": "Ramah", "trait": "ramah" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aksara",
+      "name": "Pulau Aksara",
+      "category": "Linguistik & Narrative Literacy",
+      "questions": [
+        {
+          "act": 1,
+          "minigameId": "aksara-penelusuran-prasasti",
+          "minigameTitle": "Penelusuran Prasasti",
+          "questionId": "aksara-a1",
+          "category": "Bahasa",
+          "prompt": "Apa yang paling kamu sukai dari membaca atau bercerita?",
+          "options": [
+            { "label": "A", "text": "Menemukan kata & makna baru", "trait": "linguistik" },
+            { "label": "B", "text": "Membayangkan ceritanya", "trait": "imajinatif" },
+            { "label": "C", "text": "Menceritakannya ke orang lain", "trait": "naratif" }
+          ]
+        },
+        {
+          "act": 1,
+          "minigameId": "aksara-penelusuran-prasasti",
+          "minigameTitle": "Penelusuran Prasasti",
+          "questionId": "aksara-a2",
+          "category": "Rasa Ingin Tahu",
+          "prompt": "Jika menemukan tulisan asing, kamu akan...",
+          "options": [
+            { "label": "A", "text": "Mencari tahu artinya", "trait": "ingin tahu" },
+            { "label": "B", "text": "Menebak dari bentuknya", "trait": "intuitif" },
+            { "label": "C", "text": "Bertanya pada yang tahu", "trait": "sosial" }
+          ]
+        },
+        {
+          "act": 2,
+          "minigameId": "aksara-bait",
+          "minigameTitle": "Rekonstruksi Bait Sastra",
+          "questionId": "aksara-b1",
+          "category": "Naratif",
+          "prompt": "Bagian cerita mana yang paling kamu sukai?",
+          "options": [
+            { "label": "A", "text": "Awal yang misterius", "trait": "penasaran" },
+            { "label": "B", "text": "Konflik yang menegangkan", "trait": "dinamis" },
+            { "label": "C", "text": "Akhir yang menyentuh", "trait": "empati" }
+          ]
+        },
+        {
+          "act": 3,
+          "minigameId": "aksara-wayang",
+          "minigameTitle": "Alur Wayang",
+          "questionId": "aksara-c1",
+          "category": "Cinta Bahasa",
+          "prompt": "Apa yang ingin kamu lakukan dengan kemampuan membaca & berceritamu?",
+          "options": [
+            { "label": "A", "text": "Menulis ceritaku sendiri", "trait": "penulis" },
+            { "label": "B", "text": "Membaca banyak buku", "trait": "pembaca" },
+            { "label": "C", "text": "Menceritakan untuk orang lain", "trait": "pendongeng" }
+          ]
+        }
+      ]
+    }
+  ]
+}

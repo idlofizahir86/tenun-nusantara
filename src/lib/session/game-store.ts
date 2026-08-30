@@ -136,6 +136,7 @@ export function newGame(player: PlayerInfo): string {
   }
   write(ACTIVE_KEY, { gameCode: s.gameCode });
   updateRegistry(s.gameCode!, s);
+  saveActiveSnapshot(); // simpan snapshot game baru ini SEKARANG agar selalu bisa dilanjutkan
   return s.gameCode!;
 }
 

@@ -8,7 +8,7 @@ import { Gem, Settings, Ship, Anchor, Maximize, BarChart3, Zap, Check, Copy, Che
 import { getSession } from "@/lib/session/session";
 import { AppNavbar } from "@/components/layout/app-navbar";
 import { useDemo } from "@/hooks/use-demo";
-import { getActiveGameCode } from "@/lib/session/game-store";
+import { getActiveGameCode, saveActiveSnapshot } from "@/lib/session/game-store";
 
 const AVATARS: Record<string, string> = {
   bayu: "/assets/images/characters/npcs/char_bayu.png",
@@ -146,6 +146,15 @@ export function MapCanvas() {
       // abaikan
     }
   }, []);
+
+  // Simpan snapshot game aktif secara terus-menerus (saat progres berubah &
+  // saat keluar halaman) agar game selalu bisa dilanjutkan kapan pun.
+  useEffect(() => {
+    saveActiveSnapshot();
+    return () => {
+      saveActiveSnapshot();
+    };
+  }, [completedCount]);
 
   // Minta fullscreen saat masuk halaman map (best-effort, butuh user gesture)
   useEffect(() => {
