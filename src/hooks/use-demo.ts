@@ -8,17 +8,21 @@ import {
   triggerDemoSkip,
   getDemoSkip,
   subscribeDemo,
+  isDemoInstant,
+  setDemoInstant as setDemoInstantStore,
 } from "@/lib/demo/demo-store";
 
 // Hook untuk membaca/mengubah Live Demo Mode secara reaktif.
 export function useDemo() {
   const [demo, setOn] = useState(isDemo());
   const [skip, setSkip] = useState(getDemoSkip());
+  const [demoInstant, setInstant] = useState(isDemoInstant());
 
   useEffect(() => {
     return subscribeDemo(() => {
       setOn(isDemo());
       setSkip(getDemoSkip());
+      setInstant(isDemoInstant());
     });
   }, []);
 
@@ -30,7 +34,9 @@ export function useDemo() {
 
   const disable = useCallback(() => setDemo(false), []);
 
+  const setDemoInstant = useCallback((on: boolean) => setDemoInstantStore(on), []);
+
   const triggerSkip = useCallback(() => triggerDemoSkip(), []);
 
-  return { demo, skip, enable, disable, triggerSkip };
+  return { demo, skip, demoInstant, enable, disable, setDemoInstant, triggerSkip };
 }

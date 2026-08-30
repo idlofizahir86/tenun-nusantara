@@ -30,7 +30,7 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
   const { speak, stop, speaking } = useTTS();
   const voice = useVoiceInput();
   const nala = useNala();
-  const { demo } = useDemo();
+  const { demo, demoInstant, setDemoInstant } = useDemo();
 
   const [started, setStarted] = useState(false);
   const [draft, setDraft] = useState("");
@@ -67,6 +67,20 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
   async function begin() {
     setStarted(true);
     setNalaThinking(true);
+
+    // Live Demo "NALA Instan": balasan langsung, tanpa menunggu AI.
+    if (demo && demoInstant) {
+      const first = choices[0];
+      const reply = `Halo ${playerName || "Penjelajah"}! ${
+        first ? `Aku lihat tadi kamu memilih "${first.chosen}". ` : ""
+      }Ceritakan ya, mengapa kamu memilih itu?`;
+      setMessages([{ role: "nala", text: reply }]);
+      setStep(1);
+      setNalaThinking(false);
+      speak(reply);
+      return;
+    }
+
     const reply = await nala.send(
       `Mulai sesi refleksi ${reflection.title}.\n` +
         (choiceSummary ? `Konteks pilihan anak:\n${choiceSummary}\n` : "") +
@@ -88,6 +102,28 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
     setNalaThinking(true);
 
     const isLast = step >= turns;
+
+    // Live Demo "NALA Instan": balasan langsung, tanpa menunggu AI.
+    if (demo && demoInstant) {
+      if (isLast) {
+        // Bubble penutup (konsisten dengan mode asli).
+        const closing = "Terima kasih sudah berefleksi ya! Kamu hebat! Sampai jumpa di petualangan berikutnya!";
+        setMessages((m) => [...m, { role: "nala", text: closing }]);
+        setFinished(true);
+        speak(closing);
+      } else {
+        const nextChoice = choices[step];
+        const reply = nextChoice
+          ? `Menarik! Kamu memilih "${nextChoice.chosen}". Boleh ceritakan lebih lanjut kenapa menurutmu begitu?`
+          : "Menarik! Boleh ceritakan lebih lanjut kenapa menurutmu begitu?";
+        setMessages((m) => [...m, { role: "nala", text: reply }]);
+        speak(reply);
+      }
+      setStep(step + 1);
+      setNalaThinking(false);
+      return;
+    }
+
     const nextChoice = choices[step];
 
     const instruction = isLast
@@ -140,6 +176,18 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
           <span className="font-outfit text-[10px] font-bold uppercase tracking-wide text-white">
             Live Demo
           </span>
+          <button
+            type="button"
+            onClick={() => setDemoInstant(!demoInstant)}
+            title="Pilih: NALA instan (cepat) atau NALA asli (menunggu AI)"
+            className={`rounded-full border px-2.5 py-1 font-outfit text-[10px] font-extrabold uppercase transition-colors ${
+              demoInstant
+                ? "border-[#19D29F] bg-[#09242B] text-[#19D29F]"
+                : "border-[#FFB319] bg-[#09242B] text-[#FFB319]"
+            }`}
+          >
+            {demoInstant ? "NALA Instan" : "NALA Asli"}
+          </button>
           <button
             type="button"
             onClick={demoLanjutkan}

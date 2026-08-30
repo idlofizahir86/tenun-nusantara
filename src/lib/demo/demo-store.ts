@@ -12,6 +12,7 @@
 export const DEMO_PASSWORD = "ATEAM@2026";
 
 const KEY = "tenun-demo";
+const KEY_INSTANT = "tenun-demo-instant";
 const listeners = new Set<() => void>();
 
 let demo = false;
@@ -19,6 +20,15 @@ try {
   if (typeof localStorage !== "undefined") demo = localStorage.getItem(KEY) === "1";
 } catch {
   demo = false;
+}
+
+// "NALA Instan": balasan refleksi dipakai seketika tanpa menunggu AI (untuk demo cepat).
+let demoInstant = false;
+try {
+  if (typeof localStorage !== "undefined")
+    demoInstant = localStorage.getItem(KEY_INSTANT) === "1";
+} catch {
+  demoInstant = false;
 }
 
 // Sinyal "lewati langkah sekarang". Setiap trigger menaikkan counter.
@@ -36,6 +46,20 @@ export function setDemo(on: boolean): void {
   demo = on;
   try {
     localStorage.setItem(KEY, on ? "1" : "0");
+  } catch {
+    // abaikan
+  }
+  listeners.forEach((l) => l());
+}
+
+export function isDemoInstant(): boolean {
+  return demoInstant;
+}
+
+export function setDemoInstant(on: boolean): void {
+  demoInstant = on;
+  try {
+    localStorage.setItem(KEY_INSTANT, on ? "1" : "0");
   } catch {
     // abaikan
   }
