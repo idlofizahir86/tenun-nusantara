@@ -133,9 +133,14 @@ export default function MapPage() {
   }, []);
 
   const selected = ISLANDS.find((i) => i.id === selectedId) ?? null;
+  // Kapalmu memosisikan diri di pulau terakhir yang dibuka (dari resume sesi),
+  // bukan selalu kembali ke titik awal (Candi).
+  const lastOpened = ISLANDS.find((i) => i.id === session.currentIsland) ?? null;
   const shipTarget = selected
     ? { left: selected.left - 4, top: selected.top - 6 }
-    : SHIP_START;
+    : lastOpened
+      ? { left: lastOpened.left - 4, top: lastOpened.top - 6 }
+      : SHIP_START;
   const displayName = player.name || "Penjelajah";
   const levelInfo = LEVELS[Math.min(completedCount, LEVELS.length - 1)];
 
