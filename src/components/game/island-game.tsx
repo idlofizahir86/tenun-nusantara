@@ -280,6 +280,15 @@ export function IslandGame({ island }: Props) {
     if (interruptOpen) assessmentAnsweredRef.current = false;
   }, [interruptOpen]);
 
+  // Demo: asesmen diisi otomatis sesaat setelah terbuka — bagian dari langkah
+  // "Lanjutkan", jadi presenter cukup menjelaskan minigame & popup, bukan menunggu asesmen.
+  useEffect(() => {
+    if (demo && interruptOpen) {
+      const t = setTimeout(answerAssessmentNow, 500);
+      return () => clearTimeout(t);
+    }
+  }, [demo, interruptOpen, answerAssessmentNow]);
+
   function formatTime(t: number) {
     const m = String(Math.floor(t / 60)).padStart(2, "0");
     const s = String(t % 60).padStart(2, "0");
@@ -291,7 +300,10 @@ export function IslandGame({ island }: Props) {
 
   return (
     <div className="flex h-full w-full flex-col overflow-hidden">
-      {/* Live Demo: indikator + tombol "Selesaikan Langkah" */}
+      {/* Live Demo: tombol "Lanjutkan" — mengeksekusi langkah berikutnya secara
+          otomatis lalu berhenti di checkpoint, sehingga presenter bisa menjelaskan.
+          Di minigame: menyelesaikan babak (asesmen terisi otomatis) → popup selesai.
+          Di popup: maju ke babak berikutnya. */}
       {demo && (
         <div className="fixed left-1/2 top-2 z-[70] flex -translate-x-1/2 items-center gap-2 rounded-full border border-[#19D29F] bg-[#0F3943]/95 px-3 py-1.5 shadow-lg">
           <Zap size={13} className="text-[#19D29F]" />
@@ -307,7 +319,7 @@ export function IslandGame({ island }: Props) {
             }}
             className="rounded-full bg-[#FFB319] px-3 py-1 font-outfit text-[10px] font-extrabold uppercase text-[#0B1D23] transition-transform hover:scale-105"
           >
-            Selesaikan Langkah
+            Lanjutkan
           </button>
         </div>
       )}

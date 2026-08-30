@@ -114,14 +114,15 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
     setNalaThinking(false);
   }
 
-  // ===================== Live Demo: auto-jawab per klik (presenter-driven) =====================
-  // Presenter yang menekan "Auto-jawab" untuk tiap pertanyaan NALA.
+  // ===================== Live Demo: "Lanjutkan" (presenter-driven) =====================
+  // Tekan "Lanjutkan" untuk mengisi jawaban tiap pertanyaan NALA otomatis lalu
+  // berhenti di pertanyaan berikutnya — presenter bisa menjelaskan tiap bubble.
   const submitRef = useRef(submitAnswer);
   useEffect(() => {
     submitRef.current = submitAnswer;
   });
 
-  function demoAutoAnswer() {
+  function demoLanjutkan() {
     submitRef.current("Aku suka belajar hal baru! Terima kasih sudah menemani, NALA.");
   }
 
@@ -217,14 +218,14 @@ export function Reflection({ reflection, image, fallbackImage, playerName, onFin
               </>
             )}
 
-            {/* Live Demo: auto-jawab per klik (presenter-driven) */}
+            {/* Live Demo: tombol "Lanjutkan" — isi jawaban tiap pertanyaan otomatis */}
             {demo && started && !finished && (
               <button
                 type="button"
-                onClick={demoAutoAnswer}
+                onClick={demoLanjutkan}
                 className="flex items-center justify-center gap-2 self-start rounded-full border border-[#19D29F] bg-[#0F3943] px-4 py-1.5 text-[11px] font-extrabold uppercase text-[#19D29F] transition-colors hover:bg-[#144955]"
               >
-                <Zap size={13} /> Auto-jawab
+                <Zap size={13} /> Lanjutkan
               </button>
             )}
 
