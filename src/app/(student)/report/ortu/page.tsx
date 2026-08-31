@@ -42,7 +42,6 @@ export default function ParentReportPage() {
   const doneCount = data
     ? ALL_ISLAND_IDS.filter((id) => data.completedIslands.includes(id)).length
     : 0;
-  const allDone = data ? doneCount === ALL_ISLAND_IDS.length : false;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 import { ChevronDown, School } from "lucide-react";
-import { listClasses, setActiveClassCode, type TeacherClass } from "@/lib/teacher/class-store";
+import { listClasses, setActiveClassCode } from "@/lib/teacher/class-store";
 
 // Pemilih kelas aktif. Menu dashboard mengikuti kelas yang dipilih.
 export function ClassSelector() {
-  const [classes, setClasses] = useState<TeacherClass[]>(() => listClasses());
+  const classes = listClasses();
   const [activeCode, setActive] = useState<string | null>(() => {
-    const c = listClasses();
-    const active = c.find((x) => x.code === getActiveLocal());
-    return (active?.code || c[0]?.code || null);
+    const active = classes.find((x) => x.code === getActiveLocal());
+    return (active?.code || classes[0]?.code || null);
   });
   const [open, setOpen] = useState(false);
 

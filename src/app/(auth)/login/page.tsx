@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LogIn, UserPlus, Compass } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
@@ -11,7 +11,7 @@ import { ShipScreen } from "@/components/ui/ship-screen";
 
 type Mode = "signin" | "signup";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnTo = searchParams.get("returnTo");
@@ -167,5 +167,13 @@ export default function LoginPage() {
         label={mode === "signin" ? "Berlayar ke akunmu…" : "Menyiapkan akunmu…"}
       />
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
   );
 }
