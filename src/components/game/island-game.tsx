@@ -19,6 +19,8 @@ import {
 import type { IslandConfig } from "@/types/game";
 import { Minigame } from "./minigame";
 import { AssessmentModal, type AssessmentAnswer } from "./assessment-modal";
+import { ShipScreen } from "@/components/ui/ship-screen";
+import { useShipLoading } from "@/hooks/use-ship-loading";
 import { useTTS } from "@/hooks/use-tts";
 import {
   ensureSession,
@@ -64,6 +66,8 @@ export function IslandGame({ island }: Props) {
   const [actComplete, setActComplete] = useState(false);
   const [seconds, setSeconds] = useState(ACT_DURATION);
   const [timeUp, setTimeUp] = useState(false);
+  const [sailLabel, setSailLabel] = useState("Kapal sedang berlayar…");
+  const { isBusy, run } = useShipLoading();
   const [showHint, setShowHint] = useState(false);
   const [player, setPlayer] = useState<{ name: string; characterId: string }>({
     name: "",
@@ -248,7 +252,10 @@ export function IslandGame({ island }: Props) {
       } catch {
         // abaikan
       }
-      router.push(`/island/${island.id}/refleksi`);
+      setSailLabel("Berlayar ke Refleksi…");
+      run(async () => `/island/${island.id}/refleksi`).then((href) => {
+        if (href) router.push(href);
+      });
     }
   }
 
@@ -463,8 +470,14 @@ export function IslandGame({ island }: Props) {
 
         <button
           aria-label="Kembali"
-          onClick={() => router.push("/map")}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#09242B] text-[#FFB319] transition-colors hover:bg-[#0F3943]"
+          onClick={() => {
+            setSailLabel("Kembali ke Peta…");
+            run(async () => "/map").then((href) => {
+              if (href) router.push(href);
+            });
+          }}
+          disabled={isBusy}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#09242B] text-[#FFB319] transition-colors hover:bg-[#0F3943] disabled:opacity-50"
         >
           <ArrowLeft size={20} />
         </button>
@@ -499,8 +512,14 @@ export function IslandGame({ island }: Props) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => router.push("/map")}
-                  className="inline-flex items-center justify-center gap-2 rounded-[32px] border border-[#FFB319]/40 px-8 py-3 font-outfit font-bold uppercase text-white transition-colors hover:bg-[#144955]"
+                  onClick={() => {
+                    setSailLabel("Kembali ke Peta…");
+                    run(async () => "/map").then((href) => {
+                      if (href) router.push(href);
+                    });
+                  }}
+                  disabled={isBusy}
+                  className="inline-flex items-center justify-center gap-2 rounded-[32px] border border-[#FFB319]/40 px-8 py-3 font-outfit font-bold uppercase text-white transition-colors hover:bg-[#144955] disabled:opacity-50"
                 >
                   Kembali ke Peta
                 </button>
@@ -547,6 +566,8 @@ export function IslandGame({ island }: Props) {
         questions={minigame.assessment}
         onComplete={onAssessmentDone}
       />
+
+      <ShipScreen show={isBusy} label={sailLabel} />
     </div>
   );
 }

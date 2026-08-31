@@ -29,6 +29,7 @@ export interface PlayerInfo {
 export interface Session {
   id: string;
   gameCode?: string; // kode pendek publik (mis. TN-7K3M9X) untuk share/lanjutkan
+  classCode?: string; // kode kelas guru (mis. KL-7K3M9X) untuk integrasi Dashboard Guru
   startedAt: string;
   lastActiveAt: string;
   player?: PlayerInfo;
@@ -101,11 +102,17 @@ export function levelFromXp(xp: number): { level: number; title: string } {
   return { level: current.level, title: current.title };
 }
 
+/** Normalisasi kode kelas guru: hilangkan spasi, jadikan huruf besar. */
+export function normalizeClassCode(input: string): string {
+  return (input || "").trim().toUpperCase().replace(/\s+/g, "");
+}
+
 /** Buat sesi baru yang bersih (dipakai "Mulai Baru" / game baru). */
-export function createNewSession(player?: PlayerInfo): Session {
+export function createNewSession(player?: PlayerInfo, classCode?: string): Session {
   const s: Session = {
     id: uuid(),
     gameCode: makeGameCode(),
+    classCode,
     startedAt: new Date().toISOString(),
     lastActiveAt: new Date().toISOString(),
     player,
@@ -115,9 +122,14 @@ export function createNewSession(player?: PlayerInfo): Session {
     badges: [],
   };
   write(SESSION_KEY, s);
-  recordEvent("session_start", { sessionId: s.id, gameCode: s.gameCode });
+  recordEvent("session_start", { sessionId: s.id, gameCode: s.gameCode, classCode });
   ensurePageHideFlush();
   return s;
+}
+
+/** Set kode kelas guru pada sesi aktif (dipakai saat siswa memasukkan kode di char-select). */
+export function setClassCode(code: string): Session {
+  return updateSession({ classCode: normalizeClassCode(code) });
 }
 
 /** Ambil/muat sesi aktif. Jika belum ada, buat baru. */

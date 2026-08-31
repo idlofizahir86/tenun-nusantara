@@ -25,7 +25,7 @@ const roles = [
     icon: Users,
     title: "Orang Tua",
     description: "Aku mau melihat laporan perjalanan belajar anakku.",
-    href: "/home",
+    href: "/report/ortu",
   },
 ];
 

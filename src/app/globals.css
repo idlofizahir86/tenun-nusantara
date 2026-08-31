@@ -61,3 +61,43 @@ html {
 ::selection {
   @apply bg-[#FFB319] text-[#0B1D23];
 }
+
+/* ==== Kapal Berlayar (loading indicator) ==== */
+@keyframes sail-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-3px) rotate(2deg); }
+}
+@keyframes sail-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+@keyframes sail-wave-a {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-40px); }
+}
+@keyframes sail-wave-b {
+  0% { transform: translateX(-40px); }
+  100% { transform: translateX(0); }
+}
+@keyframes sail-spark {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.9; }
+}
+
+.sail-bob {
+  animation: sail-bob 2.4s ease-in-out infinite;
+  transform-origin: 50% 75%;
+}
+.sail-sway {
+  animation: sail-sway 2.8s ease-in-out infinite;
+  transform-origin: 50% 20%;
+}
+.sail-wave-a {
+  animation: sail-wave-a 3.2s linear infinite;
+}
+.sail-wave-b {
+  animation: sail-wave-b 2.6s linear infinite;
+}
+.sail-spark {
+  animation: sail-spark 2s ease-in-out infinite;
+}

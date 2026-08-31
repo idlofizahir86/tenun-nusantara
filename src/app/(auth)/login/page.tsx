@@ -1,23 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { LogIn, UserPlus, Compass, Loader2 } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { LogIn, UserPlus, Compass } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
+import { useShipLoading } from "@/hooks/use-ship-loading";
 import { storeAccount, pullMyRemoteData } from "@/lib/supabase/sync";
+import { LoadingShip } from "@/components/ui/loading-ship";
+import { ShipScreen } from "@/components/ui/ship-screen";
 
 type Mode = "signin" | "signup";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnTo = searchParams.get("returnTo");
   const { signIn, signUp } = useAuth();
 
   const [mode, setMode] = useState<Mode>("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  const { isBusy, run } = useShipLoading();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -27,29 +32,26 @@ export default function LoginPage() {
       setError("Isi email dan kata sandi terlebih dahulu.");
       return;
     }
-    setBusy(true);
-    try {
+    const destination = await run(async (): Promise<string | null> => {
       if (mode === "signin") {
         const { user } = await signIn(email, password);
         if (user) {
           storeAccount(user.id);
           await pullMyRemoteData();
-          router.push("/role-selection");
+          return returnTo || "/role-selection";
         }
       } else {
         const { user } = await signUp(email, password);
         if (user) {
           storeAccount(user.id);
-          router.push("/role-selection");
-        } else {
-          setInfo("Akun berhasil dibuat. Silakan cek email untuk konfirmasi, lalu masuk.");
+          return returnTo || "/role-selection";
         }
+        setInfo("Akun berhasil dibuat. Silakan cek email untuk konfirmasi, lalu masuk.");
       }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Terjadi kesalahan.");
-    } finally {
-      setBusy(false);
-    }
+      return null;
+    });
+    // kapal sempat tampil minimal ~1.2 detik sebelum berpindah halaman
+    if (destination) router.push(destination);
   }
 
   function goGuest() {
@@ -130,10 +132,16 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            disabled={busy}
+            disabled={isBusy}
             className="inline-flex items-center justify-center gap-2 rounded-[32px] bg-[#FFB319] py-3 font-outfit text-sm font-extrabold uppercase text-[#0B1D23] transition-transform hover:scale-[1.02] disabled:opacity-60"
           >
-            {busy ? <Loader2 className="h-5 w-5 animate-spin" /> : mode === "signin" ? <LogIn className="h-5 w-5" /> : <UserPlus className="h-5 w-5" />}
+            {isBusy ? (
+              <LoadingShip size={22} inline />
+            ) : mode === "signin" ? (
+              <LogIn className="h-5 w-5" />
+            ) : (
+              <UserPlus className="h-5 w-5" />
+            )}
             {mode === "signin" ? "Masuk" : "Daftar"}
           </button>
         </form>
@@ -153,6 +161,11 @@ export default function LoginPage() {
           Lanjut sebagai Tamu
         </button>
       </div>
+
+      <ShipScreen
+        show={isBusy}
+        label={mode === "signin" ? "Berlayar ke akunmu…" : "Menyiapkan akunmu…"}
+      />
     </main>
   );
 }

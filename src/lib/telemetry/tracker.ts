@@ -46,6 +46,7 @@ function readSessionPayload(): Record<string, unknown> | null {
     return {
       id: s.id,
       gameCode: s.gameCode,
+      classCode: s.classCode,
       startedAt: s.startedAt,
       lastActiveAt: s.lastActiveAt,
       player: s.player || undefined,

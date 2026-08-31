@@ -72,22 +72,32 @@ export function MinigameFilter({ game, onProgress, onComplete, onWrong }: Props)
                 const layer = game.layers.find((l) => l.id === id)!;
                 const isFilled = i < placed.length;
                 return (
-                  <div
-                    key={id}
-                    className={`flex h-12 items-center gap-2 rounded-xl border-2 px-3 transition-all ${
-                      isFilled
-                        ? "border-[#19D29F] bg-[#19D29F]/15"
-                        : "border-dashed border-[#19D29F]/40 bg-[#09242B]"
-                    }`}
-                  >
-                    {isFilled ? (
-                      <GameAsset emoji={layer.emoji} image={layer.image} alt={layer.name} size={28} draggable={false} />
-                    ) : (
-                      <span className="text-xl">❓</span>
-                    )}
-                    <span className="font-nunito text-xs font-semibold text-white">
-                      {isFilled ? layer.name : "Lapisan kosong"}
+                  <div key={id} className="flex items-center gap-2">
+                    <span
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-extrabold ${
+                        isFilled
+                          ? "bg-[#19D29F] text-[#0B1D23]"
+                          : "border-2 border-[#19D29F]/40 bg-[#09242B] text-[#19D29F]"
+                      }`}
+                    >
+                      {i + 1}
                     </span>
+                    <div
+                      className={`flex h-12 flex-1 items-center gap-2 rounded-xl border-2 px-3 transition-all ${
+                        isFilled
+                          ? "border-[#19D29F] bg-[#19D29F]/15"
+                          : "border-dashed border-[#19D29F]/40 bg-[#09242B]"
+                      }`}
+                    >
+                      {isFilled ? (
+                        <GameAsset emoji={layer.emoji} image={layer.image} alt={layer.name} size={28} draggable={false} />
+                      ) : (
+                        <span className="text-xl">❓</span>
+                      )}
+                      <span className="font-nunito text-xs font-semibold text-white">
+                        {isFilled ? layer.name : "Lapisan kosong"}
+                      </span>
+                    </div>
                   </div>
                 );
               })}

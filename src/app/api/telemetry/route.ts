@@ -37,6 +37,7 @@ export async function POST(req: Request) {
       const row: Record<string, unknown> = {
         id: s.id,
         game_code: s.gameCode || null,
+        class_code: s.classCode || null,
         started_at: (s.startedAt as string) || new Date().toISOString(),
         last_active_at: (s.lastActiveAt as string) || new Date().toISOString(),
         current_island: s.currentIsland || null,
@@ -108,6 +109,32 @@ export async function GET(req: Request) {
       ]);
 
       return NextResponse.json({ ok: true, session: sRes.data || null, events: eRes.data || [] });
+    }
+
+    // Pull per classCode (kode kelas guru → data seluruh siswa kelas tsb).
+    const classCode = searchParams.get("classCode");
+    if (classCode) {
+      const db = createServiceClient();
+      if (!db) return NextResponse.json({ ok: true, skipped: true });
+      const sRes = await db
+        .from("sessions")
+        .select("*")
+        .eq("class_code", classCode)
+        .order("last_active_at", { ascending: false });
+      const sessions = sRes.data || [];
+      const ids = sessions
+        .map((s) => (s as { id?: string }).id)
+        .filter((x): x is string => Boolean(x));
+      let events: unknown[] = [];
+      if (ids.length > 0) {
+        const eRes = await db
+          .from("events")
+          .select("*")
+          .in("session_id", ids)
+          .order("t", { ascending: true });
+        events = eRes.data || [];
+      }
+      return NextResponse.json({ ok: true, sessions, events });
     }
 
     // Pull per gameCode (kode pendek, untuk lanjutkan/share lintas perangkat).

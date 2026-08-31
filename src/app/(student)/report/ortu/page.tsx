@@ -1,11 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { RefreshCw, Printer } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, Check, Compass, Ticket, Users } from "lucide-react";
 import { computeTalentProfile, type ReportEvent } from "@/lib/scoring/engine";
-import { getSession, type SessionEvent } from "@/lib/session/session";
+import { getSession, getEvents, type SessionEvent } from "@/lib/session/session";
+import { loadGame, normalizeGameCode } from "@/lib/session/game-store";
 import { AppNavbar } from "@/components/layout/app-navbar";
+import { ISLAND_BLURB } from "@/lib/report/guidance";
+import { ParentReportView } from "@/components/report/parent-report-view";
+import type { ParentReportInput } from "@/lib/report/parent-report";
+import { LoadingShip } from "@/components/ui/loading-ship";
 
 const AVATARS: Record<string, string> = {
   bayu: "/assets/images/characters/npcs/char_bayu.png",
@@ -14,221 +19,293 @@ const AVATARS: Record<string, string> = {
   ulan: "/assets/images/characters/npcs/char_ulan.png",
 };
 
-const ISLAND_BLURB: Record<string, { name: string; desc: string }> = {
-  candi: {
-    name: "Pulau Candi",
-    desc: "Saat menyusun kepingan struktur candi, ia menunjukkan konsentrasi mendalam dan menganalisis pola geometri dengan teliti. Ini menandakan penalaran logis yang kuat.",
-  },
-  rimba: {
-    name: "Pulau Rimba",
-    desc: "Sangat peka dalam mengelompokkan ragam fauna dan menyelesaikan tantangan filtrasi. Kepedulian alamnya menonjol, merefleksikan kecerdasan ekologis alami.",
-  },
-  harmoni: {
-    name: "Pulau Harmoni",
-    desc: "Menyusun nada gamelan dan motif tenun dengan kepekaan rasa. Kemampuan ini menandakan bakat seni, kreativitas, dan apresiasi estetika yang indah.",
-  },
-  aksara: {
-    name: "Pulau Aksara",
-    desc: "Merangkai bait pantun, gurindam, dan alur wayang dengan luwes. Ini menunjukkan kecintaan pada bahasa, sastra, dan kemampuan bercerita.",
-  },
-  terapung: {
-    name: "Pulau Pasar Terapung",
-    desc: "Berkolaborasi, bertukar dagangan, dan menengahi perselisihan dengan adil. Ini merefleksikan kecerdasan interpersonal dan jiwa kepemimpinan.",
-  },
-};
+const ALL_ISLAND_IDS = ["candi", "rimba", "harmoni", "aksara", "terapung"];
 
-const CAREERS: Record<string, { title: string; tag: string; desc: string }> = {
-  logika: {
-    title: "Data Analyst / AI Ethicist",
-    tag: "Logika-Matematika",
-    desc: "Kemampuan memetakan pola dan memecahkan masalah kompleks sangat ideal untuk bidang Big Data dan teknologi masa depan.",
-  },
-  naturalis: {
-    title: "Conservation Scientist",
-    tag: "Naturalis",
-    desc: "Kecintaan ekologis membuka jalan bagi kepemimpinan konservasi hutan, energi hijau, dan kelestarian lingkungan.",
-  },
-  visual: {
-    title: "Creative Director",
-    tag: "Seni-Kreativitas",
-    desc: "Berbakat mengawinkan unsur tradisi nusantara ke dalam desain multimedia, gim, dan kriya kontemporer.",
-  },
-  linguistik: {
-    title: "Penulis / Jurnalis",
-    tag: "Linguistik",
-    desc: "Kemampuan merangkai kata dan bercerita sangat cocok untuk dunia tulis-menulis, sastra, dan komunikasi.",
-  },
-  musikal: {
-    title: "Komposer / Produser Musik",
-    tag: "Musikal",
-    desc: "Kepekaan nada dan irama dapat berkembang menjadi profesi seni pertunjukan dan produksi musik.",
-  },
-  sosial: {
-    title: "Pemimpin Komunitas / Diplomat",
-    tag: "Interpersonal",
-    desc: "Kemampuan bekerja sama dan menengahi konflik ideal untuk kepemimpinan, diplomasi, dan organisasi.",
-  },
-  intrapersonal: {
-    title: "Peneliti / Ilmuwan",
-    tag: "Intrapersonal",
-    desc: "Sifat reflektif dan mandiri cocok untuk riset, analisis mendalam, dan pengembangan diri.",
-  },
-  kinestetik: {
-    title: "Atlet / Koreografer",
-    tag: "Kinestetik",
-    desc: "Kelincahan dan energi fisik dapat berkembang menjadi profesi olahraga, tari, dan praktik langsung.",
-  },
-};
+const ISLAND_META = [
+  { id: "candi", name: "Pulau Candi", emoji: "🏛️", desc: ISLAND_BLURB.candi.desc },
+  { id: "rimba", name: "Pulau Rimba", emoji: "🌿", desc: ISLAND_BLURB.rimba.desc },
+  { id: "harmoni", name: "Pulau Harmoni", emoji: "🎵", desc: ISLAND_BLURB.harmoni.desc },
+  { id: "aksara", name: "Pulau Aksara", emoji: "📜", desc: ISLAND_BLURB.aksara.desc },
+  { id: "terapung", name: "Pulau Pasar Terapung", emoji: "⛵", desc: ISLAND_BLURB.terapung.desc },
+];
 
-const NEXT_STEPS: Record<string, string[]> = {
-  logika: [
-    "Berikan buku bertema misteri detektif atau teka-teki logika matematika ringan di rumah.",
-    "Ajak bermain puzzle, catur, atau permainan strategi yang melatih pola berpikir.",
-    "Biasakan bertanya 'bagaimana' dan 'mengapa' agar nalar analitisnya terus terasah.",
-  ],
-  naturalis: [
-    "Ajak berkunjung ke taman nasional atau kebun raya sambil mengamati flora-fauna.",
-    "Berikan tanggung jawab merawat tanaman atau hewan peliharaan sederhana.",
-    "Dukung kegiatan daur ulang dan peduli lingkungan di sekitar rumah.",
-  ],
-  linguistik: [
-    "Sediakan banyak buku bacaan bergambar dan bacakan cerita setiap hari.",
-    "Ajak bercerita ulang dan menulis jurnal atau cerita pendek sederhana.",
-    "Dukung mengikuti lomba bercerita, membaca puisi, atau menulis.",
-  ],
-};
+type Phase = "lookup" | "progress" | "report";
+type LookupState = "idle" | "loading" | "notfound";
 
 export default function ParentReportPage() {
-  const [player, setPlayer] = useState<{ name: string; characterId: string }>({
-    name: "Penjelajah",
-    characterId: "siti",
-  });
-  const [profile, setProfile] = useState<ReturnType<typeof computeTalentProfile> | null>(null);
-  const [completed, setCompleted] = useState<string[]>([]);
-  const [ready, setReady] = useState(false);
+  const [phase, setPhase] = useState<Phase>("lookup");
+  const [lookup, setLookup] = useState<LookupState>("idle");
+  const [input, setInput] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<ParentReportInput | null>(null);
 
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("tenun-player");
-      if (raw) {
-        const d = JSON.parse(raw);
-        setPlayer({ name: d.name || "Penjelajah", characterId: d.characterId || "siti" });
-      }
-      const events = (localStorage.getItem("tenun-events")
-        ? JSON.parse(localStorage.getItem("tenun-events") || "[]")
-        : []) as SessionEvent[];
-      const session = getSession();
-      const prog = localStorage.getItem("tenun-progress");
-      let list = [...new Set(session.completedIslands)];
-      if (prog) {
-        const d = JSON.parse(prog);
-        list = Array.isArray(d?.completedIslands)
-          ? [...new Set(d.completedIslands as string[])]
-          : list;
-      }
-      setCompleted(list);
-      setProfile(computeTalentProfile(events as ReportEvent[], list.length));
-    } catch {
-      setProfile(null);
-    } finally {
-      setReady(true);
+  const doneCount = data
+    ? ALL_ISLAND_IDS.filter((id) => data.completedIslands.includes(id)).length
+    : 0;
+  const allDone = data ? doneCount === ALL_ISLAND_IDS.length : false;
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const code = normalizeGameCode(input);
+    if (!code) {
+      setError("Masukkan kode game anakmu terlebih dahulu.");
+      return;
     }
-  }, []);
+    setError(null);
+    setLookup("loading");
+    const ok = await loadGame(code);
+    if (!ok) {
+      setLookup("notfound");
+      return;
+    }
+    const session = getSession();
+    const events = getEvents();
+    const completedIslands = [...new Set(session.completedIslands || [])];
+    const player = session.player || { name: "Penjelajah", characterId: "siti" };
+    const profile = computeTalentProfile(events as ReportEvent[], completedIslands.length);
+    const child: ParentReportInput = {
+      gameCode: code,
+      player: {
+        name: player.name || "Penjelajah",
+        characterId: player.characterId || "siti",
+        motif: player.motif,
+      },
+      xp: Number(session.xp || 0),
+      level: Number(session.level || 1),
+      startedAt: session.startedAt || "",
+      lastActiveAt: session.lastActiveAt || "",
+      classCode: session.classCode,
+      completedIslands,
+      badges: Array.isArray(session.badges) ? session.badges : [],
+      profile,
+      events: events as SessionEvent[],
+    };
+    setData(child);
+    setLookup("idle");
+    setPhase(completedIslands.length === ALL_ISLAND_IDS.length ? "report" : "progress");
+  }
 
-  if (!ready) {
+  function reset() {
+    setPhase("lookup");
+    setLookup("idle");
+    setError(null);
+    setData(null);
+    setInput("");
+  }
+
+  // ===== Fase 1: input kode game anak =====
+  if (phase === "lookup") {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#060F14] text-center">
-        <RefreshCw size={28} className="animate-spin text-[#FFB319]" />
+      <main className="min-h-screen bg-gradient-to-b from-[#09242B] to-[#060F14] text-white">
+        <AppNavbar active="laporan-ortu" />
+        <div className="mx-auto flex w-full max-w-[620px] flex-col items-center px-6 py-16 text-center">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#144955] text-[#FFB319]">
+            <Users size={30} />
+          </span>
+          <h1 className="mt-5 font-outfit text-3xl font-extrabold text-[#FFB319] md:text-[40px]">
+            Laporan Orang Tua
+          </h1>
+          <p className="mt-3 max-w-md font-manrope text-sm leading-relaxed text-[#8DA2A6]">
+            Masukkan <b className="text-[#19D29F]">kode game</b> milik anakmu untuk melihat kemajuan petualangan
+            dan Peta Bakat mereka.
+          </p>
+
+          <form onSubmit={handleSubmit} className="mt-8 w-full">
+            <div className="flex h-[56px] items-center gap-3 rounded-xl border-[1.5px] border-[#FFB319] bg-[#0F3943] px-4">
+              <Ticket className="h-5 w-5 shrink-0 text-[#FFB319]" />
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Kode game anak (mis. TN-AB12CD)"
+                className="w-full bg-transparent font-manrope text-[16px] font-normal text-white uppercase outline-none placeholder:text-[#5A7378]"
+              />
+            </div>
+
+            {error && (
+              <p className="mt-3 rounded-lg bg-[#E63946]/15 px-3 py-2 font-manrope text-xs text-[#FF8A94]">
+                {error}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={lookup === "loading"}
+              className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[32px] bg-[#FFB319] font-outfit text-base font-extrabold uppercase text-[#0B1D23] transition hover:brightness-110 disabled:opacity-60"
+            >
+              {lookup === "loading" ? (
+                <LoadingShip size={22} inline />
+              ) : (
+                <Compass size={18} />
+              )}
+              Lihat Kemajuan Anak
+            </button>
+          </form>
+
+          {lookup === "notfound" && (
+            <div className="mt-6 w-full rounded-2xl border border-[#E63946]/40 bg-[#0F3943] p-5 text-left">
+              <p className="font-manrope text-sm text-[#FF8A94]">
+                Kode <b>{normalizeGameCode(input)}</b> tidak ditemukan.
+              </p>
+              <p className="mt-1 font-manrope text-xs text-[#8DA2A6]">
+                Pastikan kode sesuai yang tampil di layar permainan anak (berawalan TN-). Coba lagi atau hubungi
+                guru untuk bantuan.
+              </p>
+            </div>
+          )}
+
+          <p className="mt-8 font-manrope text-xs text-[#5A7378]">
+            Kode game terlihat di Peta Nusantara dan Peta Bakat anak (format TN-XXXXXX).
+          </p>
+        </div>
       </main>
     );
   }
 
-  const name = player.name || "Penjelajah";
-  const topTrait = profile?.topTrait || "intrapersonal";
-  const top3 = profile ? [...profile.traits].sort((a, b) => b.score - a.score).slice(0, 3) : [];
-  const doneIslands = ISLAND_BLURB ? completed.filter((id) => ISLAND_BLURB[id]) : [];
-  const careers = top3.map((t) => CAREERS[t.key]).filter(Boolean);
-  const steps = NEXT_STEPS[topTrait] || NEXT_STEPS.logika;
-  const today = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+  if (!data) return null;
 
-  return (
-    <main className="min-h-screen bg-gradient-to-b from-[#09242B] to-[#060F14] text-white">
-      {/* NAVBAR */}
-      <AppNavbar active="laporan-ortu" />
-
-      <div className="mx-auto w-full max-w-[1200px] border-x border-[#FFB319]/40 px-6 py-10 lg:px-[120px]">
-        {/* Top panel */}
-        <section className="flex flex-col items-start justify-between gap-6 rounded-3xl border border-[#FFB319] bg-[#0F3943] p-6 sm:flex-row sm:items-center lg:p-8">
-          <div className="flex items-center gap-5">
-            <Image
-              src={AVATARS[player.characterId] ?? AVATARS.siti}
-              alt={name}
-              width={64}
-              height={64}
-              className="h-16 w-16 rounded-full border-2 border-[#FFB319] object-cover"
-            />
-            <div className="flex flex-col gap-1">
-              <h1 className="font-outfit text-2xl font-extrabold text-[#FFB319]">{name}</h1>
-              <p className="font-manrope text-sm text-[#E2ECEF]">Petualang Nusantara • Tanggal: {today}</p>
-            </div>
-          </div>
-          <button onClick={() => window.print()} className="inline-flex items-center gap-2 rounded-xl bg-[#FFB319] px-6 py-3 font-outfit text-sm font-bold uppercase text-[#0B1D23] transition hover:brightness-110">
-            <Printer size={16} /> Cetak Laporan
+  // ===== Fase 2: anak belum selesai → detail progress =====
+  if (phase === "progress") {
+    const remaining = ALL_ISLAND_IDS.filter((id) => !data.completedIslands.includes(id));
+    return (
+      <main className="min-h-screen bg-gradient-to-b from-[#09242B] to-[#060F14] text-white">
+        <AppNavbar active="laporan-ortu" />
+        <div className="mx-auto w-full max-w-[900px] px-6 py-10 lg:px-[40px]">
+          <button
+            onClick={reset}
+            className="inline-flex items-center gap-2 font-manrope text-sm font-bold text-[#19D29F] hover:text-[#FFB319]"
+          >
+            <ArrowLeft size={16} /> Cari kode lain
           </button>
-        </section>
 
-        {/* Narrative */}
-        <section className="mt-10">
-          <h2 className="font-outfit text-[22px] font-bold text-[#FFB319]">Bagaimana {name} Menyelesaikan Tantangan?</h2>
-          {doneIslands.length === 0 ? (
-            <p className="mt-4 font-manrope text-sm text-white/70">
-              Belum ada pulau yang diselesaikan. Ajak {name} menjelajahi pulau-pulau Nusantara untuk mengungkap bakatnya!
+          {/* Header anak */}
+          <section className="mt-5 flex flex-col items-start justify-between gap-5 rounded-3xl border border-[#FFB319] bg-[#0F3943] p-6 sm:flex-row sm:items-center">
+            <div className="flex items-center gap-5">
+              <Image
+                src={AVATARS[data.player.characterId] ?? AVATARS.siti}
+                alt={data.player.name}
+                width={64}
+                height={64}
+                className="h-16 w-16 rounded-full border-2 border-[#FFB319] object-cover"
+              />
+              <div className="flex flex-col gap-1">
+                <h1 className="font-outfit text-2xl font-extrabold text-[#FFB319]">{data.player.name}</h1>
+                <p className="font-manrope text-sm text-[#E2ECEF]">
+                  {data.player.motif || "Petualang Nusantara"} • Kode {data.gameCode}
+                </p>
+              </div>
+            </div>
+            <div className="rounded-2xl border border-[#19D29F]/40 bg-[#09242B] px-5 py-3">
+              <span className="font-outfit text-xl font-extrabold text-white">
+                {doneCount} <span className="text-white/50">/</span> {ALL_ISLAND_IDS.length}
+              </span>
+              <div className="mt-1 font-manrope text-xs uppercase tracking-wider text-[#19D29F]">
+                pulau selesai
+              </div>
+            </div>
+          </section>
+
+          {/* Peringatan belum selesai */}
+          <section className="mt-6 rounded-3xl border border-[#FFB319]/40 bg-[#0F3943] p-6">
+            <h2 className="font-outfit text-lg font-extrabold text-white">
+              Peta Bakat belum terbuka 🚀
+            </h2>
+            <p className="mt-2 font-manrope text-sm leading-relaxed text-[#E2ECEF]">
+              <b className="text-[#FFB319]">{data.player.name}</b> masih menjelajahi Nusantara. Laporan lengkap
+              (Peta Bakat 8 dimensi, rekomendasi karir, dan langkah stimulasi) akan terbuka setelah{" "}
+              <b className="text-[#19D29F]">semua 5 pulau selesai</b>. Berikut detail kemajuan mereka:
             </p>
-          ) : (
-            <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
-              {doneIslands.map((id) => (
-                <div key={id} className="rounded-2xl bg-[#0F3943] p-6">
-                  <h3 className="font-outfit text-lg font-bold text-[#FFB319]">{ISLAND_BLURB[id].name}</h3>
-                  <p className="mt-2 font-manrope text-sm leading-relaxed text-[#E2ECEF]">{ISLAND_BLURB[id].desc}</p>
+
+            {/* Statistik */}
+            <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                { label: "Pulau Selesai", value: `${doneCount}/${ALL_ISLAND_IDS.length}` },
+                { label: "XP Terkumpul", value: data.xp },
+                { label: "Level", value: data.level },
+                { label: "Asesmen Bakat", value: data.profile.assessmentCount },
+              ].map((s) => (
+                <div key={s.label} className="rounded-2xl bg-[#09242B] p-4">
+                  <div className="font-outfit text-2xl font-extrabold text-[#FFB319]">{s.value}</div>
+                  <div className="font-manrope text-xs font-bold uppercase tracking-wider text-[#8DA2A6]">
+                    {s.label}
+                  </div>
                 </div>
               ))}
             </div>
-          )}
-        </section>
 
-        {/* Careers */}
-        <section className="mt-10">
-          <div className="flex flex-col gap-1.5">
-            <h2 className="font-outfit text-[22px] font-bold text-white">Rekomendasi Karir Masa Depan (Tren 2030)</h2>
-            <p className="font-manrope text-sm text-[#8DA2A6]">NALA memetakan bakat dominan pada bidang studi dan profesi masa depan.</p>
-          </div>
-          <div className="mt-4 grid grid-cols-1 gap-5 md:grid-cols-3">
-            {careers.map((c, i) => (
-              <div key={i} className="rounded-2xl border border-[#FFB319] bg-[#0F3943] p-5">
-                <h3 className="font-outfit text-base font-extrabold text-white">{c.title}</h3>
-                <span className="mt-2 inline-block self-start rounded bg-[#09242B] px-2 py-0.5 font-manrope text-[11px] text-[#FFB319]">
-                  Koneksi Bakat: {c.tag}
-                </span>
-                <p className="mt-3 font-manrope text-[13px] leading-relaxed text-[#E2ECEF]">{c.desc}</p>
+            {/* Progress bar */}
+            <div className="mt-5">
+              <div className="h-2.5 w-full overflow-hidden rounded-full bg-[#09242B]">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-[#FFB319] to-[#19D29F]"
+                  style={{ width: `${(doneCount / ALL_ISLAND_IDS.length) * 100}%` }}
+                />
               </div>
-            ))}
-          </div>
-        </section>
+              <p className="mt-2 font-manrope text-xs text-[#8DA2A6]">
+                Tinggal <b className="text-[#FFB319]">{remaining.length} pulau lagi</b> untuk membuka laporan.
+              </p>
+            </div>
+          </section>
 
-        {/* Next steps */}
-        <section className="mt-10 rounded-3xl border border-[#FFB319] bg-[#0F3943] p-6 lg:p-8">
-          <h2 className="font-outfit text-xl font-extrabold text-[#FFB319]">Langkah Stimulasi Selanjutnya</h2>
-          <div className="mt-4 flex flex-col gap-4">
-            {steps.map((s, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <div className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#FFB319] font-outfit text-xs font-extrabold text-[#0B1D23]">
-                  {i + 1}
+          {/* Rincian pulau */}
+          <section className="mt-6 flex flex-col gap-3">
+            <h2 className="font-outfit text-lg font-extrabold text-white">Rincian Pulau</h2>
+            {ALL_ISLAND_IDS.map((id, idx) => {
+              const meta = ISLAND_META.find((m) => m.id === id)!;
+              const done = data.completedIslands.includes(id);
+              return (
+                <div
+                  key={id}
+                  className={`flex items-start gap-4 rounded-2xl border p-5 ${
+                    done ? "border-[#19D29F]/40 bg-[#0F3943]" : "border-[#FFB319]/20 bg-[#0F3943]/60"
+                  }`}
+                >
+                  <span
+                    className={`mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-full border-2 ${
+                      done ? "border-[#19D29F] bg-[#19D29F]/20 text-[#19D29F]" : "border-[#FFB319]/40 text-[#FFB319]"
+                    }`}
+                  >
+                    {done ? <Check size={16} /> : idx + 1}
+                  </span>
+                  <div className="flex flex-col gap-1">
+                    <span className={`font-outfit text-base font-extrabold ${done ? "text-white" : "text-[#8DA2A6]"}`}>
+                      {meta.emoji} {meta.name}
+                    </span>
+                    <span className={`font-manrope text-xs leading-relaxed ${done ? "text-[#8DA2A6]" : "text-[#5A7378]"}`}>
+                      {done ? meta.desc : "Belum dijelajahi — arahkan si kecil ke pulau ini di Peta Nusantara."}
+                    </span>
+                  </div>
                 </div>
-                <p className="font-manrope text-sm leading-relaxed text-[#E2ECEF]">{s}</p>
-              </div>
-            ))}
+              );
+            })}
+          </section>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <button
+              onClick={reset}
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-[32px] border border-[#19D29F] bg-[#0F3943] font-outfit text-base font-bold uppercase text-[#19D29F] transition hover:bg-[#144955] sm:w-auto sm:flex-1"
+            >
+              <Users size={18} /> Cek Kode Lain
+            </button>
           </div>
-        </section>
+        </div>
+      </main>
+    );
+  }
+
+  // ===== Fase 3: anak sudah selesai → laporan lengkap & detail =====
+  return (
+    <main className="min-h-screen bg-gradient-to-b from-[#09242B] to-[#060F14] text-white">
+      <AppNavbar active="laporan-ortu" />
+      <div className="mx-auto w-full max-w-[1200px] border-x border-[#FFB319]/40 px-5 py-8 lg:px-[80px]">
+        <button
+          onClick={reset}
+          className="inline-flex items-center gap-2 font-manrope text-sm font-bold text-[#19D29F] hover:text-[#FFB319]"
+        >
+          <ArrowLeft size={16} /> Cari kode lain
+        </button>
+        <div className="mt-5">
+          <ParentReportView data={data} />
+        </div>
       </div>
     </main>
   );

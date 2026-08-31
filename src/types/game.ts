@@ -44,7 +44,7 @@ export type MinigamePayload =
         kind: "target" | "distractor";
         emoji?: string;
         image?: string; // path aset gambar (fallback ke emoji)
-      }[];
+    }[];
       question: string; // pertanyaan naratif setelah semua ditemukan
       options: { label: string; text: string; trait: string }[];
     }

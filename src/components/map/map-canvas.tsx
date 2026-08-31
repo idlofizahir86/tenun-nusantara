@@ -9,6 +9,8 @@ import { getSession } from "@/lib/session/session";
 import { AppNavbar } from "@/components/layout/app-navbar";
 import { useDemo } from "@/hooks/use-demo";
 import { getActiveGameCode, saveActiveSnapshot } from "@/lib/session/game-store";
+import { ShipScreen } from "@/components/ui/ship-screen";
+import { useShipLoading } from "@/hooks/use-ship-loading";
 
 const AVATARS: Record<string, string> = {
   bayu: "/assets/images/characters/npcs/char_bayu.png",
@@ -89,6 +91,7 @@ export function MapCanvas() {
   const [demoPasswordInput, setDemoPasswordInput] = useState("");
   const [demoError, setDemoError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const { isBusy, run } = useShipLoading();
 
   const gameCode = getActiveGameCode();
 
@@ -376,8 +379,13 @@ export function MapCanvas() {
                 </span>
                 <button
                   type="button"
-                  onClick={() => router.push(selected.href)}
-                  className="inline-flex items-center gap-2 rounded-[32px] bg-[#FFB319] px-6 py-2.5 font-outfit text-[15px] font-extrabold uppercase leading-[19px] text-[#0B1D23] transition-transform hover:scale-105"
+                  onClick={() =>
+                    run(async () => selected.href).then((href) => {
+                      if (href) router.push(href);
+                    })
+                  }
+                  className="inline-flex items-center gap-2 rounded-[32px] bg-[#FFB319] px-6 py-2.5 font-outfit text-[15px] font-extrabold uppercase leading-[19px] text-[#0B1D23] transition-transform hover:scale-105 disabled:opacity-60"
+                  disabled={isBusy}
                 >
                   Berlayar!
                   <Anchor className="h-5 w-5" />
@@ -569,6 +577,11 @@ export function MapCanvas() {
         </div>
       </footer>
       </div>
+
+      <ShipScreen
+        show={isBusy}
+        label={selected ? `Berlayar ke ${selected.name}…` : "Kapal sedang berlayar…"}
+      />
     </div>
   );
 }

@@ -56,9 +56,11 @@ export default function CharSelectPage() {
       origin: selected.origin,
     };
     localStorage.setItem("tenun-player", JSON.stringify(player));
+    // Kode kelas guru (opsional) — dipakai untuk mengikat sesi ke kelas guru.
+    const classCode = teacherCode.trim() ? teacherCode : undefined;
     // Buat permainan baru (uuid internal + kode pendek publik) lalu menuju
     // /map/{gameCode} agar bisa dilanjutkan/dibagikan.
-    const gameCode = newGame(player);
+    const gameCode = newGame(player, classCode);
     router.push(`/map/${gameCode}`);
   }
 

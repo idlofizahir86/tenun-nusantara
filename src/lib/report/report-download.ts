@@ -274,16 +274,10 @@ function windowLocationReport(gameCode: string): string {
   return `/report/${gameCode}`;
 }
 
-/** Pemicu unduhan laporan sebagai file .html. */
-export function downloadReportHtml(input: BuildReportInput): void {
+/** Pemicu unduhan laporan sebagai PDF otomatis (fallback: .html). */
+export async function downloadReportHtml(input: BuildReportInput): Promise<void> {
   const html = buildReportHtml(input);
-  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `Laporan-Bakat-${(input.player.name || "Penjelajah").replace(/[^\w\-]+/g, "-")}-${input.gameCode}.html`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  const base = `Laporan-Bakat-${(input.player.name || "Penjelajah").replace(/[^\w\-]+/g, "-")}-${input.gameCode}`;
+  const { downloadHtmlAsPdf } = await import("./pdf");
+  await downloadHtmlAsPdf(html, `${base}.pdf`);
 }

@@ -20,10 +20,7 @@ const NAV_BY_ROLE: Record<Role, { key: NavKey; label: string; href: string }[]> 
     { key: "dashboard-guru", label: "Dashboard Guru", href: "/dashboard" },
     { key: "peta", label: "Peta", href: "/map" },
   ],
-  parent: [
-    { key: "laporan-ortu", label: "Laporan Orang Tua", href: "/report/ortu" },
-    { key: "peta", label: "Peta", href: "/map" },
-  ],
+  parent: [{ key: "laporan-ortu", label: "Laporan Orang Tua", href: "/report/ortu" }],
 };
 
 // Navbar utama aplikasi — dipakai lintas halaman. Menu disesuaikan dengan peran.

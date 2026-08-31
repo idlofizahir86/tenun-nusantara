@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { islands } from "@/config/islands";
+import { LoadingShip } from "@/components/ui/loading-ship";
 
 // Aturan jelajah: pulau yang sudah dijelajahi tidak bisa dijelajahi kembali,
 // KECUALI semua pulau sudah dijelajahi (baru bisa dijelajahi ulang).
@@ -35,7 +36,11 @@ export function IslandLockGuard({
   }, [islandId]);
 
   if (state === "checking") {
-    return <div className="flex h-screen w-full items-center justify-center bg-[#09242B]" />;
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-[#09242B]">
+        <LoadingShip size={96} label="Kapal sedang berlayar…" />
+      </div>
+    );
   }
 
   if (state === "locked") {

@@ -17,6 +17,7 @@ import {
   getSession,
   getEvents,
   createNewSession,
+  normalizeClassCode,
 } from "@/lib/session/session";
 import { pullRemoteByGameCode } from "@/lib/supabase/sync";
 
@@ -124,10 +125,10 @@ function restoreSnapshot(code: string, snap: GameSnapshot): void {
   write(ACTIVE_KEY, { gameCode: code });
 }
 
-/** Mulai permainan baru dengan profil pemain. Return gameCode baru. */
-export function newGame(player: PlayerInfo): string {
+/** Mulai permainan baru dengan profil pemain (opsional: kode kelas guru). Return gameCode baru. */
+export function newGame(player: PlayerInfo, classCode?: string): string {
   saveActiveSnapshot(); // simpan game sebelumnya bila ada
-  const s = createNewSession(player);
+  const s = createNewSession(player, classCode ? normalizeClassCode(classCode) : undefined);
   write("tenun-progress", { completedIslands: [] });
   try {
     localStorage.removeItem("tenun-assessment");
@@ -156,6 +157,7 @@ export async function loadGame(input: string): Promise<boolean> {
       const session: Session = {
         id: r.id as string,
         gameCode: (r.game_code as string) || code,
+        classCode: (r.class_code as string) || undefined,
         startedAt: (r.started_at as string) || "",
         lastActiveAt: (r.last_active_at as string) || "",
         currentIsland: (r.current_island as string) || undefined,

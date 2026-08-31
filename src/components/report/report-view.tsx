@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, RefreshCw, Download, Share2 } from "lucide-react";
+import { LoadingShip } from "@/components/ui/loading-ship";
+import { useMinVisible } from "@/hooks/use-ship-loading";
 import { computeTalentProfile, type ReportEvent } from "@/lib/scoring/engine";
 import { getSession, type SessionEvent } from "@/lib/session/session";
 import { AppNavbar } from "@/components/layout/app-navbar";
@@ -47,6 +49,7 @@ export function ReportView() {
   });
   const [narrative, setNarrative] = useState("");
   const [loading, setLoading] = useState(true);
+  const loadingVisible = useMinVisible(loading); // tahan indikator minimal ~1.2 detik
   const [profile, setProfile] = useState<ReturnType<typeof computeTalentProfile> | null>(null);
   const [ready, setReady] = useState(false);
 
@@ -320,9 +323,9 @@ export function ReportView() {
                 <span className="font-outfit text-lg font-extrabold">Pesan Hangat NALA</span>
               </div>
               <p className="mt-3 font-manrope text-sm leading-relaxed text-[#09242B]/90">
-                {loading && !narrative ? (
+                {loadingVisible && !narrative ? (
                   <span className="inline-flex items-center gap-2">
-                    <RefreshCw size={16} className="animate-spin" /> NALA sedang menulis...
+                    <LoadingShip size={20} inline /> NALA sedang menulis…
                   </span>
                 ) : (
                   `“${narrative || "Ayo terus jelajah Nusantara, bakatmu bersinar!"}”`
@@ -330,9 +333,10 @@ export function ReportView() {
               </p>
               <button
                 onClick={loadNarrative}
-                className="mt-3 inline-flex items-center gap-2 rounded-full border border-[#09242B] px-4 py-1.5 font-outfit text-xs font-bold text-[#09242B] transition-colors hover:bg-[#09242B] hover:text-white"
+                disabled={loadingVisible}
+                className="mt-3 inline-flex items-center gap-2 rounded-full border border-[#09242B] px-4 py-1.5 font-outfit text-xs font-bold text-[#09242B] transition-colors hover:bg-[#09242B] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
               >
-                <RefreshCw size={13} /> Tulis ulang
+                {loadingVisible ? <LoadingShip size={16} inline /> : <RefreshCw size={13} />} Tulis ulang
               </button>
             </motion.div>
 

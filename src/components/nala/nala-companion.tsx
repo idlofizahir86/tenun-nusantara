@@ -7,6 +7,8 @@ import Image from "next/image";
 import { MessageCircle, Send, X, Volume2 } from "lucide-react";
 import { useNala } from "@/hooks/use-nala";
 import { useTTS } from "@/hooks/use-tts";
+import { useMinVisible } from "@/hooks/use-ship-loading";
+import { LoadingShip } from "@/components/ui/loading-ship";
 
 const NALA_AVATAR = "/assets/images/characters/npcs/char_siti.png";
 
@@ -15,6 +17,7 @@ const NALA_AVATAR = "/assets/images/characters/npcs/char_siti.png";
 export function NalaCompanion() {
   const pathname = usePathname();
   const { messages, loading, send } = useNala();
+  const thinking = useMinVisible(loading); // tahan indikator minimal ~1.2 detik
   const { speak } = useTTS();
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
@@ -83,10 +86,11 @@ export function NalaCompanion() {
                   </div>
                 </div>
               ))}
-              {loading && (
+              {thinking && (
                 <div className="mb-2 flex justify-start">
-                  <div className="rounded-2xl bg-[#0F3943] px-3 py-2 font-nunito text-sm text-white/70">
-                    NALA sedang berpikir...
+                  <div className="flex items-center gap-2 rounded-2xl bg-[#0F3943] px-3 py-2">
+                    <LoadingShip size={24} inline />
+                    <span className="font-nunito text-xs text-white/70">NALA sedang berpikir…</span>
                   </div>
                 </div>
               )}
