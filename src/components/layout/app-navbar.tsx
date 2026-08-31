@@ -23,6 +23,13 @@ const NAV_BY_ROLE: Record<Role, { key: NavKey; label: string; href: string }[]> 
   parent: [{ key: "laporan-ortu", label: "Laporan Orang Tua", href: "/report/ortu" }],
 };
 
+// Halaman utama yang dituju saat logo diklik, sesuai peran.
+const ROLE_HOME: Record<Role, string> = {
+  student: "/map",
+  teacher: "/dashboard",
+  parent: "/report/ortu",
+};
+
 // Navbar utama aplikasi — dipakai lintas halaman. Menu disesuaikan dengan peran.
 // `hideMenu=true` menyembunyikan tautan menu (mis. di halaman pulau yang immersive).
 export function AppNavbar({ active, hideMenu }: { active?: NavKey; hideMenu?: boolean }) {
@@ -62,9 +69,9 @@ export function AppNavbar({ active, hideMenu }: { active?: NavKey; hideMenu?: bo
 
   return (
     <header className="flex h-[72px] w-full flex-none items-center justify-between border-b border-[#0F3943] bg-[#0B1D23]/40 px-6 lg:px-[80px]">
-      {/* Logo */}
+      {/* Logo — arah ke halaman utama sesuai peran */}
       <button
-        onClick={() => router.push("/map")}
+        onClick={() => router.push(ROLE_HOME[role])}
         className="flex items-center gap-3"
         aria-label="Tenun Nusantara"
       >
