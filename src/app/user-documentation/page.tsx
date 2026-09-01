@@ -287,7 +287,7 @@ export default function UserDocumentationPage() {
             Orang tua memasukkan <b>kode game</b> anak (format TN-XXXXXX) untuk melihat laporan perjalanan belajar
             dan Peta Bakat anak.
           </p>
-          <Shot src="/docs/screenshots/parent/report-ortu-landing.png" caption="Masukkan kode game milik anak." />
+          <Shot src="/docs/screenshots/parent/report-ortu-landing-kode.jpeg" caption="Masukkan kode game milik anak." />
           <Shot src="/docs/screenshots/parent/report-ortu-result.png" caption="Laporan orang tua: kemajuan, XP, level, Peta Bakat 8 dimensi." />
           <Shot src="/docs/screenshots/parent/report-ortu-result-bottom.png" caption="Detail bakat & langkah stimulasi untuk anak." />
         </section>
