@@ -18,6 +18,8 @@ node_modules
 *.pem
 
 data-assesmen-tenun.xlsx
+data-assesmen-tenun-baru.xlsx
+todo*
 
 # Debug
 npm-debug.log*
