@@ -1,0 +1,16 @@
+name: All Contributors
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  contribute:
+    if: contains(github.event.comment.body, '@all-contributors please add')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: All Contributors Action
+        uses: all-contributors/all-contributors-bot@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
