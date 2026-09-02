@@ -208,3 +208,8 @@ Lihat **`docs/EVALUATION_AND_ROADMAP.md`** untuk detail lengkap.
 
 **Dibuat oleh ATEAM** — dengan semangat abizzz. 🇮🇩
 
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-GRID:START -->
+<!-- ALL-CONTRIBUTORS-GRID:END -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
