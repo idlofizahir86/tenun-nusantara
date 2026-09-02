@@ -17,7 +17,7 @@
 
 **Tenun Nusantara** adalah aplikasi web **game edukatif** yang mengajak anak-anak menjelajah **5 pulau** Nusantara. Di setiap pulau, anak menyelesaikan **3 babak permainan** (minigame) + **sesi Refleksi** bersama **NALA**, asisten AI yang hangat dan berbahasa Indonesia.
 
-Dari setiap aksi anak (pilihan, jawaban asesmen, bahkan salah klik), sistem merekam **jejak perilaku** untuk menyusun **"Peta Bakat"** — profil kecerdasan (8 dimensi) dan rekomendasi pengembangan yang personal.
+Dari setiap aksi anak (pilihan, jawaban asesmen, bahkan salah klik), sistem merekam **jejak perilaku** untuk menyusun **"Peta Bakat"** — profil kecerdasan (8 dimensi) dan rekomendasi pengembangan yang personal. 
 
 > ⚠️ **Ini MVP**: berfokus membuktikan konsep inti. Beberapa area (backend lengkap, dashboard guru penuh, audio, deploy) masih dalam tahap lanjutan — lihat [Roadmap](#-roadmap).
 
