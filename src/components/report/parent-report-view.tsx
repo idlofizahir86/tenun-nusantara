@@ -65,17 +65,17 @@ export function ParentReportView({ data }: { data: ParentReportInput }) {
           Laporan ini menggunakan <b className="text-[#19D29F]">data nyata</b> dari aktivitas anak selama bermain.
         </p>
         <div className="flex flex-wrap items-center gap-2">
-          <button
+          {/* <button
             onClick={() => printParentReport(data)}
             className="inline-flex items-center gap-2 rounded-[32px] bg-[#FFB319] px-5 py-2.5 font-outfit text-sm font-extrabold uppercase text-[#0B1D23] transition hover:brightness-110"
           >
             <Printer size={16} /> Cetak Laporan
-          </button>
+          </button> */}
           <button
             onClick={() => downloadParentReport(data)}
-            className="inline-flex items-center gap-2 rounded-[32px] border border-[#19D29F] bg-[#0F3943] px-5 py-2.5 font-outfit text-sm font-bold text-[#19D29F] transition hover:bg-[#144955]"
+            className="inline-flex items-center gap-2 rounded-[32px] bg-[#FFB319] px-5 py-2.5 font-outfit text-sm font-extrabold uppercase text-[#0B1D23] transition hover:brightness-110"
           >
-            <Download size={16} /> Unduh
+            <Download size={16} /> Unduh Laporan
           </button>
         </div>
       </div>

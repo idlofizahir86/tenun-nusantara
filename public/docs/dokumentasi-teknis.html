@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dokumentasi Teknis — Tenun Nusantara</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: #0B1D23; background: #fff; line-height: 1.6; }
+  .page { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+  .cover { text-align: center; padding: 50px 20px 30px; }
+  .cover h1 { font-size: 38px; color: #0F3943; }
+  .cover .sub { font-size: 18px; color: #5A7378; margin-top: 8px; }
+  .cover .badge { display: inline-block; margin-top: 18px; background: #FFB319; color: #0B1D23; padding: 8px 22px; border-radius: 32px; font-weight: 700; }
+  h1 { font-size: 28px; color: #0F3943; margin: 26px 0 10px; border-bottom: 3px solid #FFB319; padding-bottom: 6px; }
+  h2 { font-size: 21px; color: #0F3943; margin: 22px 0 8px; }
+  h3 { font-size: 17px; color: #0F3943; margin: 14px 0 6px; }
+  p { margin: 6px 0; font-size: 15px; }
+  .toc { background: #f3f7f8; border: 1px solid #d7e3e6; border-radius: 12px; padding: 18px 22px; }
+  .toc li { margin: 4px 0; }
+  .stack { border: 1px solid #d7e3e6; border-radius: 12px; padding: 14px 16px; margin: 10px 0; background: #fbfdfd; }
+  .stack .tag { display: inline-block; background: #FFB31922; color: #b3800a; padding: 2px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+  .stack p { margin-top: 8px; font-size: 14px; }
+  pre { background: #0F3943; color: #E2ECEF; border-radius: 10px; padding: 16px; font-size: 12px; overflow-x: auto; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e2ebed; }
+  th { color: #0F3943; }
+  .dim { border: 1px solid #d7e3e6; border-radius: 10px; padding: 12px; text-align: center; background: #fbfdfd; page-break-inside: avoid; }
+  .dim .ic { font-size: 28px; }
+  .dim h4 { margin-top: 4px; color: #0F3943; font-size: 15px; }
+  .dim .tag2 { font-size: 12px; color: #b3800a; font-weight: 700; }
+  .dim p { font-size: 12px; color: #5A7378; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0; }
+  .card { border: 1px solid #d7e3e6; border-radius: 12px; padding: 14px 16px; margin: 10px 0; background: #fbfdfd; page-break-inside: avoid; }
+  .card h4 { color: #0F3943; }
+  .card p { font-size: 14px; }
+  .footer { text-align: center; margin-top: 40px; padding-top: 16px; border-top: 1px solid #d7e3e6; color: #5A7378; font-size: 13px; }
+  @media print {
+    .page { padding: 0; max-width: 100%; }
+    h1, h2, h3 { page-break-after: avoid; }
+    .card, .dim, .stack { page-break-inside: avoid; }
+    .grid4 { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="cover">
+    <div style="font-size:56px;">⚙️</div>
+    <h1>Tenun Nusantara</h1>
+    <div class="sub">Dokumentasi Teknis — Stack, Arsitektur &amp; AI</div>
+    <div class="badge">Dokumen Teknis Platform</div>
+  </div>
+
+  <div class="toc">
+    <strong>Daftar Isi</strong>
+    <ol>
+      <li><a href="#ringkasan">Ringkasan Arsitektur</a></li>
+      <li><a href="#stack">Tech Stack</a></li>
+      <li><a href="#arsitektur">Arsitektur &amp; Struktur Proyek</a></li>
+      <li><a href="#ai">AI yang Digunakan</a></li>
+      <li><a href="#scoring">Engine Pemetaan Bakat</a></li>
+      <li><a href="#data">Data, Sesi &amp; Persistensi</a></li>
+      <li><a href="#tts">Suara NALA (TTS)</a></li>
+      <li><a href="#laporan">Sistem Laporan</a></li>
+    </ol>
+  </div>
+
+  <h1 id="ringkasan">1. Ringkasan Arsitektur</h1>
+  <p>
+    <b>Tenun Nusantara</b> adalah platform web gamifikasi edukatif untuk memetakan minat-bakat anak (7–14 tahun)
+    lewat petualangan di 5 pulau, dengan pendamping AI <b>NALA</b>. Aplikasi dibangun di atas
+    <b>Next.js 14 (App Router)</b>, menggunakan <b>Supabase</b> untuk backend, dan <b>Google Gemini</b> untuk
+    kecerdasan runtime.
+  </p>
+
+  <div class="card">
+    <h4>✍️ Cara aplikasi dibangun</h4>
+    <ul style="padding-left:20px; margin:8px 0;">
+      <li>🎨 <b>Desain &amp; aset</b>: wireframe/prototype di <b>Figma</b>; aset game dihasilkan dengan bantuan <b>Gemini</b> &amp; <b>Nano Banana</b>.</li>
+      <li>💻 <b>Kode</b>: ditulis/direfaktor dengan bantuan <b>DeepSeek</b>, <b>Claude</b>, dan <b>Qwen</b>.</li>
+      <li>⚙️ <b>Runtime AI</b>: NALA ditenagai <b>Google Gemini</b> via <b>Vercel AI SDK</b> (dengan fallback statis).</li>
+    </ul>
+  </div>
+
+  <h1 id="stack">2. Tech Stack</h1>
+  <div class="stack"><span class="tag">Frontend</span><p>Next.js 14 (App Router), React 18, TypeScript (strict), TailwindCSS, Zustand, Framer Motion, lucide-react</p></div>
+  <div class="stack"><span class="tag">Backend &amp; Data</span><p>Supabase (PostgreSQL + Auth + Storage), API Routes (App Router), Row Level Security</p></div>
+  <div class="stack"><span class="tag">AI / LLM</span><p>Vercel AI SDK (ai v3), @ai-sdk/google, Google Gemini (runtime NALA)</p></div>
+  <div class="stack"><span class="tag">Audio / TTS</span><p>msedge-tts (Edge TTS id-ID-GadisNeural), Web Speech API (fallback)</p></div>
+  <div class="stack"><span class="tag">Laporan / Visual</span><p>recharts (radar &amp; grafik), jspdf + html2canvas (unduh PDF)</p></div>
+  <div class="stack"><span class="tag">Utility</span><p>zod (validasi), react-hook-form, date-fns, tailwind-merge, inkjs (narasi)</p></div>
+
+  <h1 id="arsitektur">3. Arsitektur &amp; Struktur Proyek</h1>
+  <p>Next.js <b>App Router</b> dengan <b>route groups</b> untuk memisahkan area per peran.</p>
+  <pre>src/
+├─ app/
+│  ├─ (marketing)/   # Landing page
+│  ├─ (auth)/        # Login &amp; role-selection
+│  ├─ (student)/     # map, island, refleksi, report, profil
+│  ├─ (parent)/      # home
+│  ├─ (teacher)/     # dashboard (ringkasan, sebaran, siswa, laporan)
+│  ├─ api/           # ai, tts, reports, telemetry
+│  ├─ dokumentasi-pengguna/  # Panduan pengguna (3 peran)
+│  └─ dokumentasi-teknis/    # Dokumen ini
+├─ components/   (game, layout, map, landing, report, teacher, ui, dashboard)
+├─ config/
+│  ├─ islands.json   # KONTEN pulau (data-driven) — bisa diedit tanpa kode
+│  └─ islands.ts, asset-paths.ts, site.ts, orientation.ts
+├─ hooks/            # use-nala, use-tts, use-voice-input, use-sound, ...
+├─ lib/
+│  ├─ ai/            # gemini, nala-agent, prompts, report, generate
+│  ├─ scoring/       # engine (8 dimensi), evidence-rules, triangulation
+│  ├─ session/       # session.ts, game-store.ts (persistensi + resume)
+│  ├─ supabase/      # client, server, service, sync
+│  └─ sound/ telemetry/ teacher/ report/ utils/
+├─ stores/           # zustand (auth, story, student)
+└─ types/            # game, story, telemetry, user</pre>
+  <p><b>Pendekatan data-driven:</b> konten pulau (minigame, asesmen, refleksi, dialog NALA) di <b>islands.json</b> dapat diubah tanpa menyentuh kode.</p>
+
+  <h1 id="ai">4. AI yang Digunakan</h1>
+  <h3>A. AI Runtime (di dalam aplikasi)</h3>
+  <div class="card"><h4>Google Gemini — via Vercel AI SDK (@ai-sdk/google)</h4><p>NALA: kawan petualang AI. Narasi adaptif, petunjuk, refleksi, dan laporan Peta Bakat.</p></div>
+  <div class="card"><h4>gemini-2.5-flash (default + fallback)</h4><p>Model utama runtime; fallback gemini-1.5-flash &amp; gemini-2.0-flash. Bisa diatur via env <b>GEMINI_MODEL</b>.</p></div>
+  <div class="card"><h4>Fallback statis (lib/ai/prompts.ts)</h4><p>Balasan NALA otomatis bila API key Gemini tidak tersedia.</p></div>
+
+  <h3>B. AI untuk Pembuatan (Development)</h3>
+  <table>
+    <thead><tr><th>Alat</th><th>Area</th><th>Keterangan</th></tr></thead>
+    <tbody>
+      <tr><td><b>DeepSeek</b></td><td>Pembuatan kode</td><td>Menulis &amp; merefaktor sebagian besar kode (TypeScript/React/Next.js).</td></tr>
+      <tr><td><b>Claude</b></td><td>Pembuatan kode</td><td>Penulis/pemeriksa kode (code review, logika, refactor).</td></tr>
+      <tr><td><b>Qwen</b></td><td>Pembuatan kode</td><td>Bantuan pemrograman &amp; solusi teknis.</td></tr>
+      <tr><td><b>Gemini</b></td><td>Aset game</td><td>Membantu menghasilkan aset visual/ilustrasi game.</td></tr>
+      <tr><td><b>Nano Banana (Gemini 2.5 Flash Image)</b></td><td>Aset game</td><td>Model pembuat gambar untuk aset game (karakter, pulau, motif, dll).</td></tr>
+      <tr><td><b>Figma</b></td><td>Desain &amp; wireframe</td><td>Semua aset diatur &amp; diprototipekan di Figma sebelum dipakai.</td></tr>
+    </tbody>
+  </table>
+
+  <h1 id="scoring">5. Engine Pemetaan Bakat (8 Dimensi)</h1>
+  <p>Berbasis teori <b>kecerdasan majemuk</b>. Dari jawaban asesmen senyap, aksi minigame, hingga event refleksi, sistem memberi skor pada 8 dimensi:</p>
+  <div class="grid4">
+    <div class="dim"><div class="ic">📖</div><h4>Linguistik</h4><span class="tag2">Aksara</span><p>Bahasa, sastra, bercerita</p></div>
+    <div class="dim"><div class="ic">🧮</div><h4>Logika-Matematika</h4><span class="tag2">Candi</span><p>Pola, penalaran, analitis</p></div>
+    <div class="dim"><div class="ic">🎨</div><h4>Visual-Ruang</h4><span class="tag2">Harmoni</span><p>Seni, kreativitas, estetika</p></div>
+    <div class="dim"><div class="ic">🤸</div><h4>Kinestetik</h4><span class="tag2">—</span><p>Gerak, praktik fisik</p></div>
+    <div class="dim"><div class="ic">🎵</div><h4>Musikal</h4><span class="tag2">Harmoni</span><p>Nada, irama, musik</p></div>
+    <div class="dim"><div class="ic">🤝</div><h4>Interpersonal</h4><span class="tag2">Pasar Terapung</span><p>Kerja sama, kepemimpinan</p></div>
+    <div class="dim"><div class="ic">🧘</div><h4>Intrapersonal</h4><span class="tag2">Refleksi</span><p>Refleksi diri, mandiri</p></div>
+    <div class="dim"><div class="ic">🌿</div><h4>Naturalis</h4><span class="tag2">Rimba</span><p>Alam, ekologis, lingkungan</p></div>
+  </div>
+  <p>Hasil divisualkan sebagai <b>radar 8 dimensi</b> di Peta Bakat, lalu dipakai untuk rekomendasi karir (tren 2030) &amp; langkah stimulasi.</p>
+
+  <h1 id="data">6. Data, Sesi &amp; Persistensi</h1>
+  <p>Progres utama disimpan di <b>localStorage</b> agar bisa di-resume lintas pulau tanpa server.</p>
+  <table>
+    <thead><tr><th>Kunci</th><th>Isi</th></tr></thead>
+    <tbody>
+      <tr><td><code>tenun-player</code></td><td>Profil pemain (nama, karakter, motif, asal).</td></tr>
+      <tr><td><code>tenun-session</code></td><td>Sesi aktif: id, kode game, XP, level, pulau selesai, lencana.</td></tr>
+      <tr><td><code>tenun-events</code></td><td>Rangkaian event ber-timestamp (jejak perilaku).</td></tr>
+      <tr><td><code>tenun-progress</code></td><td>Daftar pulau yang sudah dijelajahi.</td></tr>
+      <tr><td><code>tenun-assessment</code></td><td>Jawaban asesmen senyap untuk refleksi &amp; scoring.</td></tr>
+      <tr><td><code>tenun-games</code></td><td>Registri game (gameCode → ringkasan).</td></tr>
+      <tr><td><code>tenun-snapshot-{code}</code></td><td>Snapshot lengkap per game (untuk resume &amp; guru).</td></tr>
+      <tr><td><code>tenun-teacher-*</code></td><td>Data kelas &amp; kode kelas milik guru.</td></tr>
+      <tr><td><code>tenun-role / tenun-mute</code></td><td>Peran aktif &amp; status bisu global.</td></tr>
+    </tbody>
+  </table>
+  <p><b>Telemetri:</b> event ber-timestamp diantrekan &amp; di-flush (ke Supabase bila diaktifkan) untuk profil bakat &amp; dashboard guru.</p>
+
+  <h1 id="tts">7. Suara NALA (Text-to-Speech)</h1>
+  <div class="card"><h4>1. Edge TTS (utama)</h4><p>via API route <b>/api/tts</b> (msedge-tts), suara <b>id-ID-GadisNeural</b> — gratis &amp; natural.</p></div>
+  <div class="card"><h4>2. Web Speech API (fallback)</h4><p>speechSynthesis dengan suara perempuan/anak berbahasa Indonesia bila Edge gagal.</p></div>
+  <div class="card"><h4>Input suara</h4><p>Web Speech API (use-voice-input) untuk menjawab refleksi dengan suara; ada mute global.</p></div>
+
+  <h1 id="laporan">8. Sistem Laporan</h1>
+  <div class="card"><h4>📊 Peta Bakat (Siswa)</h4><p>Radar 8 dimensi, bakat dominan, lencana, pesan NALA. Terbuka setelah 5 pulau selesai.</p></div>
+  <div class="card"><h4>🏫 Dashboard Guru</h4><p>Ringkasan kelas, sebaran karakter, daftar siswa, laporan akademik, pengaturan kelas (kode kelas).</p></div>
+  <div class="card"><h4>👨‍👩‍👧 Laporan Orang Tua</h4><p>Masukkan kode game anak (TN-XXXXXX) untuk melihat kemajuan &amp; Peta Bakat; laporan bisa diunduh (jspdf).</p></div>
+
+  <div class="footer">
+    ⚙️ Tenun Nusantara — Dokumentasi Teknis.<br />
+    Stack, arsitektur, AI runtime &amp; alat bantu pengembangan.
+  </div>
+
+</div>
+</body>
+</html>

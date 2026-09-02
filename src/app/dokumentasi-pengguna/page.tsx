@@ -4,7 +4,7 @@ import { useState } from "react";
 
 // ============================================================
 // Dokumentasi Pengguna — Tenun Nusantara
-// Route: /user-documentation
+// Route: /dokumentasi-pengguna
 // Berisi panduan lengkap untuk 3 peran (Siswa, Guru, Orang Tua)
 // lengkap dengan tangkapan layar dari aplikasi aslinya.
 // ============================================================
