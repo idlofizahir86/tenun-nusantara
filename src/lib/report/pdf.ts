@@ -16,8 +16,6 @@
 // Fallback: bila gagal, unduh sebagai .html.
 // ============================================================
 
-const PAGE_FORMAT = "a4";
-const CONTENT_WIDTH_MM = 190; // A4 (210mm) dikurangi margin kiri+kanan 10mm
 const RENDER_WIDTH_PX = 860; // lebar iframe agar memuat laporan siswa & ortu
 
 export function downloadHtmlFallback(html: string, filename: string): void {

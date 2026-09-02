@@ -1,13 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { Download, Printer, Star } from "lucide-react";
+import { Download, Star } from "lucide-react";
 import { traitEmoji, traitLabel } from "@/lib/scoring/engine";
 import { CAREERS, ISLAND_BLURB, NEXT_STEPS } from "@/lib/report/guidance";
 import { TalentRadar } from "@/components/teacher/talent-radar";
 import {
   downloadParentReport,
-  printParentReport,
   type ParentReportInput,
 } from "@/lib/report/parent-report";
 
