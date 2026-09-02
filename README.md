@@ -1,6 +1,6 @@
 # 🧵 Tenun Nusantara — MVP
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 > **Petualangan Mengenali Dirimu** bersama **NALA**
@@ -8,6 +8,8 @@
 
 **Status:** 🟢 MVP (Minimum Viable Product) — aktif dikembangkan
 **Tim:** ATEAM
+
+🔗 **Coba langsung:** https://tenun-nusantara-ateam-mvp.vercel.app/
 
 ---
 
@@ -18,6 +20,52 @@
 Dari setiap aksi anak (pilihan, jawaban asesmen, bahkan salah klik), sistem merekam **jejak perilaku** untuk menyusun **"Peta Bakat"** — profil kecerdasan (8 dimensi) dan rekomendasi pengembangan yang personal.
 
 > ⚠️ **Ini MVP**: berfokus membuktikan konsep inti. Beberapa area (backend lengkap, dashboard guru penuh, audio, deploy) masih dalam tahap lanjutan — lihat [Roadmap](#-roadmap).
+
+---
+
+---
+
+## 📸 Tampilan Aplikasi
+
+<p align="center">
+  <img src="public/docs/screenshots/shared/landing-hero.png" width="640" alt="Landing Tenun Nusantara"/><br/>
+  <sub><i>Landing page Tenun Nusantara</i></sub>
+</p>
+
+<p align="center">
+  <img src="public/docs/screenshots/shared/role-selection.png" width="640" alt="Pemilihan peran"/><br/>
+  <sub><i>Pemilihan peran — Siswa, Orang Tua, Guru</i></sub>
+</p>
+
+<p align="center">
+  <img src="public/docs/screenshots/student/char-select.png" width="600" alt="Pilih karakter penjelajah"/><br/>
+  <sub><i>Memilih karakter penjelajah sebelum berangkat</i></sub>
+</p>
+
+<p align="center">
+  <img src="public/docs/screenshots/student/harmoni-act3-weave.png" width="640" alt="Minigame menenun motif"/><br/>
+  <sub><i>Minigame: menenun motif tenun di Pulau Harmoni</i></sub>
+</p>
+
+<p align="center">
+  <img src="public/docs/screenshots/student/harmoni-island-complete.png" width="640" alt="Pulau selesai"/><br/>
+  <sub><i>Pulau selesai dijelajahi + lencana & XP</i></sub>
+</p>
+
+<p align="center">
+  <img src="public/docs/screenshots/student/report-peta-bakat.png" width="640" alt="Report siswa"/><br/>
+  <sub><i>Report Peta Bakat siswa (radar 8 dimensi + pesan NALA)</i></sub>
+</p>
+
+<p align="center">
+  <img src="public/docs/screenshots/parent/report-ortu-result.png" width="640" alt="Report orang tua"/><br/>
+  <sub><i>Report orang tua: rekomendasi karier & langkah stimulasi</i></sub>
+</p>
+
+<p align="center">
+  <img src="public/docs/screenshots/teacher/dashboard-ringkasan.png" width="640" alt="Dashboard guru"/><br/>
+  <sub><i>Dashboard guru: ringkasan kelas</i></sub>
+</p>
 
 ---
 
@@ -219,6 +267,7 @@ Lihat **`docs/EVALUATION_AND_ROADMAP.md`** untuk detail lengkap.
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/fahmiagungmaulana"><img src="https://avatars.githubusercontent.com/u/121919439?v=4?s=100" width="100px;" alt="Fahmi Agung Maulana"/><br /><sub><b>Fahmi Agung Maulana</b></sub></a><br /><a href="#design-fahmiagungmaulana" title="Design">🎨</a> <a href="#ideas-fahmiagungmaulana" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/rofiahbn"><img src="https://avatars.githubusercontent.com/u/94108396?v=4?s=100" width="100px;" alt="rofiahbn"/><br /><sub><b>rofiahbn</b></sub></a><br /><a href="#design-rofiahbn" title="Design">🎨</a> <a href="#ideas-rofiahbn" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/idlofi-zahir-rajaba/"><img src="https://avatars.githubusercontent.com/u/44353044?v=4?s=100" width="100px;" alt="ZedPhantom86"/><br /><sub><b>ZedPhantom86</b></sub></a><br /><a href="#design-idlofizahir86" title="Design">🎨</a> <a href="#ideas-idlofizahir86" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
   <tfoot>
@@ -240,13 +289,9 @@ Lihat **`docs/EVALUATION_AND_ROADMAP.md`** untuk detail lengkap.
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
