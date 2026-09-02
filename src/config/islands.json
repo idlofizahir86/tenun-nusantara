@@ -784,15 +784,15 @@
                 "title": "Pantun Nasihat",
                 "image": "/assets/images/islands/aksara/minigames/verse/pantun-nasihat.png",
                 "lines": [
-                  "Buah duren jatuh ke kolam,",
+                  "Buah mangga di atas para,",
                   "Dibawa Ibu ke pasar pagi.",
-                  "Rajin belajar sepanjang hari,",
-                  "Agar masa depan semakin __."
+                  "Rajin belajar sepanjang masa,",
+                  "Agar cita-cita tercapai __."
                 ],
                 "options": [
-                  { "id": "v1", "text": "terang", "correct": true },
-                  { "id": "v2", "text": "gelap", "correct": false },
-                  { "id": "v3", "text": "hujan", "correct": false }
+                  { "id": "v1", "text": "nanti", "correct": true },
+                  { "id": "v2", "text": "pagi", "correct": false },
+                  { "id": "v3", "text": "sepi", "correct": false }
                 ]
               },
               {
@@ -814,15 +814,15 @@
                 "title": "Pantun Jenaka",
                 "image": "/assets/images/islands/aksara/minigames/verse/pantun-jenaka.png",
                 "lines": [
-                  "Ada kambing makan rumput,",
-                  "Rumput hijau di tepi kali.",
-                  "Kalau kamu rajin menabung,",
-                  "Nanti hidupmu makin __."
+                  "Pergi ke pasar membeli pita,",
+                  "Pulangnya membawa pepaya.",
+                  "Ada kucing memakai mahkota,",
+                  "Jalannya lucu sambil __."
                 ],
                 "options": [
-                  { "id": "t1", "text": "cukup", "correct": true },
-                  { "id": "t2", "text": "habis", "correct": false },
-                  { "id": "t3", "text": "lari", "correct": false }
+                  { "id": "t1", "text": "bergaya", "correct": true },
+                  { "id": "t2", "text": "berenang", "correct": false },
+                  { "id": "t3", "text": "membaca", "correct": false }
                 ]
               }
             ]
