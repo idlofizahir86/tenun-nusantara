@@ -255,7 +255,7 @@ Lihat **`docs/EVALUATION_AND_ROADMAP.md`** untuk detail lengkap.
 
 ---
 
-## 🏆 Kredit
+## 🏆 Kredit & Kontributor
 
 **Dibuat oleh ATEAM** — dengan semangat abizzz. 🇮🇩
 
@@ -270,28 +270,8 @@ Lihat **`docs/EVALUATION_AND_ROADMAP.md`** untuk detail lengkap.
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/idlofi-zahir-rajaba/"><img src="https://avatars.githubusercontent.com/u/44353044?v=4?s=100" width="100px;" alt="ZedPhantom86"/><br /><sub><b>ZedPhantom86</b></sub></a><br /><a href="#design-idlofizahir86" title="Design">🎨</a> <a href="#ideas-idlofizahir86" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
-  <tfoot>
-    <tr>
-      <td align="center" size="13px" colspan="7">
-        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
-          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
-        </img>
-      </td>
-    </tr>
-  </tfoot>
 </table>
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-
-## Contributors ✨
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
