@@ -272,6 +272,7 @@ Lihat **`docs/EVALUATION_AND_ROADMAP.md`** untuk detail lengkap.
   </tbody>
 </table>
 
+
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
