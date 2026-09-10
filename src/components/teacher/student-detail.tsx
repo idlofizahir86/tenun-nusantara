@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Hourglass } from "lucide-react";
 import { traitEmoji, traitLabel } from "@/lib/scoring/engine";
 import { CAREERS, ISLAND_BLURB, NEXT_STEPS } from "@/lib/report/guidance";
 import type { TeacherStudent } from "@/lib/teacher/class-data";
@@ -51,9 +52,11 @@ export function StudentDetail({ student }: { student: TeacherStudent }) {
             {student.motif || "Sash Tenun"} • Gabung {fmtDate(student.startedAt)} • Terakhir aktif{" "}
             {fmtDate(student.lastActiveAt)}
           </p>
-          <span className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-lg bg-[#144955] px-3 py-1 font-outfit text-xs font-bold text-[#FFB319]">
-            {traitEmoji(student.topTrait)} Bakat dominan: {traitLabel(student.topTrait)}
-          </span>
+          {student.assessmentCount > 0 && student.topTrait && (
+            <span className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-lg bg-[#144955] px-3 py-1 font-outfit text-xs font-bold text-[#FFB319]">
+              {traitEmoji(student.topTrait)} Bakat dominan: {traitLabel(student.topTrait)}
+            </span>
+          )}
         </div>
         <span className="font-manrope text-[11px] text-[#5A7378]">{student.gameCode}</span>
       </section>
@@ -62,7 +65,7 @@ export function StudentDetail({ student }: { student: TeacherStudent }) {
       <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {[
           { label: "XP", value: student.xp },
-          { label: "Pulau Selesai", value: `${student.islandsCompleted}/5` },
+          { label: "Pulau Selesai", value: `${student.islandsCompleted}/${student.totalIslands}` },
           { label: "Aktivitas Selesai", value: student.totalActsCompleted },
           { label: "Asesmen Bakat", value: student.assessmentCount },
         ].map((s) => (
@@ -75,6 +78,20 @@ export function StudentDetail({ student }: { student: TeacherStudent }) {
         ))}
       </section>
 
+      {!student.isComplete && (
+        <section className="flex items-start gap-3 rounded-3xl border border-[#FFB319]/40 bg-[#0F3943] p-5">
+          <Hourglass size={20} className="mt-0.5 flex-none text-[#FFB319]" />
+          <div>
+            <h2 className="font-outfit text-base font-extrabold text-white">Belum Selesai</h2>
+            <p className="mt-1 font-manrope text-sm leading-relaxed text-[#8DA2A6]">
+              Siswa baru menyelesaikan {student.islandsCompleted} dari {student.totalIslands} pulau. Peta bakat,
+              rekomendasi karir, dan langkah stimulasi akan muncul setelah seluruh pulau dijelajahi.
+            </p>
+          </div>
+        </section>
+      )}
+
+      {student.isComplete && (
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Radar */}
         <section className="flex flex-col items-center gap-4 rounded-3xl border border-[#FFB319]/30 bg-[#0F3943] p-6">
@@ -108,6 +125,7 @@ export function StudentDetail({ student }: { student: TeacherStudent }) {
           </div>
         </section>
       </div>
+      )}
 
       {/* Narasi pulau */}
       <section className="rounded-3xl border border-[#FFB319]/30 bg-[#0F3943] p-6">
@@ -131,6 +149,7 @@ export function StudentDetail({ student }: { student: TeacherStudent }) {
       </section>
 
       {/* Langkah stimulasi */}
+      {student.isComplete && (
       <section className="rounded-3xl border border-[#FFB319] bg-[#0F3943] p-6">
         <h2 className="font-outfit text-lg font-extrabold text-[#FFB319]">Langkah Stimulasi untuk Siswa</h2>
         <div className="mt-4 flex flex-col gap-3">
@@ -144,6 +163,7 @@ export function StudentDetail({ student }: { student: TeacherStudent }) {
           ))}
         </div>
       </section>
+      )}
     </div>
   );
 }

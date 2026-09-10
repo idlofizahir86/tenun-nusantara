@@ -15,6 +15,14 @@ export interface DbSession {
   id: string;
   profile_id: string | null;
   device_key: string | null;
+  game_code: string | null;
+  class_code: string | null;
+  player: {
+    name: string;
+    characterId: string;
+    motif?: string;
+    origin?: string;
+  } | null;
   started_at: string;
   last_active_at: string;
   current_island: string | null;

@@ -40,7 +40,9 @@ export default function RingkasanPage() {
   const avgXp = Math.round(students.reduce((a, s) => a + s.xp, 0) / students.length);
   const avgLevel = (students.reduce((a, s) => a + s.level, 0) / students.length).toFixed(1);
   const traitCount: Record<string, number> = {};
-  for (const s of students) traitCount[s.topTrait] = (traitCount[s.topTrait] || 0) + 1;
+  for (const s of students) {
+    if (s.assessmentCount > 0 && s.topTrait) traitCount[s.topTrait] = (traitCount[s.topTrait] || 0) + 1;
+  }
   const topTrait = Object.entries(traitCount).sort((a, b) => b[1] - a[1])[0]?.[0];
   const recent = [...students].sort((a, b) => (b.lastActiveAt || "").localeCompare(a.lastActiveAt || "")).slice(0, 6);
 
@@ -88,7 +90,7 @@ export default function RingkasanPage() {
                 <div className="flex flex-col">
                   <span className="font-manrope text-sm font-bold text-white">{s.name}</span>
                   <span className="font-manrope text-xs text-[#8DA2A6]">
-                    {s.islandsCompleted}/5 pulau • Lv. {s.level}
+                    {s.islandsCompleted}/{s.totalIslands} pulau • Lv. {s.level}
                   </span>
                 </div>
               </div>
@@ -97,7 +99,9 @@ export default function RingkasanPage() {
                   {fmtTime(s.lastActiveAt)}
                 </span>
                 <span className="rounded-full bg-[#144955] px-2.5 py-1 font-manrope text-[11px] font-bold text-[#FFB319]">
-                  {s.topTrait ? `${traitEmoji(s.topTrait)} ${traitLabel(s.topTrait)}` : "—"}
+                  {s.assessmentCount > 0 && s.topTrait
+                    ? `${traitEmoji(s.topTrait)} ${traitLabel(s.topTrait)}`
+                    : "—"}
                 </span>
               </div>
             </div>

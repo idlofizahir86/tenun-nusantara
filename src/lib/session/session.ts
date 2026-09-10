@@ -147,6 +147,7 @@ export function getSession(): Session {
   return {
     id: s.id || "",
     gameCode: s.gameCode,
+    classCode: s.classCode,
     startedAt: s.startedAt || "",
     lastActiveAt: s.lastActiveAt || "",
     player: s.player,

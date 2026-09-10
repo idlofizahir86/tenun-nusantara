@@ -88,10 +88,12 @@ export default function DaftarSiswaPage() {
                       <div className="h-1.5 w-24 overflow-hidden rounded-full bg-[#09242B]">
                         <div
                           className="h-full rounded-full bg-[#FFB319]"
-                          style={{ width: `${(s.islandsCompleted / 5) * 100}%` }}
+                          style={{ width: `${(s.islandsCompleted / s.totalIslands) * 100}%` }}
                         />
                       </div>
-                      <span className="font-manrope text-xs text-[#8DA2A6]">{s.islandsCompleted}/5</span>
+                      <span className="font-manrope text-xs text-[#8DA2A6]">
+                        {s.islandsCompleted}/{s.totalIslands}
+                      </span>
                     </div>
                   </td>
                   <td className="px-5 py-3 font-outfit text-sm font-extrabold text-[#19D29F]">
@@ -100,7 +102,9 @@ export default function DaftarSiswaPage() {
                   <td className="px-5 py-3 font-manrope text-sm text-[#E2ECEF]">{s.xp}</td>
                   <td className="px-5 py-3">
                     <span className="rounded-full bg-[#144955] px-2.5 py-1 font-manrope text-[11px] font-bold text-[#FFB319]">
-                      {s.topTrait ? `${traitEmoji(s.topTrait)} ${traitLabel(s.topTrait)}` : "—"}
+                      {s.assessmentCount > 0 && s.topTrait
+                        ? `${traitEmoji(s.topTrait)} ${traitLabel(s.topTrait)}`
+                        : "—"}
                     </span>
                   </td>
                 </tr>

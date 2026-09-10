@@ -38,6 +38,7 @@ export async function POST(req: Request) {
         id: s.id,
         game_code: s.gameCode || null,
         class_code: s.classCode || null,
+        player: s.player || null,
         started_at: (s.startedAt as string) || new Date().toISOString(),
         last_active_at: (s.lastActiveAt as string) || new Date().toISOString(),
         current_island: s.currentIsland || null,
@@ -49,7 +50,15 @@ export async function POST(req: Request) {
       };
       if (profileId) row.profile_id = profileId;
       if (deviceKey) row.device_key = deviceKey;
-      const { error } = await db.from("sessions").upsert(row, { onConflict: "id" });
+      let { error } = await db.from("sessions").upsert(row, { onConflict: "id" });
+      // Kolom `player` bisa belum ada bila migrasi 0004 belum dijalankan.
+      // Ulangi tanpa `player` agar telemetri tetap jalan (nama jadi fallback).
+      if (error && /player/i.test(error.message)) {
+        const rowNoPlayer = { ...row };
+        delete rowNoPlayer.player;
+        const retry = await db.from("sessions").upsert(rowNoPlayer, { onConflict: "id" });
+        error = retry.error;
+      }
       if (error) console.error("upsert session:", error.message);
       else saved.sessions = 1;
     }

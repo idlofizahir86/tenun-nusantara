@@ -14,6 +14,9 @@ import {
 import { listGames } from "@/lib/session/game-store";
 import type { Session, SessionEvent } from "@/lib/session/session";
 
+/** Jumlah pulau Nusantara (lihat config/islands.json) — gerbang hasil akhir. */
+export const TOTAL_ISLANDS = 5;
+
 export interface TeacherStudent {
   gameCode: string;
   name: string;
@@ -24,6 +27,8 @@ export interface TeacherStudent {
   level: number;
   completedIslands: string[];
   islandsCompleted: number;
+  totalIslands: number;
+  isComplete: boolean;
   totalActsCompleted: number;
   lastActiveAt: string;
   startedAt: string;
@@ -57,6 +62,7 @@ function buildStudent(session: Record<string, unknown>, events: ReportEvent[]): 
       ? (session.completedIslands as string[])
       : [];
   const profile = computeTalentProfile(events, completedIslands.length);
+  const islandsCompleted = completedIslands.length;
   return {
     gameCode: (session.game_code as string) || (session.gameCode as string) || "",
     name: player.name || "Penjelajah",
@@ -66,7 +72,9 @@ function buildStudent(session: Record<string, unknown>, events: ReportEvent[]): 
     xp: Number(session.xp || 0),
     level: Number(session.level || 1),
     completedIslands,
-    islandsCompleted: completedIslands.length,
+    islandsCompleted,
+    totalIslands: TOTAL_ISLANDS,
+    isComplete: islandsCompleted >= TOTAL_ISLANDS,
     totalActsCompleted: events.filter((e) => e.type === "act_complete").length,
     lastActiveAt: (session.last_active_at as string) || (session.lastActiveAt as string) || "",
     startedAt: (session.started_at as string) || (session.startedAt as string) || "",

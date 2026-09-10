@@ -29,7 +29,9 @@ export default function SebaranPage() {
     "musikal", "sosial", "intrapersonal", "naturalis",
   ];
   const traitCount: Record<string, number> = {};
-  for (const s of students) traitCount[s.topTrait] = (traitCount[s.topTrait] || 0) + 1;
+  for (const s of students) {
+    if (s.assessmentCount > 0 && s.topTrait) traitCount[s.topTrait] = (traitCount[s.topTrait] || 0) + 1;
+  }
 
   const distribution: TraitBarDatum[] = dims.map((k) => ({
     key: k,
