@@ -1,15 +1,6 @@
-// Tipe TypeScript yang mencerminkan tabel Supabase (lihat migrasi 0001_init.sql).
-
-export interface DbProfile {
-  id: string;
-  auth_user_id: string | null;
-  name: string;
-  character_id: string | null;
-  motif: string | null;
-  origin: string | null;
-  created_at: string;
-  updated_at: string;
-}
+// Tipe TypeScript yang mencerminkan tabel Supabase
+// (lihat migrasi 0001_init.sql & 0005_align_identity.sql).
+// Catatan: profile_id mengarah ke auth.users(id), bukan tabel profiles.
 
 export interface DbSession {
   id: string;
@@ -41,16 +32,5 @@ export interface DbEvent {
   t: string;
   type: string;
   payload: Record<string, unknown>;
-  created_at: string;
-}
-
-export interface DbScore {
-  id: string;
-  session_id: string;
-  profile_id: string | null;
-  island_id: string | null;
-  act: number | null;
-  trait: string | null;
-  value: number;
   created_at: string;
 }
