@@ -12,6 +12,27 @@ interface TelemetryBody {
   deviceKey?: string | null;
 }
 
+// Kolom `payload` jsonb menyimpan objek. Baris lama sempat ditulis sebagai
+// JSON string (double-encoded) sehingga perlu di-parse agar `trait` terbaca.
+function normalizePayload(p: unknown): Record<string, unknown> {
+  if (typeof p === "string") {
+    try {
+      const parsed = JSON.parse(p);
+      return parsed && typeof parsed === "object" ? (parsed as Record<string, unknown>) : {};
+    } catch {
+      return {};
+    }
+  }
+  return p && typeof p === "object" ? (p as Record<string, unknown>) : {};
+}
+
+function normalizeEventRows(rows: unknown[]): unknown[] {
+  return (rows as Record<string, unknown>[]).map((r) => ({
+    ...r,
+    payload: normalizePayload(r.payload),
+  }));
+}
+
 // POST /api/telemetry — terima batch event + snapshot sesi, simpan ke Supabase.
 // Menggunakan service role (server-only); untuk MVP tanpa login event tetap
 // ditulis, dan bila ada profileId (user login) dikaitkan ke akun tsb.
@@ -80,7 +101,7 @@ export async function POST(req: Request) {
           profile_id: profileId,
           t: t || new Date().toISOString(),
           type,
-          payload: JSON.stringify(payload),
+          payload,
         };
       });
       const { error } = await db.from("events").upsert(rows, { onConflict: "id" });
@@ -127,7 +148,11 @@ export async function GET(req: Request) {
         db.from("events").select("*").eq("profile_id", user.id).order("t", { ascending: true }),
       ]);
 
-      return NextResponse.json({ ok: true, session: sRes.data || null, events: eRes.data || [] });
+      return NextResponse.json({
+        ok: true,
+        session: sRes.data || null,
+        events: normalizeEventRows(eRes.data || []),
+      });
     }
 
     // Pull per classCode (kode kelas guru → data seluruh siswa kelas tsb).
@@ -151,7 +176,7 @@ export async function GET(req: Request) {
           .select("*")
           .in("session_id", ids)
           .order("t", { ascending: true });
-        events = eRes.data || [];
+        events = normalizeEventRows(eRes.data || []);
       }
       return NextResponse.json({ ok: true, sessions, events });
     }
@@ -174,7 +199,11 @@ export async function GET(req: Request) {
         .select("*")
         .eq("session_id", sid)
         .order("t", { ascending: true });
-      return NextResponse.json({ ok: true, session: sRes.data || null, events: eRes.data || [] });
+      return NextResponse.json({
+        ok: true,
+        session: sRes.data || null,
+        events: normalizeEventRows(eRes.data || []),
+      });
     }
 
     // Pull per sessionId (umum).
@@ -185,7 +214,11 @@ export async function GET(req: Request) {
       db.from("sessions").select("*").eq("id", sessionId).maybeSingle(),
       db.from("events").select("*").eq("session_id", sessionId).order("t", { ascending: true }),
     ]);
-    return NextResponse.json({ ok: true, session: sRes.data || null, events: eRes.data || [] });
+    return NextResponse.json({
+      ok: true,
+      session: sRes.data || null,
+      events: normalizeEventRows(eRes.data || []),
+    });
   } catch (err) {
     console.error("API /api/telemetry GET error:", err);
     return NextResponse.json({ error: "Terjadi kesalahan." }, { status: 500 });

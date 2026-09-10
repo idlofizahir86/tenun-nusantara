@@ -15,6 +15,7 @@ import type { SessionEvent } from "@/lib/session/session";
 
 const QUEUE_KEY = "tenun-sync-queue";
 const SESSION_KEY = "tenun-session";
+const EVENTS_KEY = "tenun-events";
 const FLUSH_THRESHOLD = 5;
 
 function telemetryEnabled(): boolean {
@@ -28,6 +29,24 @@ function readQueue(): SessionEvent[] {
   } catch {
     return [];
   }
+}
+
+/** Seluruh log event game aktif (tenun-events) — dipakai untuk perbaikan data. */
+function readLocalEvents(): SessionEvent[] {
+  try {
+    const raw = localStorage.getItem(EVENTS_KEY);
+    const list = raw ? (JSON.parse(raw) as SessionEvent[]) : [];
+    return Array.isArray(list) ? list.filter((e) => e && e.id) : [];
+  } catch {
+    return [];
+  }
+}
+
+/** Gabung dua daftar event, dedupe berdasarkan id. */
+function mergeById(a: SessionEvent[], b: SessionEvent[]): SessionEvent[] {
+  const map = new Map<string, SessionEvent>();
+  for (const e of [...a, ...b]) map.set(e.id, e);
+  return [...map.values()];
 }
 
 function writeQueue(q: SessionEvent[]): void {
@@ -82,26 +101,34 @@ function readIdentity(): { profileId: string | null; deviceKey: string } {
 }
 
 let flushing = false;
+// Sekali per pemuatan halaman: kirim ulang seluruh log event game aktif agar
+// baris lama yang payload-nya rusak (`{}`) diperbaiki lewat upsert by id.
+let didFullRepair = false;
 
 export async function flushSync(): Promise<void> {
   if (!telemetryEnabled() || flushing) return;
+  const session = readSessionPayload();
   const q = readQueue();
-  if (q.length === 0) return;
+  const repairable = !didFullRepair && Boolean(session?.id);
+  const events = repairable ? mergeById(readLocalEvents(), q) : q;
+  if (events.length === 0) return;
   flushing = true;
   try {
-    const session = readSessionPayload();
     const { profileId, deviceKey } = readIdentity();
     const res = await fetch("/api/telemetry", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         session,
-        events: q,
+        events,
         profileId,
         deviceKey,
       }),
     });
-    if (res.ok) writeQueue([]);
+    if (res.ok) {
+      writeQueue([]);
+      if (repairable) didFullRepair = true;
+    }
   } catch {
     // gagal — antrean dipertahankan untuk retry berikutnya
   } finally {
