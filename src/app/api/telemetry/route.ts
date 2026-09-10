@@ -65,14 +65,24 @@ export async function POST(req: Request) {
 
     // 2) Insert event (abaikan yang sudah ada)
     if (Array.isArray(body.events) && body.events.length > 0) {
-      const rows = body.events.map((e) => ({
-        id: e.id,
-        session_id: body.session?.id || null,
-        profile_id: profileId,
-        t: e.t || new Date().toISOString(),
-        type: e.type,
-        payload: JSON.stringify(e.payload || {}),
-      }));
+      // recordEvent() menyebar payload di level atas event (bukan di e.payload),
+      // jadi sisa field selain kolom tabel harus disimpan ke kolom payload.
+      // Tanpa ini `trait`/`islandId` hilang dan Peta Bakat guru jadi kosong.
+      const rows = body.events.map((e) => {
+        const { id, t, type, payload: nested, ...rest } = e;
+        const payload =
+          nested && typeof nested === "object"
+            ? { ...rest, ...(nested as Record<string, unknown>) }
+            : rest;
+        return {
+          id,
+          session_id: body.session?.id || null,
+          profile_id: profileId,
+          t: t || new Date().toISOString(),
+          type,
+          payload: JSON.stringify(payload),
+        };
+      });
       const { error } = await db.from("events").upsert(rows, { onConflict: "id" });
       if (error) console.error("insert events:", error.message);
       else saved.events = rows.length;
