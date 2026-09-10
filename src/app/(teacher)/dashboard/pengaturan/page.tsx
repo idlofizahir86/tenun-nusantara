@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, Copy, Info, Pencil, Plus, Settings, Trash2 } from "lucide-react";
 import {
   createClass,
@@ -8,6 +8,7 @@ import {
   listClasses,
   renameClass,
   setActiveClassCode,
+  syncClasses,
   type TeacherClass,
 } from "@/lib/teacher/class-store";
 import { LoadingShip } from "@/components/ui/loading-ship";
@@ -36,9 +37,16 @@ export default function PengaturanPage() {
   const [editId, setEditId] = useState<string | null>(null);
   const [editLabel, setEditLabel] = useState("");
 
+  /** Tampilkan cache lokal dulu, lalu selaraskan dengan database. */
   function refresh() {
     setClasses(listClasses());
+    void syncClasses().then(setClasses);
   }
+
+  // Muat daftar kelas dari database saat halaman dibuka.
+  useEffect(() => {
+    refresh();
+  }, []);
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();

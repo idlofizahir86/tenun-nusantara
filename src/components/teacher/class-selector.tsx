@@ -1,17 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown, School } from "lucide-react";
-import { listClasses, setActiveClassCode } from "@/lib/teacher/class-store";
+import { listClasses, setActiveClassCode, syncClasses, type TeacherClass } from "@/lib/teacher/class-store";
 
 // Pemilih kelas aktif. Menu dashboard mengikuti kelas yang dipilih.
 export function ClassSelector() {
-  const classes = listClasses();
+  const [classes, setClasses] = useState<TeacherClass[]>(() => listClasses());
   const [activeCode, setActive] = useState<string | null>(() => {
-    const active = classes.find((x) => x.code === getActiveLocal());
-    return (active?.code || classes[0]?.code || null);
+    const list = listClasses();
+    const active = list.find((x) => x.code === getActiveLocal());
+    return active?.code || list[0]?.code || null;
   });
   const [open, setOpen] = useState(false);
+
+  // Sinkronkan daftar kelas dengan database (cache lokal hanya untuk render awal).
+  useEffect(() => {
+    let alive = true;
+    void syncClasses().then((list) => {
+      if (!alive) return;
+      setClasses(list);
+      setActive((prev) => prev || list[0]?.code || null);
+    });
+    const onChange = () => setClasses(listClasses());
+    window.addEventListener("tenun:classchange", onChange);
+    return () => {
+      alive = false;
+      window.removeEventListener("tenun:classchange", onChange);
+    };
+  }, []);
 
   const active = classes.find((c) => c.code === activeCode) || null;
 
